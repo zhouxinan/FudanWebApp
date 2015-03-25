@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* 在下方添加CSS代码 */
+
+h1 {
+	color: maroon;
+	font-size: 20pt;
+	text-align: center;
+}
+
+#selector {
+	font-weight: bold;
+	text-decoration: underline;
+	font-family: "Courier New";
+	letter-spacing: 5px;
+}
+
+.tip {
+	font-size: 9pt;
+	color: gray;
+}
+
+input[type="text"] {
+	line-height: 30px;
+	height: 30px;
+	width: 18em;
+	text-indent: 2em;
+}
+
+#descendants span {
+	background-color: #eee;
+}
+
+#child>span {
+	border: 1px dotted gray;
+}
+
+#brother+p {
+	background-color: rgba(255, 0, 0, 0.1);
+}
+
+#pseudo:hover {
+	color: blue !important;
+	cursor: pointer;
+}
+
+p#stu-id:after {
+	content: "13302010013";
+}
