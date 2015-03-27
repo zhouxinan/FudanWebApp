@@ -10,7 +10,7 @@ h1 {
 #selector {
 	font-weight: bold;
 	text-decoration: underline;
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	letter-spacing: 5px;
 }
 
