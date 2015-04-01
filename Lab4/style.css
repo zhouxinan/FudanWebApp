@@ -1,0 +1,121 @@
+@charset "utf-8";
+body {
+    margin: 0;
+	font-family: Helvetica, arial, "Times New Roman";
+}
+
+.nav {
+
+}
+
+.nav-inner {
+
+}
+
+/* style for logo
+--------------------------------*/
+.logo {
+
+}
+.logo:hover {
+
+}
+
+/* style for menus
+--------------------------------*/
+.menubar {
+
+}
+
+.menu {
+
+}
+
+.menu > a {
+
+}
+
+.menu:hover {
+
+}
+
+/* style for submenus
+---------------------------------*/
+.submenubar {
+
+}
+
+.menu:hover .submenubar {
+
+}
+
+.submenubar > li {
+
+}
+
+.submenubar > li:hover {
+
+}
+
+.submenubar > li > a {
+
+}
+
+.submenubar > li:hover > a {
+
+}
+
+/* style for triangles in submenubar
+You can take this as a reference to make this triangle:
+http://stackoverflow.com/questions/9450733/css-triangle-custom-border-color
+----------------------------------------*/
+.submenubar::before,
+.submenubar::after {
+
+}
+
+.submenubar::before {
+
+}
+
+.submenubar::after {
+
+}
+
+/********************* Part B ends and Part C starts here *********************/
+
+/* style for content
+Note: You may get the problem on clearfix,
+so you can take this as a reference:
+http://learnlayout.com/clearfix.html
+------------------------------------------*/
+.content {
+    width:960px;
+    margin:60px auto;
+    background:#76D1CE;
+    /* your style goes here or you define a new rule. */
+    /* DO NOT set height explicitly. */
+}
+
+/*------------------------------------------------------------------------*/
+/* The following rules are freezed, so you mustn't modify them. */
+
+/* Perhaps you'd better use Chrome or Firefox if your
+browser does not support box-sizing. */
+.content > .left,
+.content > .right {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.content > .left {
+    float: left;
+    width: 260px;
+    padding: 20px;
+}
+
+.content > .right {
+    float: right;
+    width: 700px;
+    padding: 20px;
+}
