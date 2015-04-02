@@ -5,64 +5,97 @@ body {
 }
 
 .nav {
-
+	position: absolute;
+	top: 0px;
+	height: 50px;
+	background-color: #00a59d;
+	width: 100%;
+	min-width: 960px;
 }
 
 .nav-inner {
-
+	height: 50px;
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* style for logo
 --------------------------------*/
 .logo {
-
+	float: left;
+	color: #efefef;
+	line-height: 50px;
+	text-decoration: none;
 }
-.logo:hover {
 
+.logo:hover {
+	color: #fff;
 }
 
 /* style for menus
 --------------------------------*/
 .menubar {
+	float: right;
+	margin-top: auto;
+}
 
+ul {
+	list-style-type: none;
 }
 
 .menu {
-
+	width: 80px;
+	height: 50px;
+	text-align: center;
+	float: left;
 }
 
 .menu > a {
-
+	color: #fff;
+	line-height: 50px;
+	text-decoration: none;
 }
 
 .menu:hover {
-
+	background-color: #0074b7;
 }
 
 /* style for submenus
 ---------------------------------*/
 .submenubar {
-
+	border: 1px solid #00a59d;
+	border-radius: 3px;
+	display: none;
+	width: 150px;
+	float: right;
+	padding: 5px;
+	position: relative;
+	background-color: #fff;
 }
 
 .menu:hover .submenubar {
-
+	display: block;
 }
 
 .submenubar > li {
-
+	width: 100%;
+	text-align: left;
 }
 
 .submenubar > li:hover {
-
+	background-color: #00a59d;
 }
 
 .submenubar > li > a {
-
+	color: #00a59d;
+	text-decoration: none;
+	padding: 3px;
+	line-height: 30px;
 }
 
 .submenubar > li:hover > a {
-
+	color: #fff;
 }
 
 /* style for triangles in submenubar
@@ -71,15 +104,21 @@ http://stackoverflow.com/questions/9450733/css-triangle-custom-border-color
 ----------------------------------------*/
 .submenubar::before,
 .submenubar::after {
-
+	content: "";
+	position: absolute;
+	border-width: 10px;
+	right: 30px;
+	border-style: dashed dashed solid dashed;
 }
 
 .submenubar::before {
-
+	top: -21px;
+	border-color: transparent transparent #00a59d transparent;
 }
 
 .submenubar::after {
-
+	top: -19px;
+	border-color: transparent transparent #ffffff transparent;
 }
 
 /********************* Part B ends and Part C starts here *********************/
@@ -93,6 +132,8 @@ http://learnlayout.com/clearfix.html
     width:960px;
     margin:60px auto;
     background:#76D1CE;
+    overflow: auto;
+    zoom: 1;
     /* your style goes here or you define a new rule. */
     /* DO NOT set height explicitly. */
 }
