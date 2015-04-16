@@ -85,6 +85,7 @@ function getCurrentTime() {
 }
 
 text = document.getElementById("text");
+text.onkeyup = countWords;
 text.onkeydown = countWords;
 submit = document.getElementById("submit");
 submit.onclick = tweet;

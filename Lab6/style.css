@@ -121,12 +121,12 @@ textarea{
 }
 
 .quote {
-	margin-bottom: 10px;
-	margin-left: 62px;
+	margin-bottom: 10px;	
 }
 
-.tweetInfo {
+.quote, .tweetInfo {
 	margin-left: 62px;
+	margin-right: 30px;
 }
 
 .username::after {
@@ -150,7 +150,7 @@ textarea{
 }
 
 .forward {
-	margin-left: 580px;
+	margin-left: 570px;
 }
 
 .username {
