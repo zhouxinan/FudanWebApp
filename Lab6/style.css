@@ -6,13 +6,13 @@ body{
 	background-color: #fff;
 	margin: 0 auto;
 	width: 900px;
-	height: 430px;
 	box-shadow: 3px 3px 30px #999999;
 }
 
 #display{
 	overflow-y: auto;
-	height: 360px;
+	overflow-x: hidden; 
+
 }
 
 h1{
@@ -168,4 +168,3 @@ textarea{
 	width: 24px;
 	height: 24px;
 }
-
