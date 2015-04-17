@@ -110,6 +110,9 @@ textarea{
 
 #faceDiv{
 	display: none;
+	position: absolute;
+	top: 50px;
+	background-color: #ecedec;
 }
 
 .tweet {
@@ -160,3 +163,9 @@ textarea{
 .clear {
 	clear: both;
 }
+
+#facetable td {
+	width: 24px;
+	height: 24px;
+}
+

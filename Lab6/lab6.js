@@ -3,13 +3,20 @@ window.onload = function(){
 	var display = document.getElementById("note");
 	display.style.height = window.innerHeight - 230 +"px";
 
+	var ds = document.getElementById("display");
+	ds.style.height = (window.innerHeight - 230 - 75)+"px";
+
 	var write = document.getElementById("write");
 	write.style.left = (window.innerWidth - 900)/2 + "px";
+	constructFaceTable();
 }
 
 window.onresize = function(){
 	var display = document.getElementById("note");
 	display.style.height = window.innerHeight - 230 +"px";
+
+	var ds = document.getElementById("display");
+	ds.style.height = (window.innerHeight - 230 - 75)+"px";
 
 	var write = document.getElementById("write");
 	write.style.left = (window.innerWidth - 900)/2 + "px";
@@ -23,6 +30,7 @@ function countWords() {
 
 function tweet() {
 	if (countWords() >= 0) {
+		text.value = replaceFace(text.value);
 		var newTweet = document.createElement("div");
 		newTweet.className = "tweet";
 		var quote = document.createElement("div");
@@ -35,7 +43,7 @@ function tweet() {
 		userImage.src = "img/user.jpg";
 		var tweetContent = document.createElement("span");
 		tweetContent.className = "tweetContent";
-		tweetContent.appendChild(document.createTextNode(text.value));
+		tweetContent.innerHTML = text.value;
 		var tweetInfo = document.createElement("div");
 		tweetInfo.className = "tweetInfo";
 		var tweetTime = document.createElement("span");
@@ -84,8 +92,58 @@ function getCurrentTime() {
 	return currentTimeString;
 }
 
+function constructFaceTable() {
+	var facetable = document.createElement("table");
+	facetable.id = "facetable";
+	var tablerow;
+	for (var i = 1; i < 40; i++) {
+		if (i % 10 == 1) {
+			tablerow = document.createElement("tr");
+			facetable.appendChild(tablerow);
+		}
+		var newtd = document.createElement("td");
+		newtd.style.background = "url(img/faces/F_" + i + ".gif)";
+		newtd.id = "F_" + i;
+		newtd.onclick = function(){
+			addFace(this.id);
+			hideFaceTable();
+		}
+		tablerow.appendChild(newtd);
+	}
+	document.getElementById("faceDiv").appendChild(facetable);
+}
+
+function showFaceTable() {
+	if (faceDiv.style.display == "block") {
+		faceDiv.style.display = "none";
+	} else {
+		faceDiv.style.display = "block";
+	}
+}
+
+function hideFaceTable() {
+	faceDiv.style.display = "none";
+}
+
+function addFace(i) {
+	text.value += "(" + i + ".gif)";
+	countWords();
+}
+
+function replaceFace(text){
+    // The regular expression only matches strings like "(F_1.gif)". The number ranges from 1 to 39.
+    var searchFor = /\(F_[1-9].gif\)|\(F_[1-3][0-9].gif\)/g;
+    // Do the replacements
+    text = text.replace(searchFor, function(match) {
+		return '<img src="img/faces/' + match.substring(1, match.length - 1)  + '" />';
+    });
+    return text;
+}
+
 text = document.getElementById("text");
 text.onkeyup = countWords;
 text.onkeydown = countWords;
 submit = document.getElementById("submit");
 submit.onclick = tweet;
+face = document.getElementById("face");
+face.onclick = showFaceTable;
