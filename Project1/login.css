@@ -98,3 +98,43 @@
 #loginDiv {
 	display: none;
 }
+
+#content {
+	margin-top: 350px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+}
+
+#content > div {
+	margin-bottom: 50px;
+}
+
+#userAvatar {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#userAvatar a {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+#userAvatar div {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#popularQuestionDiv a {
+	line-height: 30px;
+	color: #16a085;
+	text-decoration: none;
+}
+
+.contentTitle {
+	font-size: 1.5em;
+	border-bottom: 1px solid silver;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
