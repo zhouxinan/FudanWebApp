@@ -1,0 +1,36 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="login.css" />
+	<script type="text/javascript" src="login.js"></script>
+	<meta charset="utf-8" />
+	<title>识乎 - 提高自己的知识水平</title>
+</head>
+<body>
+	<div id="top">
+		<div id="topWrapper">
+			<div id="logo">
+				<div id="title"><span>识乎</span></div>
+				<div id="subtitle">提高自己的知识水平</div>
+			</div>
+			<div id="formWrapper" class="noselect">
+				<div id="changeFormButton" onclick="changeForm()">登陆</div>
+				<div id="regDiv" class="formDiv">
+					<form name="regForm" id="regForm" method="post" action="">
+						<input type="text" id="regUsername" name="username" placeholder="用户名" />
+						<input type="text" id="regEmail" name="email" placeholder="邮箱" />
+						<input type="password" id="regPassword" name="password" placeholder="密码" />
+					</form>
+				</div>
+				<div id="loginDiv" class="formDiv">
+					<form name="loginForm" id="loginForm" method="post" action="">
+						<input type="text" id="loginEmail" name="email" placeholder="邮箱" />
+						<input type="password" id="loginPassword" name="password" placeholder="密码" />
+					</form>
+				</div>
+				<div id="errorMessage"></div>
+				<button id="submitButton" onclick="register()">注册</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
