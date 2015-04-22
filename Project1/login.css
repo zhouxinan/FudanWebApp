@@ -2,8 +2,8 @@
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* Don't allow selecting the login/register area, or the UI may look silly.  */
-.noselect {
+/* Don't allow mis-selections caused by clicking too fast on elements in the login/register area, or the UI will look silly.  */
+.noSelect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -24,7 +24,8 @@
 
 #topWrapper {
 	width: 960px;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #logo {
@@ -56,30 +57,33 @@
 }
 
 .formDiv input {
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: white;
+	opacity: 0.75;
 	border: 0px;
 	height: 30px;
 	padding: 5px;
-	width: 200px;
+	width: 100%;
 	float: left;
 	margin-bottom: 10px;
 }
 
-.formDiv input:hover {
+.formDiv input:hover, .formDiv input:focus {
 	-moz-box-shadow: 0 0 1px #ffffff;
 	box-shadow: 0 0 1px #ffffff;
 }
 
+.formDiv input:hover {
+	opacity: 0.9;
+}
+
 .formDiv input:focus {
-	background-color: white;
-	-moz-box-shadow: 0 0 1px #ffffff;
-	box-shadow: 0 0 1px #ffffff;
+	opacity: 1;
 }
 
 #errorMessage {
 	color: white;
 	float: left;
-	font-size: 13px;
+	font-size: 12px;
 	margin-bottom: 10px;
 }
 
@@ -87,7 +91,7 @@
 	height: 30px;
 	border: 0px;
 	background-color: white;
-	width: 200px;
+	width: 100%;
 	color: #1abc9c;
 }
 
@@ -110,23 +114,28 @@
 	margin-bottom: 50px;
 }
 
-#userAvatar {
+#userAvatarList {
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#userAvatar a {
+#userAvatarList a {
 	margin-left: 55px;
 	margin-right: 55px;
 }
 
-#userAvatar div {
+#userAvatarList div {
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
 
-#popularQuestionDiv a {
+#userAvatarList img {
+	width: 75px;
+	height: 75px;
+}
+
+#popularQuestionList a {
 	line-height: 30px;
 	color: #16a085;
 	text-decoration: none;

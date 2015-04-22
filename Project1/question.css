@@ -44,24 +44,22 @@
 	outline: none;
 }
 
-#searchButton, #newQuestionDiv button {
+#searchButton, #newQuestionButton button {
 	color: #1abc9c;
 	border: 0px;
 	background-color: white;
 	height: 30px;
-	padding: 5px;
 }
 
 #searchButton {
 	float: right;
 }
 
-#newQuestionDiv button {
-	margin-left: 10px;
-	margin-top: 10px;
+#newQuestionButton button {
+	margin: 10px;
 }
 
-#newQuestionDiv button:hover, #searchButton:hover {
+#newQuestionButton button:hover, #searchButton:hover {
 	cursor: pointer;
 }
 
@@ -80,64 +78,156 @@
 	position: absolute;
 	right: 0px;
 	height: 50px;
-	margin-right: 10px;
-	margin-left: 10px;
 	width: 150px;
 }
 
-#userMenuDiv:hover ul {
+#userMenuDiv:hover #userMenu {
 	display: block;
 }
 
-#username {
-	float: left;
-	line-height: 30px;
-	margin: 5px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-#userMenuDiv img {
-	margin: 10px;
-	margin-left: 20px;
+#myAvatar {
 	float: left;
 	width: 30px;
 	height: 30px;
+	margin: 10px;
+	margin-left: 20px;
+}
+
+#myName {
+	float: left;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #userMenu {
 	display: none;
-	margin-top: 0px;
-	width: 150px;
+	width: 100%;
 	float: right;
-	padding: 0px;
-	position: relative;
 	background-color: #16a085;
 }
 
-#userMenu > li {
-	width: 100%;
+#userMenu > div {
 	text-align: left;
 }
 
-#userMenu > li:hover {
+#userMenu > div:hover {
 	background-color: #1abc9c;
 }
 
-#userMenu > li > a {
+#userMenu > div > a {
 	color: #fff;
 	text-decoration: none;
-	width: 100%;
-	padding: 3px;
-	padding-left: 10px;
+	padding: 5px;
 	line-height: 30px;
 }
 
-#userMenu > li:hover > a {
-	color: #fff;
-}
-
-
 .changeHoverBackground:hover {
 	background-color: #16a085;
+}
+
+#content {
+	margin-top: 70px;
+	width: 100%;
+	min-width: 960px;
+}
+
+#contentWrapper {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#leftColumn {
+	float: left;
+	width: 75%;
+}
+
+#rightColumn {
+	float: right;
+	width: 20%;
+}
+
+#questionTitle {
+	font-size: 20px;
+}
+
+#questionMetadata {
+	color: gray;
+	line-height: 30px;
+}
+
+#questionMetadata > span {
+	margin-right: 5px;
+}
+
+.userAvatar {
+	float: left;
+	height: 30px;
+	width: 30px;
+	margin: 5px;
+}
+
+.userInfoDiv {
+	line-height: 40px;
+}
+
+.userInfoDiv a {
+	color: #16a085;
+	text-decoration: none;
+}
+
+.answerMetadata {
+	float: right;
+}
+
+.commentCount:hover {
+	cursor: pointer;
+}
+
+.columnDiv {
+	width: 100%;
+	border-bottom: 1px solid silver;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+
+.rightColumnTitle {
+	font-size: 18px;
+	padding: 5px;
+}
+
+#popularQuestionList div {
+	font-size: 15px;
+	padding: 5px;
+	color: #16a085;
+}
+
+.popularUser {
+	float: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.popularUser div {
+	float: left;
+	font-size: 12px;
+}
+
+.userSignature {
+	width: 70%;
+	color: gray;
+}
+
+.userName {
+	font-weight: bold;
+}
+
+.clear {
+	clear: both;
+}
+
+#author {
+	text-align: center;
+	color: silver;
 }

@@ -15,33 +15,110 @@
 					<button type="submit" id="searchButton">搜索</button>
 				</form>
 			</div>
-			<div id="newQuestionDiv"><button>提问题</button></div>
+			<div id="newQuestionButton"><button>提问题</button></div>
 			<div id="menuDiv">
 				<div class="changeHoverBackground">首页</div>
 				<div class="changeHoverBackground">话题</div>
 				<div class="changeHoverBackground">发现</div>
 			</div>
 			<div id="userMenuDiv" class="changeHoverBackground">
-				<div><img src="img/myAvatar.jpg" /><div id="username">江泽民</div></div>
-				<ul id="userMenu">
-					<li><a href="http://www.fudan.edu.cn">我的主页</a></li>
-					<li><a href="http://mail.fudan.edu.cn">私信</a></li>
-					<li><a href="http://www.library.fudan.edu.cn">设置</a></li>
-					<li><a href="http://www.software.fudan.edu.cn">退出</a></li>
-				</ul>
+				<div>
+					<img id="myAvatar" src="img/myAvatar.jpg" />
+					<div id="myName">江泽民</div>
+				</div>
+				<div id="userMenu">
+					<div class="clickDiv"><a href="http://www.fudan.edu.cn">我的主页</a></div>
+					<div class="clickDiv"><a href="http://mail.fudan.edu.cn">私信</a></div>
+					<div class="clickDiv"><a href="http://www.library.fudan.edu.cn">设置</a></div>
+					<div class="clickDiv"><a href="http://www.software.fudan.edu.cn">退出</a></div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div id="content">
-		<div id="leftColumn">
-		<div id="questionTitle">你看过哪张照片</div>
-		<div id="questionMetadata"><span>Kitty</span>提问于<span id="questionTime">2015年1月1日</span></div>
-		
-		</div>
-		
-		
-		<div id="rightColumn">
-		
+		<div id="contentWrapper">
+			<div id="leftColumn">
+				<div class="columnDiv">
+					<div id="questionTitle">美国的华莱士到底有多高？</div>
+					<div id="questionMetadata">
+						<span id="questionAsker">张宝华</span><span>提问于</span><span id="questionTime">2015年1月1日</span>
+					</div>
+				</div>
+				<div class="columnDiv">
+					<div class="userInfoDiv">
+						<a href="http://baidu.com">
+							<img class="userAvatar" src="img/user_1.jpg" />
+							<span class="userName">华莱士</span>
+						</a>
+						<span class="userSignature">比你们不知道高到哪里去</span>
+					</div>
+					<div class="answer">
+						华莱士到底有多高呢，我们试图以长者的身高来推出他的身高来。先来看一张长者和华莱士的合影。
+						这张是我在“CBS60分钟”里的截图
+					</div>
+					<div class="answerMetadata">
+						<span class="">评论</span>
+						<span class="commentCount">(2)</span>
+						<span class="commentTime">2015-01-01 12:12</span>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="columnDiv">
+					<div class="userInfoDiv">
+						<a href="http://baidu.com">
+							<img class="userAvatar" src="img/user_1.jpg" />
+							<span class="userName">华莱士</span>
+						</a>
+						<span class="userSignature">比你们不知道高到哪里去</span>
+					</div>
+					<div class="answer">
+						华莱士到底有多高呢，我们试图以长者的身高来推出他的身高来。先来看一张长者和华莱士的合影。
+						这张是我在“CBS60分钟”里的截图
+					</div>
+					<div class="answerMetadata">
+						<span class="">评论</span>
+						<span class="commentCount">(2)</span>
+						<span class="commentTime">2015-01-01 12:12</span>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div id="rightColumn">
+				<div class="columnDiv">
+					<div class="rightColumnTitle">热门问题</div>
+					<div id="popularQuestionList">
+						<div>美国的华莱士到底有多高？</div>
+						<div>香港记者到底跑得有多快？</div>
+						<div>江主席究竟掌握了几门语言？</div>
+						<div>李光耀眼里的长者是什么样的？</div>
+					</div>
+				</div>
+				<div class="columnDiv" id="popularUserDiv">
+					<div class="rightColumnTitle">热门用户</div>
+					<div id="popularUserList">
+						<div class="popularUser">
+							<img class="userAvatar" src="img/user_1.jpg" />
+							<div class="userName">华莱士</div>
+							<div class="userSignature">比你们不知道高到哪里去</div>
+						</div>
+						<div class="popularUser">
+							<img class="userAvatar" src="img/user_2.jpg" />
+							<div class="userName">张宝华</div>
+							<div class="userSignature">著名香港女记者</div>
+						</div>
+						<div class="popularUser">
+							<img class="userAvatar" src="img/user_3.jpg" />
+							<div class="userName">董建华</div>
+							<div class="userSignature">香港第一任特首</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="columnDiv">
+					<div id="author">© 2015 Zhou Xinan</div>
+				</div>
+			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
 </body>

@@ -1,23 +1,23 @@
 function login() {
-	if (!validateEmail(document.getElementById("loginEmail").value)) {
+	if (!validateEmail(loginEmail.value)) {
 		return;
 	}
-	if (validatePassword(document.getElementById("loginPassword").value)) {
+	if (validatePassword(loginPassword.value)) {
 		errorMessage.textContent = "";
-		document.getElementById("loginForm").submit();
+		loginForm.submit();
 	}
 }
 
 function register() {
-	if (!validateUsername(document.getElementById("regUsername").value)) {	
+	if (!validateUsername(regUsername.value)) {
 		return;
 	}
-	if (!validateEmail(document.getElementById("regEmail").value)) {
+	if (!validateEmail(regEmail.value)) {
 		return;
 	}
-	if (validatePassword(document.getElementById("regPassword").value)) {
+	if (validatePassword(regPassword.value)) {
 		errorMessage.textContent = "";
-		document.getElementById("regForm").submit();
+		regForm.submit();
 	}
 }
 
@@ -58,8 +58,8 @@ function validatePassword(password) {
 		errorMessage.textContent = "密码长度必须是6～16个字符！";
 		return false;
 	}
-	var numbersOnlyFilter = /^\d+$/;
-	if (numbersOnlyFilter.test(password)) {
+	var allNumbersFilter = /^\d+$/;
+	if (allNumbersFilter.test(password)) {
 		errorMessage.textContent = "密码不允许是纯数字！";
 		return false;
 	}
