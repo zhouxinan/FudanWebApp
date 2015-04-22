@@ -16,14 +16,22 @@
       else slide.display="none";
     }
     function goFirst(){
+    	displaySlide(0);
      //"first"按钮做了什么
     }
     function goLast(){
+    	displaySlide(numSlides - 1);
       //"last"按钮做了什么
     }
     function goNext(){
+    	if (currentSlide != numSlides - 1) {
+    		displaySlide(currentSlide + 1);
+    	}
       //"next"按钮做了什么
     }
     function goPrevious(){
+    	if (currentSlide != 0) {
+    		displaySlide(currentSlide - 1);
+    	}
       //"previous"按钮做了什么
     }
