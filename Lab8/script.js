@@ -19,14 +19,23 @@ $(function partA() {
 (function partB() {
     function EventEmitter() {
         // Your codes here for part B
+        this.map = {};
     }
 
     EventEmitter.prototype.on = function(name, callback) {
         // Your codes here for part B
+        if (!this.map[name]) {
+        	this.map[name] = [];
+        }
+        this.map[name].push(callback);
+        return this;
     };
 
     EventEmitter.prototype.emit = function(name, data) {
         // Your codes here for part B
+        for (var i = 0; i < this.map[name].length; i++) {
+        	this.map[name][i](data);
+        }
     };
 
     /* the following are test codes, DO NOT modify them */
