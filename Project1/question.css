@@ -59,7 +59,7 @@
 	margin: 10px;
 }
 
-#newQuestionButton button:hover, #searchButton:hover {
+#newQuestionButton button:hover, #searchButton:hover, .submitButton {
 	cursor: pointer;
 }
 
@@ -147,6 +147,11 @@
 	width: 75%;
 }
 
+#leftColumn > div {
+	float: left;
+	width: 100%;
+}
+
 #rightColumn {
 	float: right;
 	width: 20%;
@@ -169,11 +174,16 @@
 	float: left;
 	height: 30px;
 	width: 30px;
-	margin: 5px;
+	margin-right: 5px;
 }
 
 .userInfoDiv {
-	line-height: 40px;
+	width: 100%;
+	height: 40px;
+}
+
+.userInfoDiv span {
+	line-height: 30px;
 }
 
 a {
@@ -183,17 +193,23 @@ a {
 
 .answerMetadata {
 	float: right;
+	color: gray;
+	height: 20px;
 }
 
 .commentCount:hover {
 	cursor: pointer;
 }
 
-.columnDiv {
+.commentCount {
+	position: relative;
+}
+
+.columnDiv, .replyDiv {
 	width: 100%;
 	border-bottom: 1px solid silver;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 }
 
 .rightColumnTitle {
@@ -234,4 +250,71 @@ a {
 #author {
 	text-align: center;
 	color: silver;
+}
+
+#newAnswerTextArea {
+	width: 100%;
+	height: 20%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.submitButton {
+	margin: 5px;
+	margin-right: 0px;
+	height: 30px;
+	float: right;
+	color: white;
+	background-color: #1abc9c;
+	border: 0px;
+}
+
+.replyListDiv {
+	position: relative;
+	border: 1px solid silver;
+	border-radius: 3px;
+	width: 90%;
+	float: right;
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.replyListDiv::before, .replyListDiv::after {
+	content: "";
+	position: absolute;
+	right: 0.5ex;
+	border-width: 5px;
+	border-style: dashed dashed solid dashed;
+}
+
+.replyListDiv::before {
+	top: -10px;
+	border-color: transparent transparent silver transparent;
+}
+
+.replyListDiv::after {
+	top: -8px;
+	border-color: transparent transparent white transparent;
+}
+
+.replyData {
+	float: left;
+}
+
+#newReplyDiv input {
+	height: 30px;
+	width: 100%;
+	border: 1px solid grey;
+	border-radius: 2px;
+	
+}
+
+.replyTime {
+	color: silver;
+	font-size: 15px;
+}
+
+#uploadImgButton {
+	float: left;
 }
