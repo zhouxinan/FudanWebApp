@@ -1,5 +1,17 @@
 $(function partA() {
     // Your codes here for part A
+    var $tab = $(".tab");
+    var $tabpane = $(".tabpane");
+    $tab.click(function(){
+    	for (var i = 0; i < $tab.length; i++) {
+    		if (this == $tab[i]) {
+    			$tab.attr("class", "tab");
+    			$(this).attr("class", "tab active");
+    			$tabpane.attr("class", "tabpane");
+    			$tabpane.eq(i).attr("class", "tabpane active");
+    		}
+    	}
+    });
 });
 
 /************************** spliter ****************************/
