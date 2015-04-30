@@ -66,6 +66,17 @@ $(function partA() {
 (function partC() {
     function currying(fn) {
         // Your codes here for part C
+        var args = [].slice.call(arguments);
+        if (args.length > fn.length) {
+        	var innerArgs = [].slice.call(args, 1);
+        	return fn.apply(null, innerArgs);
+       	} else {
+       		return function () {
+       			var innerArgs = [].slice.call(arguments);
+       			args = args.concat(innerArgs);
+       			return currying.apply(null, args);				
+       		}
+       	}
     }
 
     /* the following are test codes, DO NOT modify them */
@@ -75,7 +86,7 @@ $(function partA() {
     function add5(a, b, c, d, e) {
         return a + b + c + d + e;
     }
-
+	
     var testcase = ['currying(add5, 1, 2, 3, 4, 5)',
         'currying(add5, 1, 2, 3, 4)(5)',
         'currying(add5, 1, 2, 3)(4, 5)',
