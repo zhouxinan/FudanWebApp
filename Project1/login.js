@@ -76,13 +76,13 @@ function changeForm() {
 	if (loginDiv.style.display == "block") {
 		loginDiv.style.display = "none";
 		regDiv.style.display = "block";
-		changeFormButton.textContent = "登陆";
+		changeFormButtonText.textContent = "登陆";
 		submitButton.textContent = "注册";
 		submitButton.onclick = register;
 	} else {
 		loginDiv.style.display = "block";
 		regDiv.style.display = "none";
-		changeFormButton.textContent = "注册";
+		changeFormButtonText.textContent = "注册";
 		submitButton.textContent = "登陆";
 		submitButton.onclick = login;
 	}
