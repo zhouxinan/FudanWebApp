@@ -1,7 +1,9 @@
 <html>
 <head>
-	<link type="text/css" rel="stylesheet" href="profile.css" />
-	<script type="text/javascript" src="profile.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" href="css/profile.css" />
+	<script src="lib/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="js/profile.js"></script>
 	<meta charset="utf-8" />
 	<title>识乎 - 个人资料</title>
 </head>
@@ -41,23 +43,34 @@
 		<div id="contentWrapper">
 			<div id="leftColumn">
 				<div id="tabBar">
-					<div>提问</div>
-					<div>回答</div>
+					<div class="tab active">提问</div>
+					<div class="tab">回答</div>
 				</div>
-				<div class="columnDiv">
-					<div class="questionTitle">你读过最美的一句诗是什么</div>
-					<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
-					<div class="replyTime">2015.1.1</div>
-				</div>
-				<div class="columnDiv">
-					<div class="questionTitle">你读过最美的一句诗是什么</div>
-					<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
-					<div class="replyTime">2015.1.1</div>
-				</div>
-				<div class="columnDiv">
-					<div class="questionTitle">你读过最美的一句诗是什么</div>
-					<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
-					<div class="replyTime">2015.1.1</div>
+				<div id="myQuestionAndAnswerDiv">
+					<div id="myQuestionDiv" class="tabPane active">
+						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+					</div>
+					<div id="myAnswerDiv" class="tabPane">
+						<div class="columnDiv">
+							<div class="questionTitle"><a href="#">你读过最美的一句诗是什么</a></div>
+							<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
+							<div class="replyTime">2015.1.1 12:00</div>
+						</div>
+						<div class="columnDiv">
+							<div class="questionTitle"><a href="#">你读过最美的一句诗是什么</a></div>
+							<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
+							<div class="replyTime">2015.1.1 12:00</div>
+						</div>
+						<div class="columnDiv">
+							<div class="questionTitle"><a href="#">你读过最美的一句诗是什么</a></div>
+							<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
+							<div class="replyTime">2015.1.1 12:00</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="rightColumn">
@@ -69,10 +82,10 @@
 						最近关注了
 					</div>
 					<div class="avatarList">
-						<img src="img/user_1.jpg" />
-						<img src="img/user_2.jpg" />
-						<img src="img/user_3.jpg" />
-						<img src="img/user_4.jpg" />
+						<a href="#"><img src="img/user_1.jpg" /></a>
+						<a href="#"><img src="img/user_2.jpg" /></a>
+						<a href="#"><img src="img/user_3.jpg" /></a>
+						<a href="#"><img src="img/user_4.jpg" /></a>
 					</div>
 				</div>
 				<div class="columnDiv">
@@ -80,10 +93,10 @@
 						最近被他们关注
 					</div>
 					<div class="avatarList">
-						<img src="img/user_1.jpg" />
-						<img src="img/user_2.jpg" />
-						<img src="img/user_3.jpg" />
-						<img src="img/user_4.jpg" />
+						<a href="#"><img src="img/user_1.jpg" /></a>
+						<a href="#"><img src="img/user_2.jpg" /></a>
+						<a href="#"><img src="img/user_3.jpg" /></a>
+						<a href="#"><img src="img/user_4.jpg" /></a>
 					</div>
 				</div>
 			</div>
