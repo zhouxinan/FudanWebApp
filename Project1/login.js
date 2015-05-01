@@ -1,34 +1,36 @@
 function login() {
-	if (!validateEmail(loginEmail.value)) {
+	if (!validateEmail(document.getElementById("loginEmail").value)) {
 		return;
 	}
-	if (validatePassword(loginPassword.value)) {
-		errorMessage.textContent = "";
-		loginForm.submit();
+	if (validatePassword(document.getElementById("loginPassword").value)) {
+		document.getElementById("errorMessage").textContent = "";
+		document.getElementById("loginForm").submit();
+		window.location.href = "question.html";
 	}
 }
 
 function register() {
-	if (!validateUsername(regUsername.value)) {
+	if (!validateUsername(document.getElementById("regUsername").value)) {
 		return;
 	}
-	if (!validateEmail(regEmail.value)) {
+	if (!validateEmail(document.getElementById("regEmail").value)) {
 		return;
 	}
-	if (validatePassword(regPassword.value)) {
-		errorMessage.textContent = "";
-		regForm.submit();
+	if (validatePassword(document.getElementById("regPassword").value)) {
+		document.getElementById("errorMessage").textContent = "";
+		document.getElementById("regForm").submit();
+		window.location.href = "question.html";
 	}
 }
 
 function validateUsername(username) {
 	var usernameLength = username.length;
 	if (usernameLength == 0) {
-		errorMessage.textContent = "请输入用户名！";
+		document.getElementById("errorMessage").textContent = "请输入用户名！";
 		return false;
 	}
 	if (usernameLength < 2 | usernameLength > 16) {
-		errorMessage.textContent = "用户名长度必须是2～16个字符！";
+		document.getElementById("errorMessage").textContent = "用户名长度必须是2～16个字符！";
 		return false;
 	}
 	return true;
@@ -36,14 +38,14 @@ function validateUsername(username) {
 
 function validateEmail(emailAddress) {
 	if (emailAddress.length == 0) {
-		errorMessage.textContent = "请输入邮箱！";
+		document.getElementById("errorMessage").textContent = "请输入邮箱！";
 		return false;
 	}
-	var filter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; //The regex is from http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
+	var filter = /^[a-zA-Z0-9]+@([a-zA-Z0-9]+\.)+([a-zA-Z0-9]+)$/;
 	if (filter.test(emailAddress)) {
 		return true;
 	} else {
-		errorMessage.textContent = "邮箱格式错误！";
+		document.getElementById("errorMessage").textContent = "邮箱格式错误！";
 		return false;
 	}
 }
@@ -51,39 +53,39 @@ function validateEmail(emailAddress) {
 function validatePassword(password) {
 	var passwordLength = password.length;
 	if (passwordLength == 0) {
-		errorMessage.textContent = "请输入密码！";
+		document.getElementById("errorMessage").textContent = "请输入密码！";
 		return false;
 	}
 	if (passwordLength < 6 | passwordLength > 16) {
-		errorMessage.textContent = "密码长度必须是6～16个字符！";
+		document.getElementById("errorMessage").textContent = "密码长度必须是6～16个字符！";
 		return false;
 	}
 	var allNumbersFilter = /^\d+$/;
 	if (allNumbersFilter.test(password)) {
-		errorMessage.textContent = "密码不允许是纯数字！";
+		document.getElementById("errorMessage").textContent = "密码不允许是纯数字！";
 		return false;
 	}
 	var numberAndLetterFilter = /^[A-Za-z0-9]+$/;
 	if (numberAndLetterFilter.test(password)) {
 		return true;
 	} else {
-		errorMessage.textContent = "密码只能包含数字和字母！";
+		document.getElementById("errorMessage").textContent = "密码只能包含数字和字母！";
 		return false;
 	}
 }
 
 function changeForm() {
-	if (loginDiv.style.display == "block") {
-		loginDiv.style.display = "none";
-		regDiv.style.display = "block";
-		changeFormButtonText.textContent = "登陆";
-		submitButton.textContent = "注册";
-		submitButton.onclick = register;
+	if (document.getElementById("loginDiv").style.display == "block") {
+		document.getElementById("loginDiv").style.display = "none";
+		document.getElementById("regDiv").style.display = "block";
+		document.getElementById("changeFormButtonText").textContent = "登陆";
+		document.getElementById("submitButton").textContent = "注册";
+		document.getElementById("submitButton").onclick = register;
 	} else {
-		loginDiv.style.display = "block";
-		regDiv.style.display = "none";
-		changeFormButtonText.textContent = "注册";
-		submitButton.textContent = "登陆";
-		submitButton.onclick = login;
+		document.getElementById("loginDiv").style.display = "block";
+		document.getElementById("regDiv").style.display = "none";
+		document.getElementById("changeFormButtonText").textContent = "注册";
+		document.getElementById("submitButton").textContent = "登陆";
+		document.getElementById("submitButton").onclick = login;
 	}
 }
