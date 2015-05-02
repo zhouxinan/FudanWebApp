@@ -34,7 +34,8 @@
 
 .columnDiv {
 	border-bottom: 1px solid #bdc3c7;
-	padding: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	width: 100%;
 }
 
