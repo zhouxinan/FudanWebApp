@@ -15,6 +15,17 @@ a:hover {
 	color: #1abc9c;
 }
 
+button {
+	border: 0px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+}
+
 .clear {
 	clear: both;
 }

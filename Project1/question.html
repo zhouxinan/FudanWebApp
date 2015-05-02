@@ -1,6 +1,8 @@
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" href="css/navigator.css" />
+	<link type="text/css" rel="stylesheet" href="css/layout.css" />
 	<link type="text/css" rel="stylesheet" href="css/question.css" />
 	<script type="text/javascript" src="js/question.js"></script>
 	<meta charset="utf-8" />
@@ -8,7 +10,7 @@
 </head>
 <body>
 	<div id="navigator">
-		<div id="navigator-Inner">
+		<div id="navigatorWrapper">
 			<div id="logo">识乎</div>
 			<div id="searchDiv">
 				<form method="post" action="">
@@ -23,15 +25,15 @@
 				<div class="changeHoverBackground">发现</div>
 			</div>
 			<div id="userMenuDiv" class="changeHoverBackground">
-				<div>
+				<div id="myAvatarAndNameDiv">
 					<img id="myAvatar" src="img/myAvatar.jpg" />
 					<div id="myName">江泽民</div>
 				</div>
 				<div id="userMenu">
-					<div class="clickDiv"><a href="http://www.fudan.edu.cn">我的主页</a></div>
-					<div class="clickDiv"><a href="http://mail.fudan.edu.cn">私信</a></div>
-					<div class="clickDiv"><a href="http://www.library.fudan.edu.cn">设置</a></div>
-					<div class="clickDiv"><a href="http://www.software.fudan.edu.cn">退出</a></div>
+					<a href="profile.html"><div><span><img src="img/user.png" class="icon" />我的主页</span></div></a>
+					<a href="#"><div><span><img src="img/envelop.png" class="icon" />私信</span></div></a>
+					<a href="#"><div><span><img src="img/cog.png" class="icon" />设置</span></div></a>
+					<a href="#"><div><span><img src="img/exit.png" class="icon" />退出</span></div></a>
 				</div>
 			</div>
 		</div>
@@ -42,7 +44,7 @@
 				<div class="columnDiv">
 					<div id="questionTitle">美国的华莱士到底有多高？</div>
 					<div id="questionMetadata">
-						<span id="questionAsker"><a href="#">张宝华</a></span><span>提问于</span><span id="questionTime">2015年1月1日</span>
+						<span class="userName"><a href="#">张宝华</a></span><span>提问于</span><span>2015年1月1日</span>
 					</div>
 				</div>
 				<div class="columnDiv">
@@ -53,43 +55,40 @@
 						</a>
 						<span class="userSignature">比你们不知道高到哪里去</span>
 					</div>
-					<div class="clear"></div>
 					<div class="answer">
 						<div>华莱士到底有多高呢，我们试图以长者的身高来推出他的身高来。先来看一张长者和华莱士的合影。
 						这张是我在“CBS60分钟”里的截图</div>
 					</div>
 					<div class="answerMetadata">
-						<span class="commentTime">2015-01-01 12:12</span>
-						<span class="">评论</span>
-						<span class="commentCount">(2)</span>
+						<span>2015-01-01 12:12</span>
+						<span class="replyCount">评论 (2)</span>
 					</div>
 					<div class="replyListDiv">
 						<div class="replyDiv">
-							<div><img class="userAvatar" src="img/user_2.jpg" /></div>
+							<div><a href="#"><img class="userAvatar" src="img/user_2.jpg" /></a></div>
 							<div class="replyData">
-								<div class="userName">张宝华</div>
+								<div class="userName"><a href="#">张宝华</a></div>
 								<div class="replyContent">哦，谢谢！</div>
-								<div class="replyTime">2015.1.1</div>
+								<div class="replyTime">2015-01-01 13:00</div>
 							</div>
 							<div class="clear"></div>
 						</div>
 						<div class="replyDiv">
-							<div><img class="userAvatar" src="img/user_2.jpg" /></div>
+							<div><a href="#"><img class="userAvatar" src="img/user_2.jpg" /></a></div>
 							<div class="replyData">
-								<div class="userName">张宝华</div>
+								<div class="userName"><a href="#">张宝华</a></div>
 								<div class="replyContent">哦，谢谢！</div>
-								<div class="replyTime">2015.1.1</div>
+								<div class="replyTime">2015-01-01 13:00</div>
 							</div>
 							<div class="clear"></div>
 						</div>
-						<div id="newReplyDiv">
+						<div class="replyDiv new">
 							<form method="post" action="">
-							<input type="text" name="newReply" />
-							<button class="submitButton">发表评论</button>
+								<input type="text" name="newReply" placeholder="说你什么好呢……"/>
+								<button class="submitButton">发表评论</button>
 							</form>
 						</div>
 					</div>
-					<div class="clear"></div>
 				</div>
 				<div class="columnDiv">
 					<div class="userInfoDiv">
@@ -99,41 +98,39 @@
 						</a>
 						<span class="userSignature">比你们不知道高到哪里去</span>
 					</div>
-					<div class="clear"></div>
 					<div class="answer">
 						<div>有一张华莱士、姚明、长者三人的合影：</div>
 						<img src="img/Wallace.jpg" />
 					</div>
 					<div class="answerMetadata">
-						<span class="commentTime">2015-01-01 12:12</span>
-						<span class="">评论</span>
-						<span class="commentCount">(2)</span>
+						<span>2015-01-01 12:12</span>
+						<span class="replyCount">评论 (1)</span>
 					</div>
 					<div class="replyListDiv">
 						<div class="replyDiv">
-							<div><img class="userAvatar" src="img/user_2.jpg" /></div>
+							<div><a href="#"><img class="userAvatar" src="img/user_2.jpg" /></a></div>
 							<div class="replyData">
-								<div class="userName">张宝华</div>
+								<div class="userName"><a href="#">张宝华</a></div>
 								<div class="replyContent">哇，原来真的很高哦！</div>
-								<div class="replyTime">2015.1.1</div>
+								<div class="replyTime">2015-01-01 13:00</div>
 							</div>
 							<div class="clear"></div>
 						</div>
-						<div id="newReplyDiv">
+						<div class="replyDiv new">
 							<form method="post" action="">
-								<input type="text" name="newReply" />
+								<input type="text" name="newReply" placeholder="说你什么好呢……"/>
+								<button class="submitButton">发表评论</button>
 							</form>
-							<button class="submitButton">发表评论</button>
 						</div>
 					</div>
-					<div class="clear"></div>
 				</div>
-				<div>
+				<div class="columnDiv">
 					<form method="post" action="">
 						<textarea id="newAnswerTextArea"></textarea>
+						<button id="uploadImgButton"><img src="img/attachment.png" class="icon" /></button>
+						<button class="submitButton">发布回答</button>
 					</form>
-					<button id="uploadImgButton"><img src="img/attachment.png" /></button>
-					<button class="submitButton">发布回答</button>
+					<div class="clear"></div>
 				</div>
 			</div>
 			<div id="rightColumn">
@@ -146,22 +143,28 @@
 						<div><a href="#">李光耀眼里的长者是什么样的？</a></div>
 					</div>
 				</div>
-				<div class="columnDiv" id="popularUserDiv">
+				<div class="columnDiv">
 					<div class="rightColumnTitle">热门用户</div>
 					<div id="popularUserList">
 						<div class="popularUser">
-							<img class="userAvatar" src="img/user_1.jpg" />
-							<div class="userName">华莱士</div>
+							<a href="#">
+								<img class="userAvatar" src="img/user_1.jpg" />
+								<div class="userName">华莱士</div>
+							</a>
 							<div class="userSignature">比你们不知道高到哪里去</div>
 						</div>
 						<div class="popularUser">
-							<img class="userAvatar" src="img/user_2.jpg" />
-							<div class="userName">张宝华</div>
+							<a href="#">
+								<img class="userAvatar" src="img/user_2.jpg" />
+								<div class="userName">张宝华</div>
+							</a>
 							<div class="userSignature">著名香港女记者</div>
 						</div>
 						<div class="popularUser">
-							<img class="userAvatar" src="img/user_3.jpg" />
-							<div class="userName">董建华</div>
+							<a href="#">
+								<img class="userAvatar" src="img/user_3.jpg" />
+								<div class="userName">董建华</div>
+							</a>
 							<div class="userSignature">香港第一任特首</div>
 						</div>
 						<div class="clear"></div>

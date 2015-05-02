@@ -1,0 +1,53 @@
+#content {
+	margin-top: 70px;
+	width: 100%;
+	min-width: 960px;
+}
+
+#contentWrapper {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#leftColumn {
+	float: left;
+	width: 75%;
+}
+
+#leftColumn > div {
+	float: left;
+	width: 100%;
+}
+
+#rightColumn {
+	float: right;
+	width: 20%;
+}
+
+.userAvatar {
+	float: left;
+	height: 30px;
+	width: 30px;
+	margin-right: 5px;
+}
+
+.columnDiv {
+	border-bottom: 1px solid #bdc3c7;
+	padding: 10px;
+	width: 100%;
+}
+
+.columnDiv:last-child {
+	border-bottom: 0px;
+}
+
+#author {
+	text-align: center;
+	color: #bdc3c7;
+	font-size: 12px;
+}
+
+.rightColumnTitle {
+	font-size: 18px;
+}

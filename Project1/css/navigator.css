@@ -1,0 +1,135 @@
+#navigator {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	min-width: 960px;
+	height: 50px;
+	background-color: #2ecc71;
+}
+
+#navigatorWrapper {
+	position: relative;
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#navigatorWrapper > div {
+	float: left;
+	color: white;
+}
+
+#logo {
+	line-height: 50px;
+	font-size: 30px;
+}
+
+#searchDiv {
+	background-color: white;
+	height: 30px;
+	margin-left: 50px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#searchInput {
+	float: left;
+	width: 200px;
+	height: 20px;
+	margin: 5px;
+	border: 0px;
+}
+
+#navigator button {
+	color: #1abc9c;
+	background-color: white;
+}
+
+#navigator button:hover {
+	color: #2ecc71;
+}
+
+#searchButton {
+	float: right;
+}
+
+#newQuestionButton button {
+	margin: 10px;
+}
+
+#menuDiv {
+	margin-left: 50px;
+}
+
+#menuDiv div {
+	float: left;
+	width: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
+#userMenuDiv {
+	position: absolute;
+	right: 0px;
+	height: 50px;
+	width: 150px;
+}
+
+#userMenuDiv:hover #userMenu {
+	display: block;
+}
+
+#myAvatarAndNameDiv:hover {
+	cursor: pointer;
+}
+
+#myAvatar {
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+	margin-left: 20px;
+}
+
+#myName {
+	float: left;
+	line-height: 50px;
+	width: 90px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#userMenu {
+	display: none;
+	float: right;
+	background-color: #27ae60;
+}
+
+#userMenu div {
+	text-align: left;
+	width: 100%;
+	float: left;
+	color: white;
+}
+
+#userMenu div:hover {
+	background-color: #2ecc71;
+}
+
+#userMenu span {
+	line-height: 30px;
+	float: left;
+}
+
+#userMenu img {
+	margin: 5px;
+	margin-right: 10px;
+	margin-left: 15px;
+	float: left;
+}
+
+.changeHoverBackground:hover {
+	background-color: #27ae60;
+}

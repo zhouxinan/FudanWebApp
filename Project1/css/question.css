@@ -1,184 +1,27 @@
-#navigator {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	min-width: 960px;
-	height: 50px;
-	background-color: #1abc9c;
-}
-
-#navigator-Inner {
-	position: relative;
-	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#navigator-Inner > div {
-	float: left;
-	color: white;
-}
-
-#logo {
-	line-height: 30px;
-	font-size: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-#searchDiv {
-	background-color: white;
-	height: 30px;
-	margin-left: 50px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-#searchInput {
-	float: left;
-	width: 200px;
-	height: 20px;
-	margin: 5px;
-	border: 0px;
-	outline: none;
-}
-
-#searchButton, #newQuestionButton button {
-	color: #1abc9c;
-	border: 0px;
-	background-color: white;
-	height: 30px;
-}
-
-#searchButton {
-	float: right;
-}
-
-#newQuestionButton button {
-	margin: 10px;
-}
-
-#newQuestionButton button:hover, #searchButton:hover, .submitButton {
-	cursor: pointer;
-}
-
-#menuDiv {
-	margin-left: 50px;
-}
-
-#menuDiv div {
-	float: left;
-	width: 50px;
-	text-align: center;
-	line-height: 50px;
-}
-
-#userMenuDiv {
-	position: absolute;
-	right: 0px;
-	height: 50px;
-	width: 150px;
-}
-
-#userMenuDiv:hover #userMenu {
-	display: block;
-}
-
-#myAvatar {
-	float: left;
-	width: 30px;
-	height: 30px;
-	margin: 10px;
-	margin-left: 20px;
-}
-
-#myName {
-	float: left;
-	line-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 90px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-#userMenu {
-	display: none;
-	width: 100%;
-	float: right;
-	background-color: #16a085;
-}
-
-#userMenu > div {
-	text-align: left;
-}
-
-#userMenu > div:hover {
-	background-color: #1abc9c;
-}
-
-#userMenu > div > a {
-	color: #fff;
-	text-decoration: none;
-	padding: 5px;
-	line-height: 30px;
-}
-
-.changeHoverBackground:hover {
-	background-color: #16a085;
-}
-
-#content {
-	margin-top: 70px;
-	width: 100%;
-	min-width: 960px;
-}
-
-#contentWrapper {
-	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#leftColumn {
-	float: left;
-	width: 75%;
-}
-
-#leftColumn > div {
-	float: left;
-	width: 100%;
-}
-
-#rightColumn {
-	float: right;
-	width: 20%;
-}
-
 #questionTitle {
-	font-size: 20px;
+	font-size: 1.5em;
 }
 
 #questionMetadata {
-	color: gray;
+	color: #7f8c8d;
 	line-height: 30px;
+	font-size: 15px;
 }
 
 #questionMetadata > span {
 	margin-right: 5px;
 }
 
-.userAvatar {
-	float: left;
-	height: 30px;
-	width: 30px;
-	margin-right: 5px;
+.userSignature {
+	width: 70%;
+	color: #7f8c8d;
+}
+
+.userName {
+	font-weight: bold;
 }
 
 .userInfoDiv {
-	width: 100%;
 	height: 40px;
 }
 
@@ -186,41 +29,116 @@
 	line-height: 30px;
 }
 
-a {
-	color: #16a085;
-	text-decoration: none;
-}
-
 .answerMetadata {
 	float: right;
-	color: gray;
+	color: #7f8c8d;
 	height: 20px;
+	font-size: 15px;
 }
 
-.commentCount:hover {
+.replyCount:hover {
 	cursor: pointer;
 }
 
-.commentCount {
-	position: relative;
-}
-
-.columnDiv, .replyDiv {
-	width: 100%;
-	border-bottom: 1px solid silver;
-	margin-bottom: 10px;
+.replyDiv {
+	border-bottom: 1px solid #bdc3c7;
 	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
-.rightColumnTitle {
-	font-size: 18px;
+#newAnswerTextArea {
+	width: 100%;
+	height: 20%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-color: #bdc3c7;
+	border-radius: 3px;
+}
+
+.submitButton, #uploadImgButton {
+	margin: 5px;
+	background-color: #16a085;
+}
+
+.submitButton:hover, #uploadImgButton:hover {
+	background-color: #1abc9c;
+}
+
+.submitButton {
+	float: right;
+	margin-right: 0px;
+	color: white;
+}
+
+#uploadImgButton {
+	float: left;
+	margin-left: 0px;
+}
+
+.replyListDiv {
+	position: relative;
+	border: 1px solid #bdc3c7;
+	border-radius: 3px;
+	width: 90%;
+	float: right;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.replyListDiv::before, .replyListDiv::after {
+	content: "";
+	position: absolute;
+	right: 0.5ex;
+	border-width: 5px;
+	border-style: dashed dashed solid dashed;
+}
+
+.replyListDiv::before {
+	top: -10px;
+	border-color: transparent transparent #bdc3c7 transparent;
+}
+
+.replyListDiv::after {
+	top: -8px;
+	border-color: transparent transparent white transparent;
+}
+
+.replyData {
+	float: left;
+}
+
+.replyDiv.new input {
+	height: 30px;
+	width: 100%;
+	border: 1px solid #bdc3c7;
+	border-radius: 2px;
+	padding: 5px;
+}
+
+.replyDiv.new {
+	border-bottom: 0px;
+}
+
+.replyTime {
+	color: #bdc3c7;
+	font-size: 15px;
+}
+
+.answer {
+	margin-bottom: 10px;
+}
+
+.answer img {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #popularQuestionList div {
 	font-size: 15px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	color: #16a085;
 }
 
 #popularUserList {
@@ -239,87 +157,3 @@ a {
 	font-size: 12px;
 }
 
-.userSignature {
-	width: 70%;
-	color: gray;
-}
-
-.userName {
-	font-weight: bold;
-}
-
-.clear {
-	clear: both;
-}
-
-#author {
-	text-align: center;
-	color: silver;
-}
-
-#newAnswerTextArea {
-	width: 100%;
-	height: 20%;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.submitButton {
-	margin: 5px;
-	margin-right: 0px;
-	height: 30px;
-	float: right;
-	color: white;
-	background-color: #1abc9c;
-	border: 0px;
-}
-
-.replyListDiv {
-	position: relative;
-	border: 1px solid silver;
-	border-radius: 3px;
-	width: 90%;
-	float: right;
-	padding: 5px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.replyListDiv::before, .replyListDiv::after {
-	content: "";
-	position: absolute;
-	right: 0.5ex;
-	border-width: 5px;
-	border-style: dashed dashed solid dashed;
-}
-
-.replyListDiv::before {
-	top: -10px;
-	border-color: transparent transparent silver transparent;
-}
-
-.replyListDiv::after {
-	top: -8px;
-	border-color: transparent transparent white transparent;
-}
-
-.replyData {
-	float: left;
-}
-
-#newReplyDiv input {
-	height: 30px;
-	width: 100%;
-	border: 1px solid silver;
-	border-radius: 2px;
-	
-}
-
-.replyTime {
-	color: silver;
-	font-size: 15px;
-}
-
-#uploadImgButton {
-	float: left;
-}

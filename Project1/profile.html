@@ -1,6 +1,8 @@
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" href="css/navigator.css" />
+	<link type="text/css" rel="stylesheet" href="css/layout.css" />
 	<link type="text/css" rel="stylesheet" href="css/profile.css" />
 	<script src="lib/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="js/profile.js"></script>
@@ -9,7 +11,7 @@
 </head>
 <body>
 	<div id="navigator">
-		<div id="navigator-Inner">
+		<div id="navigatorWrapper">
 			<div id="logo">识乎</div>
 			<div id="searchDiv">
 				<form method="post" action="">
@@ -17,24 +19,22 @@
 					<button type="submit" id="searchButton">搜索</button>
 				</form>
 			</div>
-			<div id="newQuestionButton">
-				<button>提问题</button>
-			</div>
+			<div id="newQuestionButton"><button>提问题</button></div>
 			<div id="menuDiv">
 				<div class="changeHoverBackground">首页</div>
 				<div class="changeHoverBackground">话题</div>
 				<div class="changeHoverBackground">发现</div>
 			</div>
 			<div id="userMenuDiv" class="changeHoverBackground">
-				<div>
+				<div id="myAvatarAndNameDiv">
 					<img id="myAvatar" src="img/myAvatar.jpg" />
 					<div id="myName">江泽民</div>
 				</div>
 				<div id="userMenu">
-					<div class="clickDiv"><a href="http://www.fudan.edu.cn">我的主页</a></div>
-					<div class="clickDiv"><a href="http://mail.fudan.edu.cn">私信</a></div>
-					<div class="clickDiv"><a href="http://www.library.fudan.edu.cn">设置</a></div>
-					<div class="clickDiv"><a href="http://www.software.fudan.edu.cn">退出</a></div>
+					<a href="profile.html"><div><span><img src="img/user.png" class="icon" />我的主页</span></div></a>
+					<a href="#"><div><span><img src="img/envelop.png" class="icon" />私信</span></div></a>
+					<a href="#"><div><span><img src="img/cog.png" class="icon" />设置</span></div></a>
+					<a href="#"><div><span><img src="img/exit.png" class="icon" />退出</span></div></a>
 				</div>
 			</div>
 		</div>
@@ -42,17 +42,19 @@
 	<div id="content">
 		<div id="contentWrapper">
 			<div id="leftColumn">
-				<div id="tabBar">
+				<div id="tabBar" class="columnDiv">
 					<div class="tab active">提问</div>
 					<div class="tab">回答</div>
 				</div>
 				<div id="myQuestionAndAnswerDiv">
 					<div id="myQuestionDiv" class="tabPane active">
-						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
-						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
-						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
-						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
-						<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+						<div class="columnDiv">
+							<div class="questionTitle"><a href="#">声乐有几种唱法？</a></div>
+							<div class="questionTitle"><a href="#">三个代表重要思想的内容是什么？</a></div>
+							<div class="questionTitle"><a href="#">为什么有那么多人膜蛤？</a></div>
+							<div class="questionTitle"><a href="#">我和华莱士到底谁更高？</a></div>
+							<div class="questionTitle"><a href="#">为什么现在的新闻工作者动不动就喜欢搞个大新闻？</a></div>
+						</div>
 					</div>
 					<div id="myAnswerDiv" class="tabPane">
 						<div class="columnDiv">
@@ -61,45 +63,71 @@
 							<div class="replyTime">2015.1.1 12:00</div>
 						</div>
 						<div class="columnDiv">
-							<div class="questionTitle"><a href="#">你读过最美的一句诗是什么</a></div>
-							<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
+							<div class="questionTitle"><a href="#">你去过哪些西方国家？</a></div>
+							<div class="replyContent">哪个西方国家我没去过？</div>
 							<div class="replyTime">2015.1.1 12:00</div>
 						</div>
 						<div class="columnDiv">
-							<div class="questionTitle"><a href="#">你读过最美的一句诗是什么</a></div>
-							<div class="replyContent">苟利国家生死以，岂因祸福避趋之。</div>
+							<div class="questionTitle"><a href="#">保持长寿的秘诀是什么？</a></div>
+							<div class="replyContent">天天有人续。</div>
 							<div class="replyTime">2015.1.1 12:00</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="rightColumn">
-				<div id="myBigAvatarDiv" class="columnDiv">
+				<div class="columnDiv" id="myBigAvatarDiv">
 					<img id="myBigAvatar" src="img/myAvatar.jpg" />
+				</div>
+				<div class="columnDiv" id="myInfoDiv">
+					<div>
+						<img src="img/user_green.png" class="icon" />
+						<span>江泽民</span>
+					</div>
+					<div>
+						<img src="img/location.png" class="icon" />
+						<span>上海交通大学</span>
+					</div>
+				</div>
+				<div class="columnDiv" id="followerDiv">
+					<div>
+						<div class="bigNumber"><span>4</span></div>
+						<div class="followerDivText"><span>Follower</span></div>
+					</div>
+					<div>
+						<div class="bigNumber"><span>4</span></div>
+						<div class="followerDivText"><span>Followed</span></div>
+					</div>
 				</div>
 				<div class="columnDiv">
 					<div class="rightColumnTitle">
 						最近关注了
 					</div>
 					<div class="avatarList">
-						<a href="#"><img src="img/user_1.jpg" /></a>
-						<a href="#"><img src="img/user_2.jpg" /></a>
-						<a href="#"><img src="img/user_3.jpg" /></a>
-						<a href="#"><img src="img/user_4.jpg" /></a>
+						<a href="#"><img src="img/user_1.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/user_2.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/user_3.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/user_4.jpg" class="userAvatar" /></a>
 					</div>
+					<div class="clear"></div>
 				</div>
 				<div class="columnDiv">
 					<div class="rightColumnTitle">
 						最近被他们关注
 					</div>
 					<div class="avatarList">
-						<a href="#"><img src="img/user_1.jpg" /></a>
-						<a href="#"><img src="img/user_2.jpg" /></a>
-						<a href="#"><img src="img/user_3.jpg" /></a>
-						<a href="#"><img src="img/user_4.jpg" /></a>
+						<a href="#"><img src="img/user_1.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/user_2.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/user_3.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/user_4.jpg" class="userAvatar" /></a>
 					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="columnDiv">
+					<div id="author">© 2015 Zhou Xinan</div>
 				</div>
 			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
 </body>
