@@ -1,0 +1,89 @@
+.tab {
+	color: #16a085;
+	float: left;
+	width: 50px;
+	text-align: center;
+	margin-right: 2px;
+}
+
+.tab:hover {
+	background-color: #1abc9c;
+	color: white;
+	cursor: pointer;
+}
+
+.tab.active {
+	background-color: #16a085;
+	color: white;
+}
+
+.tabPane {
+    display: none;
+}
+
+.tabPane.active {
+    display: block;
+}
+
+.replyTime {
+	color: silver;
+	font-size: 15px;
+}
+
+.questionTitle {
+	font-weight: bold;
+}
+
+#myBigAvatar {
+	width: 100%;
+}
+
+#myBigAvatarDiv {
+	height: 200px;
+}
+
+.avatarList {
+	padding-top: 5px;
+}
+
+#myInfoDiv div {
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+}
+
+#myInfoDiv img {
+	margin: 5px;
+	float: left;
+}
+
+#myInfoDiv span {
+	float: left;
+}
+
+.bigNumber {
+	font-size: 30px;
+	color: #16a085;
+}
+
+.followerDivText {
+	font-size: 12px;
+}
+
+#followerDiv {
+	height: 50px;
+}
+
+#followerDiv div {
+	text-align: center;
+	width: 99px;
+}
+
+#followerDiv > div {
+	float: left;
+	width: 45%;
+}
+
+.columnDiv > div {
+	line-height: 30px;
+}
