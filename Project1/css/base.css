@@ -1,5 +1,17 @@
+/*This CSS file is linked to any page of the site, since it sets basic styles of the site.*/
+
 * {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Don't allow mis-selections caused by clicking too fast on elements in the login/register area, or the UI will look silly.  */
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 input, textarea {

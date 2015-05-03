@@ -1,3 +1,4 @@
+// Currently, the page will jump to question.html if all validations are right.
 function login() {
 	if (!validateEmail(document.getElementById("loginEmail").value)) {
 		return;
@@ -74,6 +75,7 @@ function validatePassword(password) {
 	}
 }
 
+// This function is to switch between the login form and the registration form.
 function switchForm() {
 	if (document.getElementById("loginDiv").style.display == "block") {
 		document.getElementById("loginDiv").style.display = "none";
@@ -90,6 +92,7 @@ function switchForm() {
 	}
 }
 
+// This function is to show an error message.
 function showErrorMessage(errorMessage) {
 	document.getElementById("errorMessage").textContent = errorMessage;
 }

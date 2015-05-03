@@ -81,6 +81,7 @@
 	padding-right: 5px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	display: none;
 }
 
 .replyListDiv::before, .replyListDiv::after {
@@ -99,6 +100,10 @@
 .replyListDiv::after {
 	top: -8px;
 	border-color: transparent transparent white transparent;
+}
+
+.replyListDiv.active {
+	display: block;
 }
 
 .replyData {
