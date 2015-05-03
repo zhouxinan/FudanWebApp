@@ -52,11 +52,15 @@ body {
 	float: right;
 	color: white;
 	margin-bottom: 5px;
-	opacity: 0.9;
+	opacity: 0.8;
 }
 
 #switchFormController:hover {
 	cursor: pointer;
+	opacity: 0.9;
+}
+
+#switchFormController:active {
 	opacity: 1;
 }
 
