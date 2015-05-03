@@ -32,10 +32,14 @@
 	margin-right: 5px;
 }
 
+.userName {
+	font-weight: bold;
+}
+
 .columnDiv {
 	border-bottom: 1px solid #bdc3c7;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	width: 100%;
 }
 
@@ -51,4 +55,9 @@
 
 .rightColumnTitle {
 	font-size: 18px;
+}
+
+.replyTime {
+	color: #bdc3c7;
+	font-size: 12px;
 }

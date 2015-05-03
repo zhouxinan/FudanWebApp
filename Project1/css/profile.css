@@ -25,15 +25,6 @@
     display: block;
 }
 
-.replyTime {
-	color: silver;
-	font-size: 15px;
-}
-
-.questionTitle {
-	font-weight: bold;
-}
-
 #myBigAvatar {
 	width: 100%;
 }
@@ -42,22 +33,20 @@
 	height: 200px;
 }
 
-.avatarList {
-	padding-top: 5px;
-}
-
-#myInfoDiv div {
-	height: 30px;
+.myInfoRowDiv {
+	width: 100%;
 	line-height: 30px;
 	font-size: 15px;
-}
-
-#myInfoDiv img {
-	margin: 5px;
 	float: left;
 }
 
-#myInfoDiv span {
+.myInfoRowDiv > div {
+	float: left;
+	width: 150px;
+}
+
+.myInfoRowDiv img {
+	margin: 5px;
 	float: left;
 }
 
