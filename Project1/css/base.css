@@ -49,4 +49,6 @@ button {
 textarea {
 	padding: 5px;
 	overflow-y: auto;
+	border-radius: 3px;
+	border: 1px solid #bdc3c7;
 }
