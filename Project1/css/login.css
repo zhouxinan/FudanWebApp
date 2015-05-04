@@ -1,22 +1,24 @@
 body {
 	background-color: #ecf0f1;
+	margin: 0px;
 }
 
 #top, #content {
-	position: absolute;
-	left: 0px;
 	width: 100%;
-	min-width: 960px;
 }
 
 #top {
-	top: 0px;
 	background-color: #2ecc71;
-	height: 300px;
+}
+
+#content {
+	float: left;
 }
 
 #topWrapper, #contentWrapper {
-	width: 960px;
+	width: 80%;
+	padding-top: 5%;
+	padding-bottom: 5%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -24,18 +26,16 @@ body {
 #logoDiv {
 	float: left;
 	color: white;
-	margin-top: 80px;
 }
 
 #title {
 	font-size: 3em;
-	margin-bottom: 20px;
+	margin-bottom: 5%;
 }
 
 #loginAndRegDiv {
 	width: 200px;
 	float: right;
-	margin-top: 50px;
 }
 
 #switchFormController {
@@ -62,6 +62,10 @@ body {
 #switchFormController div {
 	float: right;
 	margin-left: 2px;
+}
+
+input, #submitButton {
+	border-radius: 3px;
 }
 
 input {
@@ -116,35 +120,26 @@ input:focus {
 	display: none;
 }
 
-#content {
-	top: 350px;
-}
-
-#contentWrapper > div {
-	margin-bottom: 50px;
+#contentWrapper > div+div {
+	margin-top: 5%;
 }
 
 #popularUserList {
-	width: 720px;
+	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.popularUserAvatarRow {
+#popularUserList div {
 	float: left;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	width: 25%;
+	text-align: center;
 }
 
-.popularUserAvatarRow div {
-	float: left;
-	margin-left: 55px;
-	margin-right: 55px;
-}
-
-.popularUserAvatarRow img {
-	width: 70px;
-	height: 70px;
+#popularUserList img {
+	width: 30%;
+	height: auto;
+	margin: 5%;
 	border-radius: 35px;
 }
 
