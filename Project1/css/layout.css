@@ -67,3 +67,9 @@
 	color: #bdc3c7;
 	font-size: 12px;
 }
+
+@media screen and (max-width: 600px) {
+	#contentWrapper {
+		width: 90%;
+	}
+}
