@@ -139,3 +139,9 @@
 .changeHoverBackground:hover {
 	background-color: #27ae60;
 }
+
+@media screen and (max-width: 600px) {
+	#navigatorWrapper {
+		width: 90%;
+	}
+}
