@@ -154,30 +154,3 @@ input:focus {
 	margin-bottom: 10px;
 	color: #7f8c8d;
 }
-
-@media screen and (max-width: 600px) {
-    #logoDiv {
-    	width: 100%;
-    }
-    
-    #logoDiv div {
-    	text-align: center;
-    }
-    
-    #loginAndRegDiv {
-    	width: 100%;
-    	margin-top: 5%;
-    }
-    
-    #popularUserList div {
-    	width: 50%;
-    }
-    
-    #popularUserList img {
-    	width: 50%;
-    }
-    
-    #title {
-    	margin-bottom: 0px;
-    }
-}
