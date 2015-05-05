@@ -1,4 +1,4 @@
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 600px) {
     #logoDiv {
     	width: 100%;
     }
@@ -22,5 +22,13 @@
     
     #title {
     	margin-bottom: 0px;
+    }
+    
+    #rightColumn {
+    	display: none;
+    }
+    
+    #leftColumn {
+    	width: 100%;
     }
 }

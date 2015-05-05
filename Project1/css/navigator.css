@@ -5,14 +5,13 @@
 	top: 0px;
 	left: 0px;
 	width: 100%;
-	min-width: 960px;
 	height: 50px;
 	background-color: #2ecc71;
 }
 
 #navigatorWrapper {
 	position: relative;
-	width: 960px;
+	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -28,16 +27,19 @@
 }
 
 #searchDiv {
+	position: relative;
 	background-color: white;
 	height: 30px;
-	margin-left: 50px;
+	margin-left: 5%;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	width: 30%;
 }
 
 #searchInput {
-	float: left;
-	width: 200px;
+	position: absolute;
+	left: 0px;
+	width: 85%;
 	height: 20px;
 	margin: 5px;
 	border: 0px;
@@ -53,7 +55,8 @@
 }
 
 #searchButton {
-	float: right;
+	position: absolute;
+	right: 0px;
 }
 
 #newQuestionButton button {
@@ -61,7 +64,7 @@
 }
 
 #menuDiv {
-	margin-left: 50px;
+	margin-left: 5%;
 }
 
 #menuDiv div {

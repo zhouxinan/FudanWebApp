@@ -3,18 +3,17 @@
 #content {
 	margin-top: 70px;
 	width: 100%;
-	min-width: 960px;
 }
 
 #contentWrapper {
-	width: 960px;
+	position: relative;
+	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #leftColumn {
-	float: left;
-	width: 75%;
+	margin-right: 250px;
 }
 
 #leftColumn > div {
@@ -23,8 +22,9 @@
 }
 
 #rightColumn {
-	float: right;
-	width: 20%;
+	position: absolute;
+	right: 0px;
+	width: 200px;
 }
 
 .userAvatar {
@@ -43,6 +43,10 @@
 	padding-top: 15px;
 	padding-bottom: 15px;
 	width: 100%;
+}
+
+.columnDiv img {
+	max-width: 100%;
 }
 
 .columnDiv:last-child {
