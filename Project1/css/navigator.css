@@ -3,31 +3,29 @@
 #navigator {
 	position: fixed;
 	top: 0px;
-	left: 0px;
 	width: 100%;
-	height: 50px;
 	background-color: #2ecc71;
 	z-index: 1;
 }
 
 #navigatorWrapper {
-	position: relative;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #navigatorWrapper > div {
-	float: left;
 	color: white;
 }
 
 #logo {
+	float: left;
 	line-height: 50px;
 	font-size: 30px;
 }
 
 #searchDiv {
+	float: left;
 	position: relative;
 	background-color: white;
 	height: 30px;
@@ -61,10 +59,12 @@
 }
 
 #newQuestionButton button {
+	float: left;
 	margin: 10px;
 }
 
 #menuDiv {
+	float: left;
 	margin-left: 5%;
 }
 
@@ -76,8 +76,7 @@
 }
 
 #userMenuDiv {
-	position: absolute;
-	right: 0px;
+	float: right;
 	height: 50px;
 	width: 150px;
 }
@@ -143,5 +142,16 @@
 @media screen and (max-width: 600px) {
 	#navigatorWrapper {
 		width: 90%;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	#searchDiv {
+		width: 60%;
+	}
+	
+	#menuDiv {
+		margin-left: 0px;
+		width: 50%;
 	}
 }

@@ -1,4 +1,7 @@
 /*This CSS file is linked to any page of the site, since it sets basic styles of the site.*/
+body {
+	margin: 0px;
+}
 
 * {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
