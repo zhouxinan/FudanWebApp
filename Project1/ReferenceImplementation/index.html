@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UKnow</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <header>
+        <div class="header-wrapper clearfix">
+            <div class="logo">
+                <h1>UKnow</h1>
+                <p>与世界分享你的知识</p>
+            </div>
+            <div class="form-wrapper">
+                <p id="form-label">登陆</p>
+                <form id="form-signup" action="" method="post">
+                    <div class="input-wrapper">
+                        <input type="text" name="username" placeholder="用户名">
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="email" name="email" placeholder="邮箱">
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" placeholder="密码">
+                    </div>
+                    <div id="signup-error" class="error-tip"></div>
+                    <div class="input-wrapper">
+                        <input id="signup-submit" type="button" value="立即注册">
+                    </div>
+                </form>
+                <form id="form-signin" class="hidden" action="" method="post">
+                    <div class="input-wrapper">
+                        <input type="email" name="email" placeholder="邮箱">
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" placeholder="密码">
+                    </div>
+                    <div id="signin-error" class="error-tip"></div>
+                    <div class="input-wrapper">
+                        <input id="signin-submit" type="button" value="登陆">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h3>热门用户</h3>
+        <div class="pop-user clearfix">
+            <a href="#"><img src="img/head-1.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-2.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-3.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-4.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-5.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-6.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-7.jpg" alt="user-head"></a>
+            <a href="#"><img src="img/head-8.jpg" alt="user-head"></a>
+        </div>
+        <h3>热门问题</h3>
+        <div class="pop-ques">
+            <p><a class="link" href="#">错过了哪些异性对你的暗示？ 你的哪些暗示没有被异性理解？</a></p>
+            <p><a class="link" href="#">什么样的故事才能称得上是神转折？</a></p>
+            <p><a class="link" href="#">隔壁老王怎么翻译成英语，才能表达中国人想要表达的意思，必须隐晦，但一听就差不多明白？</a></p>
+            <p><a class="link" href="#">学专业，软件工程、金融学、经济学。哪个比较实用，就业率高，前景好？另外想问下金融学和经济学的区别?</a></p>
+            <p><a class="link" href="#">是一种什么生理体验，为什么古人总喜欢用“断肠”来形容一种惆怅的感觉？</a></p>
+            <p><a class="link" href="#">你看过最文艺的一段电影台词是哪一段？</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2015 UKnow.</p>
+    </footer>
+    <script src="js/index.js"></script>
+</body>
+</html>
