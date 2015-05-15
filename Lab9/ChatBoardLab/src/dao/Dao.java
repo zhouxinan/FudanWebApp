@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 
+import bean.Message;
 import bean.User;
 
 public class Dao {
@@ -97,5 +100,44 @@ public class Dao {
 		return null;
 	}
 	
+	public List<Message> getAllMessage(int userID) throws SQLException{
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from message m where m.userID="+userID);
+			List<Message> messageList = new LinkedList<Message>();
+			while(results.next()){
+				String messageString = results.getString("message");
+				String dateString = results.getString("note_time");
+				int messageID = results.getInt("messageID");
+				Message message = new Message();
+				message.setMessageID(messageID);
+				message.setMessage(messageString);
+				message.setDate(dateString);
+				messageList.add(message);
+			}
 
+			return messageList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(sm != null){
+				sm.close();
+			}
+			if(con != null){
+				con.close();	
+			}
+			if(results != null){
+				results.close();
+			}
+
+		}
+		
+		return null;
+
+	}
 }

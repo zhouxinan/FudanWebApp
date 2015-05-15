@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 		if(user != null){
 			request.getSession().setAttribute("user", user);
 			// your note board jsp, not this login jsp
-			response.sendRedirect("Login.jsp");
+			response.sendRedirect("NoteBoard.jsp");
 		}else{
 			request.getSession().setAttribute("error", "error");
 			response.sendRedirect("Login.jsp");
