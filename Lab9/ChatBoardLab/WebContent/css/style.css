@@ -75,7 +75,7 @@ textarea{
 }
 
 #tool  .image{
-	background-image: url("img/main.png"); 
+	background-image: url("../img/main.png"); 
 	background-repeat: no-repeat;
 	height: 15px;
 	width: 15px;

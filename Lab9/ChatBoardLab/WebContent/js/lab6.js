@@ -42,6 +42,11 @@ document.getElementById("submit").onclick = function(){
 	form.submit();
 };
 
+function deleteMessage(messageID) {
+	document.getElementById("deleteMessageID").value = messageID;
+	document.getElementById("deleteMessageForm").submit();
+}
+
 function produceHtml(text){
 	var ret = "<div class='noteItem'> ";
 	ret += "<img class='user-photo' src='img/user.jpg'/> ";

@@ -16,20 +16,21 @@ import bean.User;
 public class Dao {
 	private static String driver = "com.mysql.jdbc.Driver";
 	String url = "jdbc:mysql://127.0.0.1:3306/note?useUnicode=true&amp;characterEncoding=UTF-8&amp;";
-	
-	//your username and password
-	String dbUsername = "root"; 
-	String dbPassword = "123456";
-	
+
+	// your username and password
+	String dbUsername = "root";
+	String dbPassword = "";
+
 	private static Dao dao;
-	
-	private Dao(){};
-	
-	public static Dao getInstance(){
-		if(dao == null){
+
+	private Dao() {
+	};
+
+	public static Dao getInstance() {
+		if (dao == null) {
 			dao = new Dao();
 		}
-		
+
 		return dao;
 	}
 
@@ -47,32 +48,37 @@ public class Dao {
 			e.printStackTrace();
 		}
 	}
-	
-	public User login(String username, String password){
+
+	public User login(String username, String password) {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select * from user where user.username='"+username+"'");
-			if(results.next()){
+			results = sm
+					.executeQuery("select * from user where user.username='"
+							+ username + "'");
+			if (results.next()) {
 				String oldPassword = results.getString("password");
-				if(oldPassword.equals(password)){
+				if (oldPassword.equals(password)) {
 					User user = new User();
 					user.setUserID(results.getInt("userID"));
 					user.setUsername(username);
 					return user;
-				}else{
+				} else {
 					return null;
 				}
 			}
-			
-			sm.executeUpdate("insert into user(username, password) values('"+username+"', '"+password+"')");
+
+			sm.executeUpdate("insert into user(username, password) values('"
+					+ username + "', '" + password + "')");
 			results.close();
-			results = sm.executeQuery("select * from user where user.username='"+username+"'");
+			results = sm
+					.executeQuery("select * from user where user.username='"
+							+ username + "'");
 			User user = new User();
-			if(results.next()){
+			if (results.next()) {
 				user.setUserID(results.getInt("userID"));
 				user.setUsername(username);
 			}
@@ -80,37 +86,37 @@ public class Dao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
-				if( sm != null){
+				if (sm != null) {
 					sm.close();
 				}
-				if(con != null){
-					con.close();	
+				if (con != null) {
+					con.close();
 				}
-				if(results != null){
+				if (results != null) {
 					results.close();
 				}
 			} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
 
 		}
 		return null;
 	}
-	
-	public List<Message> getAllMessage(int userID) throws SQLException{
+
+	public List<Message> getAllMessage(int userID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select * from message m where m.userID="+userID);
+			results = sm.executeQuery("select * from message m where m.userID="
+					+ userID);
 			List<Message> messageList = new LinkedList<Message>();
-			while(results.next()){
+			while (results.next()) {
 				String messageString = results.getString("message");
 				String dateString = results.getString("note_time");
 				int messageID = results.getInt("messageID");
@@ -125,24 +131,24 @@ public class Dao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			if(sm != null){
+		} finally {
+			if (sm != null) {
 				sm.close();
 			}
-			if(con != null){
-				con.close();	
+			if (con != null) {
+				con.close();
 			}
-			if(results != null){
+			if (results != null) {
 				results.close();
 			}
 
 		}
-		
+
 		return null;
 
 	}
-	
-	public void saveMessage(String message, int userID) throws SQLException{
+
+	public void saveMessage(String message, int userID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		message = message.replace("'", "''");
@@ -150,22 +156,44 @@ public class Dao {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
 			Date date = new Date();
-			SimpleDateFormat sim=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			String dateString = sim.format(date);
-			sm.executeUpdate("insert into message(userID, message, note_time) values("+userID+", '"+message+"', '"+dateString+"')");
+			sm.executeUpdate("insert into message(userID, message, note_time) values("
+					+ userID + ", '" + message + "', '" + dateString + "')");
 			sm.close();
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			if(sm != null){
+		} finally {
+			if (sm != null) {
 				sm.close();
 			}
-			if(con != null){
-				con.close();	
+			if (con != null) {
+				con.close();
 			}
 		}
 	}
 
+	public void deleteMessage(String messageID, int userID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("DELETE FROM message WHERE messageID = '" + messageID + "' and userID = '" + userID + "'");
+			sm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
 }
