@@ -6,9 +6,11 @@
    <%@page import="java.util.List" %>
    
    <%
-   		User user = (User)request.getSession().getAttribute("user");
-   		if(user == null){
+		User user = (User)request.getSession().getAttribute("user");
+
+		if(user == null){
    			response.sendRedirect("Login.jsp");
+   			return;
    		}
    		List<Message> messageList = Dao.getInstance().getAllMessage(user.getUserID());
    %>
@@ -34,7 +36,7 @@
 								<span class='text-content' ><%=m.getMessage() %></span>
 								<div class='info'><span class='time'><%=m.getDate().toLocaleString() %></span>
 									<span class='agent'>来自网页</span>
-									<span class='operation' onclick=deleteMethod(<%=m.getMessageID() %>)>删除</span>
+									<span class='operation')>删除</span>
 								</div>
 							</div>
 							<div class='clear' ></div>
@@ -61,6 +63,12 @@
 			<div id="faceDiv">
 			</div>
 		</div>	
+		
+		<div class="hiden">
+			<form action="addMessage" method="post" id="addMessage">
+				<input type="text" name="message" id="message"/>
+			</form>
+		</div>
 	
 </body>
 </html>

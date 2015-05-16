@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -83,7 +85,6 @@ public class Dao {
 				if( sm != null){
 					sm.close();
 				}
-				sm.close();
 				if(con != null){
 					con.close();	
 				}
@@ -140,4 +141,31 @@ public class Dao {
 		return null;
 
 	}
+	
+	public void saveMessage(String message, int userID) throws SQLException{
+		Connection con = null;
+		Statement sm = null;
+		message = message.replace("'", "''");
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			Date date = new Date();
+			SimpleDateFormat sim=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String dateString = sim.format(date);
+			sm.executeUpdate("insert into message(userID, message, note_time) values("+userID+", '"+message+"', '"+dateString+"')");
+			sm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(sm != null){
+				sm.close();
+			}
+			if(con != null){
+				con.close();	
+			}
+		}
+	}
+
 }

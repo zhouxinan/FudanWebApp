@@ -37,6 +37,9 @@ document.getElementById("submit").onclick = function(){
 	display.scrollTop = display.scrollHeight;
 	document.getElementById("promote").innerHTML = 140;
 	
+	var form = document.getElementById("addMessage");
+	document.getElementById("message").value=content;
+	form.submit();
 };
 
 function produceHtml(text){
