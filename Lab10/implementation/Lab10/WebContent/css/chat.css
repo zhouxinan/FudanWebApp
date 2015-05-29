@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+* {margin:0;padding:0}
+body {font-size:12px;font-family:Arial}
+.main {width:588px;height:512px;border:1px solid #ccc;border-radius:5px;margin:50px auto;background:#E8F4EF;box-shadow:0 0 50px #ccc}
+.title {width:100%;margin:10px;height:24px;line-height:24px}
+#msgbox {width:98%;height:310px;padding:5px 1%;background:#ececec;border-top:1px solid #acacac;border-bottom:1px solid #acacac;overflow-y:scroll;}
+#msgbox .msg {margin:10px 0;float:left;width:100%}
+.msg .pic {width:35px;height:35px;border-radius:3px;margin-right:10px;float:left}
+.msg .brf {float:left;width:500px;height:35px}
+.msg .detail {display:inline-block;background:#E2E6ED;border:1px solid #D5E0E0;border-radius:5px;box-shadow:1px 1px 4px #D5E0E0;line-height:20px;margin:-15px 0 0 45px;padding:10px}
+.enterbox {width:100%;height:120px;background:#f3f3f3;}
+.enterbox textarea {width:98%;height:100px;max-width:98%;max-height:100px;padding:0 1%;padding-top:5px;background:#f5f5f5;border:none;outline:none}
+.send {width:100px;height:25px;background:#4CB177;color:white;line-height:25px;float:right;margin-right:10px;margin-top:5px;text-align:center;border-radius:3px;cursor:pointer}
