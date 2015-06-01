@@ -1,0 +1,88 @@
+.tab {
+	color: #16a085;
+	float: left;
+	width: 50px;
+	text-align: center;
+	margin-right: 2px;
+}
+
+.tab:hover {
+	background-color: #1abc9c;
+	color: white;
+	cursor: pointer;
+}
+
+.tab.active {
+	background-color: #16a085;
+	color: white;
+}
+
+.tabPane {
+    display: none;
+}
+
+.tabPane.active {
+    display: block;
+}
+
+#myBigAvatar {
+	width: 100%;
+	height: auto;
+}
+
+#myBigAvatarDiv {
+	width: 100%;
+	
+}
+
+.myInfoRowDiv {
+	width: 100%;
+	line-height: 30px;
+	float: left;
+}
+
+.myInfoRowDiv > div {
+	float: left;
+	width: 150px;
+}
+
+.myInfoRowDiv img {
+	margin: 5px;
+	float: left;
+}
+
+.bigNumber {
+	font-size: 30px;
+	color: #16a085;
+}
+
+.followerDivText {
+	font-size: 12px;
+}
+
+#followerDiv {
+	height: 50px;
+}
+
+#followerDiv > div {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+
+.columnDiv > div {
+	line-height: 30px;
+}
+
+@media screen and (max-width: 600px) {
+    #rightColumn, #leftColumn {
+    	position: relative;
+    	float: left;
+    	width: 100%;
+    }
+    
+    .myInfoRowDiv > div {
+    	width: 80%;
+    }
+    
+}

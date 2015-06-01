@@ -1,0 +1,57 @@
+/*This CSS file is linked to any page of the site, since it sets basic styles of the site.*/
+body {
+	margin: 0px;
+}
+
+* {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Don't allow mis-selections caused by clicking too fast on elements in the login/register area, or the UI will look silly.  */
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input, textarea {
+	outline: none;
+}
+
+a {
+	color: #16a085;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1abc9c;
+}
+
+a:active {
+	color: #2ecc71;
+}
+
+button {
+	border: 0px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+}
+
+.clear {
+	clear: both;
+}
+
+textarea {
+	padding: 5px;
+	overflow-y: auto;
+	border-radius: 3px;
+	border: 1px solid #bdc3c7;
+}

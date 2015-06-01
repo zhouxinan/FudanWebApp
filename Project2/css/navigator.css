@@ -1,0 +1,157 @@
+/*This CSS file is linked to any page of the site which is to use the navigator.*/
+
+#navigator {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	background-color: #2ecc71;
+	z-index: 1;
+}
+
+#navigatorWrapper {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#navigatorWrapper > div {
+	color: white;
+}
+
+#logo {
+	float: left;
+	line-height: 50px;
+	font-size: 30px;
+}
+
+#searchDiv {
+	float: left;
+	position: relative;
+	background-color: white;
+	height: 30px;
+	margin-left: 5%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 30%;
+}
+
+#searchInput {
+	position: absolute;
+	left: 0px;
+	width: 85%;
+	height: 20px;
+	margin: 5px;
+	border: 0px;
+}
+
+#navigator button {
+	color: #1abc9c;
+	background-color: white;
+}
+
+#navigator button:hover {
+	color: #2ecc71;
+}
+
+#searchButton {
+	position: absolute;
+	right: 0px;
+}
+
+#newQuestionButton button {
+	float: left;
+	margin: 10px;
+}
+
+#menuDiv {
+	float: left;
+	margin-left: 5%;
+}
+
+#menuDiv div {
+	float: left;
+	width: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
+#userMenuDiv {
+	float: right;
+	height: 50px;
+	width: 150px;
+}
+
+#userMenuDiv:hover #userMenu {
+	display: block;
+}
+
+#myAvatarAndNameDiv:hover {
+	cursor: pointer;
+}
+
+#myAvatar {
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+	margin-left: 20px;
+}
+
+#myName {
+	float: left;
+	line-height: 50px;
+	width: 90px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#userMenu {
+	display: none;
+	float: right;
+	background-color: #27ae60;
+}
+
+#userMenu div {
+	text-align: left;
+	width: 100%;
+	float: left;
+	color: white;
+}
+
+#userMenu div:hover {
+	background-color: #2ecc71;
+}
+
+#userMenu span {
+	line-height: 30px;
+	float: left;
+}
+
+#userMenu img {
+	margin: 5px;
+	margin-right: 10px;
+	margin-left: 15px;
+	float: left;
+}
+
+.changeHoverBackground:hover {
+	background-color: #27ae60;
+}
+
+@media screen and (max-width: 600px) {
+	#navigatorWrapper {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	#searchDiv {
+		width: 60%;
+	}
+	
+	#menuDiv {
+		margin-left: 0px;
+		width: 50%;
+	}
+}
