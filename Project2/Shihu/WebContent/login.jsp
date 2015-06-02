@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="css/base.css" />
@@ -21,19 +23,26 @@
 					<div id="switchFormControllerText">登陆</div>
 				</div>
 				<div id="regDiv" class="formDiv">
-					<form name="regForm" id="regForm" method="post" action="">
-						<input type="text" id="regUsername" name="regUsername" placeholder="用户名" />
-						<input type="text" id="regEmail" name="regEmail" placeholder="邮箱" />
-						<input type="password" id="regPassword" name="regPassword" placeholder="密码" />
+					<form name="regForm" id="regForm" method="post" action="register">
+						<input type="text" id="regUsername" name="username" placeholder="用户名" />
+						<input type="text" id="regEmail" name="email" placeholder="邮箱" />
+						<input type="password" id="regPassword" name="password" placeholder="密码" />
 					</form>
 				</div>
 				<div id="loginDiv" class="formDiv">
-					<form name="loginForm" id="loginForm" method="post" action="">
-						<input type="text" id="loginEmail" name="loginEmail" placeholder="邮箱" />
-						<input type="password" id="loginPassword" name="loginPassword" placeholder="密码" />
+					<form name="loginForm" id="loginForm" method="post" action="login">
+						<input type="text" id="loginEmail" name="email" placeholder="邮箱" />
+						<input type="password" id="loginPassword" name="password" placeholder="密码" />
 					</form>
 				</div>
-				<div id="errorMessage"></div>
+				<div id="errorMessage">
+				<% 
+					if(request.getSession()!=null && (String)request.getSession().getAttribute("error") != null){
+						out.print(request.getSession().getAttribute("error"));
+						request.getSession().removeAttribute("error");
+					}
+				%>
+				</div>
 				<button id="submitButton" onclick="register()">注册</button>
 			</div>
 			<div class="clear"></div>

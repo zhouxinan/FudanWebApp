@@ -6,7 +6,6 @@ function login() {
 	if (validatePassword(document.getElementById("loginPassword").value)) {
 		showErrorMessage("");
 		document.getElementById("loginForm").submit();
-		window.location.href = "question.html";
 	}
 }
 
@@ -20,7 +19,6 @@ function register() {
 	if (validatePassword(document.getElementById("regPassword").value)) {
 		showErrorMessage("");
 		document.getElementById("regForm").submit();
-		window.location.href = "question.html";
 	}
 }
 
