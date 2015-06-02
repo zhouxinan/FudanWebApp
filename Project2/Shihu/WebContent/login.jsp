@@ -23,14 +23,16 @@
 					<div id="switchFormControllerText">登陆</div>
 				</div>
 				<div id="regDiv" class="formDiv">
-					<form name="regForm" id="regForm" method="post" action="register">
+					<form name="regForm" id="regForm" method="post" action="LoginServlet">
+						<input type="hidden" name="action" value="register" />
 						<input type="text" id="regUsername" name="username" placeholder="用户名" />
 						<input type="text" id="regEmail" name="email" placeholder="邮箱" />
 						<input type="password" id="regPassword" name="password" placeholder="密码" />
 					</form>
 				</div>
 				<div id="loginDiv" class="formDiv">
-					<form name="loginForm" id="loginForm" method="post" action="login">
+					<form name="loginForm" id="loginForm" method="post" action="LoginServlet">
+						<input type="hidden" name="action" value="login" />
 						<input type="text" id="loginEmail" name="email" placeholder="邮箱" />
 						<input type="password" id="loginPassword" name="password" placeholder="密码" />
 					</form>

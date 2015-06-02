@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.User;
+import utility.Validator;
 import dao.Dao;
+import exception.LoginServletException;
+import bean.User;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.doPost(request, response);
 	}
 
 	/**
@@ -43,24 +44,46 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-
+		Dao dao = Dao.getInstance();
+		String action = request.getParameter("action");
+		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
-		Dao dao = Dao.getInstance();
 		User user = null;
-		try {
-			user = dao.login(email, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (user != null) {
-			request.getSession().setAttribute("user", user);
-			response.sendRedirect("profile.html");
+		if (action.equals("login")) {
+			try {
+				Validator.validateEmail(email);
+				Validator.validatePassword(password);
+				user = dao.login(email, password);
+				request.getSession().setAttribute("user", user);
+				response.sendRedirect("profile.html");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (LoginServletException e) {
+				// TODO Auto-generated catch block
+				request.getSession().setAttribute("error", e.getMessage());
+				response.sendRedirect("login.jsp");
+			}
+		} else if (action.equals("register")) {
+			try {
+				Validator.validateUsername(username);
+				Validator.validateEmail(email);
+				Validator.validatePassword(password);
+				user = dao.register(username, email, password);
+				request.getSession().setAttribute("user", user);
+				response.sendRedirect("profile.html");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (LoginServletException e) {
+				// TODO Auto-generated catch block
+				request.getSession().setAttribute("error", e.getMessage());
+				response.sendRedirect("login.jsp");
+			}
 		} else {
-			request.getSession().setAttribute("error", "邮箱或密码错误");
 			response.sendRedirect("login.jsp");
 		}
 	}

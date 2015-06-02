@@ -5,13 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import bean.User;
-import exception.RegistryException;
+import exception.LoginServletException;
 
 public class Dao {
 	private static String driver = "com.mysql.jdbc.Driver";
@@ -49,7 +45,8 @@ public class Dao {
 		}
 	}
 
-	public User login(String email, String password) throws SQLException {
+	public User login(String email, String password) throws SQLException,
+			LoginServletException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -64,6 +61,8 @@ public class Dao {
 				user.setUsername(results.getString("username"));
 				user.setEmail(email);
 				return user;
+			} else {
+				throw new LoginServletException("邮箱或密码错误");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -83,7 +82,7 @@ public class Dao {
 	}
 
 	public User register(String username, String email, String password)
-			throws SQLException, RegistryException {
+			throws SQLException, LoginServletException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -93,19 +92,19 @@ public class Dao {
 			results = sm.executeQuery("select * from user where username='"
 					+ username + "'");
 			if (results.next()) {
-				throw new RegistryException("用户名已被注册");
+				throw new LoginServletException("用户名已被注册");
 			}
 			results.close();
 			results = sm.executeQuery("select * from user where email='"
 					+ email + "'");
 			if (results.next()) {
-				throw new RegistryException("邮箱已被注册");
+				throw new LoginServletException("邮箱已被注册");
 			}
 			results.close();
 			sm.executeUpdate("insert into user(username, password, email) values('"
 					+ username + "', '" + password + "', '" + email + "')");
 			results = sm.executeQuery("select * from user where email='"
-					+ email + "' and password = '" + password + "'");
+					+ email + "'");
 			if (results.next()) {
 				User user = new User();
 				user.setUserID(results.getInt("userID"));
