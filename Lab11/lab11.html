@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Lab 11</title>
+
+</head>
+<body>
+<h1>Lab 11</h1>
+
+<ul>
+<li>Deadline: 2015-06-08 23:59:59</li>
+<li>如有疑问联系11302010035@fudan.edu.cn / QQ上找我</li>
+<li>不要更改index.html，不要更改script.js中标记为<code>freezed</code>的代码</li>
+<li>参考答案会在deadline之后上传到FTP</li>
+<li>提交：将<code>index.html</code>和<code>script.js</code>放在<code>学号_姓名</code>文件夹内并打包上传（<em>注意：不要使用快压！！！</em>）</li>
+</ul>
+
+
+<p>本次Lab共有两部分：</p>
+
+<ul>
+<li>Part A: 通过一个简单的例子来让大家熟悉HTML5的 Drag&amp;Drop 和 File API</li>
+<li>Part B: localStorage的使用，同时对Part A的程序做一些功能上的补充</li>
+</ul>
+
+
+<h3>Part A</h3>
+
+<p>本部分主要实现通过HTML5的Drag&amp;Drop和File API实现一个简单的文件预览功能，效果示例参考截图。主要功能点包括：</p>
+
+<ul>
+<li>通过file input选择文件，然后点击preview按钮，下面会显示文件的基本信息以及预览内容</li>
+<li>通过将文件拖拽到预览区域，从而显示文件的基本信息和预览内容</li>
+<li>目前仅支持MIME type为<code>image/*</code>和<code>text/*</code>的文件预览，对于不支持的文件类型，预览框里显示文字提示不支持该格式的预览</li>
+<li>文件的基本信息包括：name，size，type，lastModifiedDate</li>
+</ul>
+
+
+<p>File API 参考资料：</p>
+
+<ul>
+<li><a href="http://www.w3.org/TR/file-upload/">W3C File API</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">MDN File</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileList">MDN FileList</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader">MDN FileReader</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/file/dndfiles/">Reading files in JavaScript using the File APIs</a></li>
+</ul>
+
+
+<p>Drag&amp;Drop 参考资料：</p>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop">MDN Drag and Drop</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_operations">MDN Drag Operations</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/dnd/basics/">Native HTML5 Drag and Drop</a></li>
+</ul>
+
+
+<h3>Part B</h3>
+
+<p>随着Web的发展，在客户端存储一些数据很有必要。目前主要的解决方案有cookie，Web Storage，Indexed DB等，它们各有优缺点。在本部分，我们主要使用localStorage来实现文件预览的历史记录。效果示例参考截图，需要实现的功能为：</p>
+
+<ul>
+<li>每次预览一个文件的时候，表格中都会新增一项预览历史记录，主要记录文件的基本信息</li>
+<li>点击Clear History按钮的时候，清空所有的历史记录</li>
+</ul>
+
+
+<p><strong>注意：</strong> 由于localStorage中只能存储字符串，因此涉及到数组、对象等结构需要将其转成字符串。最好使用<code>JSON.parse</code>和<code>JSON.stringify</code>。</p>
+
+<p>相关参考资料：</p>
+
+<ul>
+<li><a href="http://www.w3cfuns.com/article-5598924-1-1.html">客户端本地存储解决方案</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage">MDN Storage</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/offline/storage/">Client-Side Storage</a></li>
+</ul>
+
+</body>
+</html>

@@ -6,3 +6,12 @@ create table user(
     email text,
 	primary key(userID)
 )default charset utf8;
+
+drop table if exists question;
+create table question(
+	questionID integer not null auto_increment,
+    userID integer,
+    title text,
+    content text,
+	primary key(questionID)
+)default charset utf8;

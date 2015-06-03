@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lab 11</title>
+	<style>
+		.container{
+			width:768px;
+			margin: auto;
+		}
+		#meta{
+			min-height: 80px;
+			padding: 10px;
+			border: 1px solid #ccc;
+		}
+		#view{
+			min-height: 200px;
+			padding: 5px;
+			border: 2px dashed #ccc;
+		}
+		#view img{
+			max-width: 100%;
+		}
+		table{
+			width: 100%;
+			margin-top: 10px;
+			border-collapse: collapse;
+		}
+		th,td{
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<input type="file" id="file">
+		<button id="preview">Preview</button>
+		<h3>Meta</h3>
+		<div id="meta"></div>
+		<h3>Preview</h3>
+		<div id="view"></div>
+		<h3>Preview History</h3>
+		<button id="clear">Clear History</button>
+		<div id="history"></div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
