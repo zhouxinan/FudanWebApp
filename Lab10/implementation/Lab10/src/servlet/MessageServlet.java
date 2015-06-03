@@ -47,6 +47,7 @@ public class MessageServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
 		if (action.equals("get")) {
