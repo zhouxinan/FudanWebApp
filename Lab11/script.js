@@ -45,44 +45,72 @@
 
 	/*************** Part A begins ***************/
 	previewEle.addEventListener('click', function() {
-		// your codes here
+		preview(fileEle.files[0]);
 	}, false);
 
 	viewEle.addEventListener('dragover', function(e) {
-		// your codes here
+		e.stopPropagation();
+		e.preventDefault();
+		e.dataTransfer.dropEffect = 'copy';
 	}, false);
 
 	viewEle.addEventListener('dragend', function(e) {
-		// your codes here
+		e.stopPropagation();
+		e.preventDefault();
 	}, false);
 
 	viewEle.addEventListener('drop', function(e) {
-		// your codes here
+		e.stopPropagation();
+		e.preventDefault();
+		var files = e.dataTransfer.files;
+		preview(files[0]);
 	}, false);
 
 	function previewMeta(file) {
-		// your codes here
+		metaEle.innerHTML = 'Name: ' + file.name + '<br>Size: ' + file.size + ' bytes<br>Type: ' + file.type + '<br>Last Modified Date: ' + file.lastModifiedDate;
 	}
 
 	function previewContent(file) {
-		// your codes here
+		var reader = new FileReader();
+		if (file.type.match('image.*')) {
+      		reader.onload = function(e) {
+        		viewEle.innerHTML = '<img src="' + e.target.result + '"/>';
+      		};
+      		reader.readAsDataURL(file);
+		} else if (file.type.match('text.*')) {
+			reader.onload = function(e) {
+				viewEle.innerHTML = e.target.result;
+			};
+			reader.readAsText(file);
+		} else {
+			viewEle.innerHTML = 'Preview for ' + file.type + ' is not supported.';
+		}
 	}
 
 	/*************** Part B begins ***************/
 	StorageUtil = {
 		addPreview: function(file) {
-			// your codes here
+			var p = {
+				name: file.name,
+				size: file.size, 
+				type: file.type, 
+				lastModifiedDate: file.lastModifiedDate
+			}
+			var previews = StorageUtil.loadPreviews();
+			previews[previews.length] = p;
+			localStorage.setItem("history", JSON.stringify(previews));
 		},
 
 		loadPreviews: function() {
-			// your codes here
-			// using default return value to avoid console error
-			// you should change the return value to make things go well
-			return [];
+			if (localStorage["history"] == undefined) {
+				var newHistory = [];
+				localStorage.setItem("history", JSON.stringify(newHistory));
+			}
+			return JSON.parse(localStorage.getItem("history"));
 		},
 
 		clearPreviews: function() {
-			// your codes here
+			localStorage.clear();
 		}
 	};
 	updateHistory();
