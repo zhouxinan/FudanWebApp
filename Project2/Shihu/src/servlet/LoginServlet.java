@@ -36,6 +36,11 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String action = request.getParameter("action");
+		if (action.equals("logout")) {
+			request.getSession().setAttribute("user", null);
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 	/**
@@ -58,7 +63,8 @@ public class LoginServlet extends HttpServlet {
 				Validator.validatePassword(password);
 				user = dao.login(email, password);
 				request.getSession().setAttribute("user", user);
-				response.sendRedirect("profile.jsp");  // Jump to index.jsp if login succeeds.
+				response.sendRedirect("profile.jsp"); // Jump to index.jsp if
+														// login succeeds.
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,7 +80,8 @@ public class LoginServlet extends HttpServlet {
 				Validator.validatePassword(password);
 				user = dao.register(username, email, password);
 				request.getSession().setAttribute("user", user);
-				response.sendRedirect("discovery.jsp");  // Jump to discovery.jsp if registry succeeds.
+				response.sendRedirect("discovery.jsp"); // Jump to discovery.jsp
+														// if registry succeeds.
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

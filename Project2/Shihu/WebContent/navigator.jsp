@@ -10,6 +10,7 @@
    		}
    %>
 <link type="text/css" rel="stylesheet" href="css/navigator.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
 <div id="navigator">
 	<div id="navigatorWrapper">
 		<div id="logo"><a href="index.jsp">识乎</a></div>
@@ -33,9 +34,9 @@
 			<% if (user != null) { %>
 			<div id="userMenu">
 				<a href="profile.jsp"><div><span><img src="img/icon/user.png" class="icon" />我的主页</span></div></a>
-				<a href="#"><div><span><img src="img/icon/envelop.png" class="icon" />私信</span></div></a>
-				<a href="#"><div><span><img src="img/icon/cog.png" class="icon" />设置</span></div></a>
-				<a href="#"><div><span><img src="img/icon/exit.png" class="icon" />退出</span></div></a>
+				<a href="messages.jsp"><div><span><img src="img/icon/envelop.png" class="icon" />私信</span></div></a>
+				<a href="settings.jsp"><div><span><img src="img/icon/cog.png" class="icon" />设置</span></div></a>
+				<a href="LoginServlet?action=logout"><div><span><img src="img/icon/exit.png" class="icon" />退出</span></div></a>
 			</div>
 			<% }%>
 		</div>

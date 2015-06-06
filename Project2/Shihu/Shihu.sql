@@ -18,3 +18,22 @@ create table question(
     questionTime datetime DEFAULT CURRENT_TIMESTAMP,
 	primary key(questionID)
 )default charset utf8;
+
+drop table if exists messages;
+create table messages(
+	messageID integer not null auto_increment,
+    fromUserID integer,
+    toUserID integer,
+    content text,
+    sendTime datetime DEFAULT CURRENT_TIMESTAMP,
+	primary key(messageID)
+)default charset utf8;
+
+drop table if exists follows;
+create table follows(
+	followID integer not null auto_increment,
+    fromUserID integer,
+    toUserID integer,
+    followTime datetime DEFAULT CURRENT_TIMESTAMP,
+	primary key(followID)
+)default charset utf8;

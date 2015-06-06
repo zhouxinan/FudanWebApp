@@ -12,9 +12,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>识乎 - 主页</title>
+<title>识乎 - 设置</title>
 </head>
 <body>
-This is index.jsp.
+	<jsp:include page="navigator.jsp"/>
+	
 </body>
 </html>
