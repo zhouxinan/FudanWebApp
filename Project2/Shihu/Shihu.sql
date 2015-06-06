@@ -4,6 +4,8 @@ create table user(
 	username varchar(20),
 	password varchar(20),
     email text,
+    avatarPath text,
+    motto text,
 	primary key(userID)
 )default charset utf8;
 

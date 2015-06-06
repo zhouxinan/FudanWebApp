@@ -5,6 +5,7 @@
    		User user = (User)request.getSession().getAttribute("user");
    		if (user == null) {
    			response.sendRedirect("login.jsp");
+   			return;
    		}
    %>
 <html>
@@ -59,20 +60,16 @@
 			</div>
 			<div id="rightColumn">
 				<div class="columnDiv" id="myBigAvatarDiv">
-					<img id="myBigAvatar" src="img/avatar/myAvatar.jpg" />
+					<img id="myBigAvatar" src="img/avatar/<%=user.getAvatarPath() %>" />
 				</div>
 				<div class="columnDiv" id="myInfoDiv">
 					<div class="myInfoRowDiv">
 						<img src="img/icon/user_green.png" class="icon" />
-						<div>江泽民</div>
-					</div>
-					<div class="myInfoRowDiv">
-						<img src="img/icon/location.png" class="icon" />
-						<div>上海交通大学</div>
+						<div><%=user.getUsername() %></div>
 					</div>
 					<div class="myInfoRowDiv">
 						<img src="img/icon/signature.png" class="icon" />
-						<div>我是身经百战了，见得多了！</div>
+						<div><%=user.getMotto() %></div>
 					</div>
 					<div class="clear"></div>
 				</div>

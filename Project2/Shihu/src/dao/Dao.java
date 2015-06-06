@@ -60,6 +60,8 @@ public class Dao {
 				user.setUserID(results.getInt("userID"));
 				user.setUsername(results.getString("username"));
 				user.setEmail(email);
+				user.setAvatarPath(results.getString("avatarPath"));
+				user.setMotto(results.getString("motto"));
 				return user;
 			} else {
 				throw new LoginServletException("邮箱或密码错误");
@@ -101,8 +103,8 @@ public class Dao {
 				throw new LoginServletException("邮箱已被注册");
 			}
 			results.close();
-			sm.executeUpdate("insert into user(username, password, email) values('"
-					+ username + "', '" + password + "', '" + email + "')");
+			sm.executeUpdate("insert into user(username, password, email, avatarPath) values('"
+					+ username + "', '" + password + "', '" + email + "', 'default.jpg')"); // default avatar path is default.jpg
 			results = sm.executeQuery("select * from user where email='"
 					+ email + "'");
 			if (results.next()) {
@@ -110,6 +112,8 @@ public class Dao {
 				user.setUserID(results.getInt("userID"));
 				user.setUsername(username);
 				user.setEmail(email);
+				user.setAvatarPath(results.getString("avatarPath"));
+				user.setMotto(results.getString("motto"));
 				return user;
 			}
 		} catch (SQLException e) {

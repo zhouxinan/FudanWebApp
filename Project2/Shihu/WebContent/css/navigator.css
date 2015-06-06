@@ -24,6 +24,10 @@
 	font-size: 30px;
 }
 
+#logo a {
+	color: white;
+}
+
 #searchDiv {
 	float: left;
 	position: relative;
@@ -74,6 +78,9 @@
 	text-align: center;
 	line-height: 50px;
 }
+#menuDiv a {
+	color: white;
+}
 
 #userMenuDiv {
 	float: right;
@@ -87,6 +94,10 @@
 
 #myAvatarAndNameDiv:hover {
 	cursor: pointer;
+}
+
+#myAvatarAndNameDiv a {
+	color: white;
 }
 
 #myAvatar {
