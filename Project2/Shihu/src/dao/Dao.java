@@ -128,4 +128,39 @@ public class Dao {
 		}
 		return null;
 	}
+
+	public int addNewQuestion(User user, String title, String content)
+			throws SQLException {
+		int userID = user.getUserID();
+		title = title.replace("'", "''");
+		content = content.replace("'", "''");
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("insert into question(userID, title, content) values('"
+					+ userID + "', '" + title + "', '" + content + "')");
+			results = sm.executeQuery("select * from question where userID='"
+					+ userID + "' ORDER BY questionTime DESC LIMIT 1");
+			if (results.next()) {
+				return results.getInt("questionID");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return -1; // default error return value
+	}
 }

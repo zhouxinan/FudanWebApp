@@ -13,5 +13,6 @@ create table question(
     userID integer,
     title text,
     content text,
+    questionTime datetime DEFAULT CURRENT_TIMESTAMP,
 	primary key(questionID)
 )default charset utf8;

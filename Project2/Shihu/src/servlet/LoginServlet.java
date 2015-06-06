@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 				Validator.validatePassword(password);
 				user = dao.login(email, password);
 				request.getSession().setAttribute("user", user);
-				response.sendRedirect("profile.html");
+				response.sendRedirect("profile.jsp");  // Jump to index.jsp if login succeeds.
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 				Validator.validatePassword(password);
 				user = dao.register(username, email, password);
 				request.getSession().setAttribute("user", user);
-				response.sendRedirect("profile.html");
+				response.sendRedirect("discovery.jsp");  // Jump to discovery.jsp if registry succeeds.
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
