@@ -258,4 +258,34 @@ public class Dao {
 		}
 		return false;
 	}
+	
+	public boolean checkFollow(User user, int toUserID) throws SQLException {
+		int fromUserID = user.getUserID();
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from follows where fromUserID='"
+					+ fromUserID + "' and toUserID='" + toUserID + "'");
+			if (results.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
 }

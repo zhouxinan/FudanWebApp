@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -62,6 +63,15 @@ public class FollowServlet extends HttpServlet {
 		} else if (action.equals("defollow")) {
 			try {
 				dao.defollow(user, toUserID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (action.equals("checkFollow")) {
+			try {
+				PrintWriter out = response.getWriter();
+				out.print(dao.checkFollow(user, toUserID));
+				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

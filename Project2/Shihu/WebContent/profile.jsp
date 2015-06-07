@@ -74,7 +74,7 @@
 				</div>
 				<%} %>
 				<div class="columnDiv" id="myInfoDiv">
-					<div id="userIDDiv"><%=(id!=null)?id:"" %></div>
+					<div id="userIDDiv"><%=(id!=null)?id:user.getUserID() %></div>
 					<div class="myInfoRowDiv">
 						<img src="img/icon/user_green.png" class="icon" />
 						<div><%=user.getUsername() %></div>

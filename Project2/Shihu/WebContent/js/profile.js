@@ -1,7 +1,7 @@
 $(function setTabAction() {
 	var $tab = $(".tab");
 	var $tabPane = $(".tabPane");
-	$tab.click(function(){
+	$tab.click(function() {
 		for (var i = 0; i < $tab.length; i++) {
 			if (this == $tab[i]) {
 				$tab.attr("class", "tab");
@@ -13,7 +13,7 @@ $(function setTabAction() {
 	});
 });
 
-$("#followButton").click(function(){
+$("#followButton").click(function() {
 	if ($(this).html() == '关注') {
 		sendfollow('follow');
 		$(this).html('取消关注');
@@ -29,8 +29,31 @@ function sendfollow(action) {
 		url : "FollowServlet",
 		data : {
 			action : action,
-			toUserID: $("#userIDDiv").html()
+			toUserID : $("#userIDDiv").html()
 		},
 		dataType : "json"
 	});
 }
+
+function checkfollow() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'checkFollow',
+			toUserID : $("#userIDDiv").html()
+		},
+		success : function(data) {
+			if (data == 'true') {
+				$("#followButton").html('取消关注');
+			} else {
+				$("#followButton").html('关注');
+			}
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+checkfollow();
