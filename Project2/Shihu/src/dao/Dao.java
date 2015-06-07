@@ -104,7 +104,13 @@ public class Dao {
 			}
 			results.close();
 			sm.executeUpdate("insert into user(username, password, email, avatarPath) values('"
-					+ username + "', '" + password + "', '" + email + "', 'default.jpg')"); // default avatar path is default.jpg
+					+ username
+					+ "', '"
+					+ password
+					+ "', '"
+					+ email
+					+ "', 'default.jpg')"); // default avatar path is
+											// default.jpg
 			results = sm.executeQuery("select * from user where email='"
 					+ email + "'");
 			if (results.next()) {
@@ -166,5 +172,90 @@ public class Dao {
 			}
 		}
 		return -1; // default error return value
+	}
+
+	public boolean isUserIDExist(int userID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from user where userID='"
+					+ userID + "'");
+			if (results.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
+
+	public boolean follow(User user, int toUserID) throws SQLException {
+		int fromUserID = user.getUserID();
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("insert into follows(fromUserID, toUserID) values('"
+					+ fromUserID + "', '" + toUserID +  "')");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
+	
+	public boolean defollow(User user, int toUserID) throws SQLException {
+		int fromUserID = user.getUserID();
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("delete from follows where fromUserID='"
+					+ fromUserID + "' and toUserID='" + toUserID + "'");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
 	}
 }

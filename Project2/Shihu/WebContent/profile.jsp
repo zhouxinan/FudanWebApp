@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="bean.*" %>
+<%@ page import="dao.*" %>
     <%
    		User user = (User)request.getSession().getAttribute("user");
    		if (user == null) {
    			response.sendRedirect("login.jsp");
    			return;
    		}
+   		String id = request.getParameter("id");
+   		/* if (id != null && !Dao.getInstance().isUserIDExist(Integer.parseInt(id))) {
+   			response.sendRedirect("login.jsp");
+   			return;
+   		} */
    %>
 <html>
 <head>
@@ -14,7 +20,6 @@
 	<link type="text/css" rel="stylesheet" href="css/layout.css" />
 	<link type="text/css" rel="stylesheet" href="css/profile.css" />
 	<script src="lib/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="js/profile.js"></script>
 	<meta charset="utf-8" />
 	<!-- For iPhone to display normally -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +67,14 @@
 				<div class="columnDiv" id="myBigAvatarDiv">
 					<img id="myBigAvatar" src="img/avatar/<%=user.getAvatarPath() %>" />
 				</div>
+				<% if (id != null && !id.equals("" + user.getUserID())) {
+				%>
+				<div class="columnDiv">
+					<button id="followButton">关注</button>
+				</div>
+				<%} %>
 				<div class="columnDiv" id="myInfoDiv">
+					<div id="userIDDiv"><%=(id!=null)?id:"" %></div>
 					<div class="myInfoRowDiv">
 						<img src="img/icon/user_green.png" class="icon" />
 						<div><%=user.getUsername() %></div>
@@ -114,5 +126,6 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/profile.js"></script>
 </body>
 </html>

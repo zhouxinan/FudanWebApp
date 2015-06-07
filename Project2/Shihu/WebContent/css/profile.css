@@ -74,6 +74,10 @@
 	line-height: 30px;
 }
 
+#userIDDiv {
+	display: none;
+}
+
 @media screen and (max-width: 600px) {
     #rightColumn, #leftColumn {
     	position: relative;

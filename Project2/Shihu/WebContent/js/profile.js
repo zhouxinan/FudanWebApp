@@ -12,3 +12,25 @@ $(function setTabAction() {
 		}
 	});
 });
+
+$("#followButton").click(function(){
+	if ($(this).html() == '关注') {
+		sendfollow('follow');
+		$(this).html('取消关注');
+	} else {
+		sendfollow('defollow');
+		$(this).html('关注');
+	}
+});
+
+function sendfollow(action) {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : action,
+			toUserID: $("#userIDDiv").html()
+		},
+		dataType : "json"
+	});
+}
