@@ -15,18 +15,18 @@
 	<div id="navigatorWrapper">
 		<div id="logo"><a href="index.jsp">识乎</a></div>
 		<div id="searchDiv">
-			<form method="post" action="">
-				<input type="text" id="searchInput" name="searchInput" placeholder="搜索问题或用户" />
+			<form method="post" action="SearchServlet">
+				<input type="text" id="searchInput" name="keyword" placeholder="搜索问题或用户" />
 				<button type="submit" id="searchButton">搜索</button>
 			</form>
 		</div>
 		<div id="newQuestionButton"><button>提问题</button></div>
 		<div id="menuDiv">
-			<div class="changeHoverBackground"><a href="index.jsp">首页</a></div>
-			<div class="changeHoverBackground">话题</div>
-			<div class="changeHoverBackground"><a href="discovery.jsp">发现</a></div>
+			<div class="changeHoverBackground clickbox"><a href="index.jsp">首页</a></div>
+			<div class="changeHoverBackground clickbox">话题</div>
+			<div class="changeHoverBackground clickbox"><a href="discovery.jsp">发现</a></div>
 		</div>
-		<div id="userMenuDiv" class="changeHoverBackground">
+		<div id="userMenuDiv" class="changeHoverBackground  clickbox">
 			<div id="myAvatarAndNameDiv">
 				<img id="myAvatar" src="img/avatar/<%=avatarPath %>" />
 				<div id="myName"><a href="profile.jsp"><%=username %></a></div>
