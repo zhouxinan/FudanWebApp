@@ -103,14 +103,15 @@ public class Dao {
 				throw new LoginServletException("邮箱已被注册");
 			}
 			results.close();
-			sm.executeUpdate("insert into user(username, password, email, avatarPath) values('"
+			sm.executeUpdate("insert into user(username, password, email, avatarPath, motto) values('"
 					+ username
 					+ "', '"
 					+ password
 					+ "', '"
 					+ email
-					+ "', 'default.jpg')"); // default avatar path is
-											// default.jpg
+					+ "', 'default.jpg', '这个人太懒，什么都没说……')"); // default avatar
+																// path is
+			// default.jpg
 			results = sm.executeQuery("select * from user where email='"
 					+ email + "'");
 			if (results.next()) {
@@ -174,7 +175,7 @@ public class Dao {
 		return -1; // default error return value
 	}
 
-	public boolean isUserIDExist(int userID) throws SQLException {
+	public User getUserByID(String userID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -184,7 +185,13 @@ public class Dao {
 			results = sm.executeQuery("select * from user where userID='"
 					+ userID + "'");
 			if (results.next()) {
-				return true;
+				User user = new User();
+				user.setUserID(results.getInt("userID"));
+				user.setUsername(results.getString("username"));
+				user.setEmail(results.getString("email"));
+				user.setAvatarPath(results.getString("avatarPath"));
+				user.setMotto(results.getString("motto"));
+				return user;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -200,7 +207,7 @@ public class Dao {
 				results.close();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public boolean follow(User user, int toUserID) throws SQLException {
@@ -212,7 +219,7 @@ public class Dao {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
 			sm.executeUpdate("insert into follows(fromUserID, toUserID) values('"
-					+ fromUserID + "', '" + toUserID +  "')");
+					+ fromUserID + "', '" + toUserID + "')");
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -230,7 +237,7 @@ public class Dao {
 		}
 		return false;
 	}
-	
+
 	public boolean defollow(User user, int toUserID) throws SQLException {
 		int fromUserID = user.getUserID();
 		Connection con = null;
@@ -258,7 +265,7 @@ public class Dao {
 		}
 		return false;
 	}
-	
+
 	public boolean checkFollow(User user, int toUserID) throws SQLException {
 		int fromUserID = user.getUserID();
 		Connection con = null;
@@ -267,8 +274,9 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select * from follows where fromUserID='"
-					+ fromUserID + "' and toUserID='" + toUserID + "'");
+			results = sm
+					.executeQuery("select * from follows where fromUserID='"
+							+ fromUserID + "' and toUserID='" + toUserID + "'");
 			if (results.next()) {
 				return true;
 			}

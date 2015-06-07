@@ -9,10 +9,16 @@
    			return;
    		}
    		String id = request.getParameter("id");
-   		/* if (id != null && !Dao.getInstance().isUserIDExist(Integer.parseInt(id))) {
-   			response.sendRedirect("login.jsp");
+   		User currentUser;
+   		if (id != null && !id.equals("" + user.getUserID())) {
+   			currentUser = Dao.getInstance().getUserByID(id);
+   		} else {
+   			currentUser = user;
+   		}
+   		if (currentUser == null) { // It will only happen if id is invalid.
+   			response.sendRedirect("404.jsp");
    			return;
-   		} */
+   		}
    %>
 <html>
 <head>
@@ -65,7 +71,7 @@
 			</div>
 			<div id="rightColumn">
 				<div class="columnDiv" id="myBigAvatarDiv">
-					<img id="myBigAvatar" src="img/avatar/<%=user.getAvatarPath() %>" />
+					<img id="myBigAvatar" src="img/avatar/<%=currentUser.getAvatarPath() %>" />
 				</div>
 				<% if (id != null && !id.equals("" + user.getUserID())) {
 				%>
@@ -77,11 +83,11 @@
 					<div id="userIDDiv"><%=(id!=null)?id:user.getUserID() %></div>
 					<div class="myInfoRowDiv">
 						<img src="img/icon/user_green.png" class="icon" />
-						<div><%=user.getUsername() %></div>
+						<div><%=currentUser.getUsername() %></div>
 					</div>
 					<div class="myInfoRowDiv">
 						<img src="img/icon/signature.png" class="icon" />
-						<div><%=user.getMotto() %></div>
+						<div><%=currentUser.getMotto() %></div>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -101,7 +107,7 @@
 					</div>
 					<div class="avatarList">
 						<a href="#"><img src="img/avatar/user_1.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/user_2.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/avatar/2.jpg" class="userAvatar" /></a>
 						<a href="#"><img src="img/avatar/user_3.jpg" class="userAvatar" /></a>
 						<a href="#"><img src="img/avatar/user_4.jpg" class="userAvatar" /></a>
 					</div>
@@ -113,7 +119,7 @@
 					</div>
 					<div class="avatarList">
 						<a href="#"><img src="img/avatar/user_1.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/user_2.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/avatar/2.jpg" class="userAvatar" /></a>
 						<a href="#"><img src="img/avatar/user_3.jpg" class="userAvatar" /></a>
 						<a href="#"><img src="img/avatar/user_4.jpg" class="userAvatar" /></a>
 					</div>
