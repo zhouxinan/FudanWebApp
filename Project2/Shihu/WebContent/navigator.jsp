@@ -33,12 +33,14 @@
 			</div>
 			<% if (user != null) { %>
 			<div id="userMenu">
-				<a href="profile.jsp"><div><span><img src="img/icon/user.png" class="icon" />我的主页</span></div></a>
-				<a href="messages.jsp"><div><span><img src="img/icon/envelop.png" class="icon" />私信</span></div></a>
-				<a href="settings.jsp"><div><span><img src="img/icon/cog.png" class="icon" />设置</span></div></a>
-				<a href="LoginServlet?action=logout"><div><span><img src="img/icon/exit.png" class="icon" />退出</span></div></a>
+				<div class="clickbox"><img src="img/icon/user.png" class="icon" /><a href="profile.jsp">我的主页</a></div>
+				<div class="clickbox"><img src="img/icon/envelop.png" class="icon" /><a href="messages.jsp">私信</a></div>
+				<div class="clickbox"><img src="img/icon/cog.png" class="icon" /><a href="settings.jsp">设置</a></div>
+				<div class="clickbox"><img src="img/icon/exit.png" class="icon" /><a href="LoginServlet?action=logout">退出</a></div>
 			</div>
 			<% }%>
 		</div>
 	</div>
 </div>
+<script src="lib/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/navigator.js"></script>

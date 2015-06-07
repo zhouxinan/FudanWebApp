@@ -127,16 +127,10 @@
 	text-align: left;
 	width: 100%;
 	float: left;
-	color: white;
 }
 
 #userMenu div:hover {
 	background-color: #2ecc71;
-}
-
-#userMenu span {
-	line-height: 30px;
-	float: left;
 }
 
 #userMenu img {
@@ -144,6 +138,16 @@
 	margin-right: 10px;
 	margin-left: 15px;
 	float: left;
+}
+
+#userMenu a {
+	color: white;
+	line-height: 30px;
+	float: left;
+}
+
+.clickbox {
+    cursor: pointer;
 }
 
 .changeHoverBackground:hover {
