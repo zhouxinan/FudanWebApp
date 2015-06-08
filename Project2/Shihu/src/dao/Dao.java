@@ -372,4 +372,62 @@ public class Dao {
 		}
 		return null;
 	}
+	
+	public int getFollowingCount(int fromUserID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select count(*) from follows where fromUserID='"
+					+ fromUserID + "'");
+			if (results.next()) {
+				return Integer.parseInt(results.getString("count(*)"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return -1; // default error return value
+	}
+	
+	public int getFollowerCount(int toUserID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select count(*) from follows where toUserID='"
+					+ toUserID + "'");
+			if (results.next()) {
+				return Integer.parseInt(results.getString("count(*)"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return -1; // default error return value
+	}
 }

@@ -93,11 +93,11 @@
 				</div>
 				<div class="columnDiv" id="followerDiv">
 					<div>
-						<div class="bigNumber"><span>4</span></div>
+						<div class="bigNumber"><span id="followerCount"></span></div>
 						<div class="followerDivText"><span>Follower</span></div>
 					</div>
 					<div>
-						<div class="bigNumber"><span>4</span></div>
+						<div class="bigNumber"><span id="followingCount"></span></div>
 						<div class="followerDivText"><span>Followed</span></div>
 					</div>
 				</div>

@@ -57,7 +57,8 @@ public class FollowServlet extends HttpServlet {
 		}
 		if (action.equals("follow")) {
 			try {
-				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
+				int toUserID = Integer.parseInt(request
+						.getParameter("toUserID"));
 				dao.follow(user, toUserID);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +66,8 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("defollow")) {
 			try {
-				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
+				int toUserID = Integer.parseInt(request
+						.getParameter("toUserID"));
 				dao.defollow(user, toUserID);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -73,7 +75,8 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("checkFollow")) {
 			try {
-				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
+				int toUserID = Integer.parseInt(request
+						.getParameter("toUserID"));
 				PrintWriter out = response.getWriter();
 				out.print(dao.checkFollow(user, toUserID));
 				out.close();
@@ -83,7 +86,8 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("getFollowers")) {
 			try {
-				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
+				int toUserID = Integer.parseInt(request
+						.getParameter("toUserID"));
 				List<JSONObject> followerList = dao.getFollowers(toUserID);
 				PrintWriter out = response.getWriter();
 				out.println(followerList);
@@ -94,7 +98,8 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("getFollowing")) {
 			try {
-				int fromUserID = Integer.parseInt(request.getParameter("fromUserID"));
+				int fromUserID = Integer.parseInt(request
+						.getParameter("fromUserID"));
 				List<JSONObject> followingList = dao.getFollowing(fromUserID);
 				PrintWriter out = response.getWriter();
 				out.println(followingList);
@@ -103,7 +108,28 @@ public class FollowServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (action.equals("getFollowingCount")) {
+			try {
+				int fromUserID = Integer.parseInt(request
+						.getParameter("fromUserID"));
+				PrintWriter out = response.getWriter();
+				out.println(dao.getFollowingCount(fromUserID));
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (action.equals("getFollowerCount")) {
+			try {
+				int toUserID = Integer.parseInt(request
+						.getParameter("toUserID"));
+				PrintWriter out = response.getWriter();
+				out.println(dao.getFollowerCount(toUserID));
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-
 }

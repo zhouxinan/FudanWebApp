@@ -22,6 +22,7 @@ $("#followButton").click(function() {
 		$(this).html('关注');
 	}
 	getFollowers();
+	getFollowerCount();
 });
 
 function sendfollow(action) {
@@ -105,10 +106,47 @@ function appendAvatar(data, avatarListDivID) {
 function addAvatar(fromUserID, avatarPath, avatarListDivID) {
 	var content = document.createElement('a');
 	content.href = 'profile.jsp?id=' + fromUserID;
-	content.innerHTML = '<img src="img/avatar/' + avatarPath + '" class="userAvatar">';
+	content.innerHTML = '<img src="img/avatar/' + avatarPath
+			+ '" class="userAvatar">';
 	$("#" + avatarListDivID).append(content);
+}
+
+function getFollowingCount() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'getFollowingCount',
+			fromUserID : $("#userIDDiv").html()
+		},
+		success : function(data) {
+			$("#followingCount").html(data);
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+function getFollowerCount() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'getFollowerCount',
+			toUserID : $("#userIDDiv").html()
+		},
+		success : function(data) {
+			$("#followerCount").html(data);
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
 }
 
 checkfollow();
 getFollowers();
 getFollowing();
+getFollowerCount();
+getFollowingCount();
