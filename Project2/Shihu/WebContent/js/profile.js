@@ -76,10 +76,28 @@ function getFollowers() {
 	});
 }
 
+function getFollowing() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'getFollowing',
+			fromUserID : $("#userIDDiv").html()
+		},
+		dataType : "json",
+		success : function(data) {
+			appendAvatar(data, 'followingListDiv');
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
 function appendAvatar(data, avatarListDivID) {
 	if (data != null) {
 		for (i = 0; i < data.length; i++) {
-			addAvatar(data[i].fromUserID, data[i].avatarPath, avatarListDivID);
+			addAvatar(data[i].userID, data[i].avatarPath, avatarListDivID);
 		}
 	}
 }
@@ -93,3 +111,4 @@ function addAvatar(fromUserID, avatarPath, avatarListDivID) {
 
 checkfollow();
 getFollowers();
+getFollowing();

@@ -50,7 +50,6 @@ public class FollowServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
-		int toUserID = Integer.parseInt(request.getParameter("toUserID"));
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			response.sendRedirect("login.jsp");
@@ -58,6 +57,7 @@ public class FollowServlet extends HttpServlet {
 		}
 		if (action.equals("follow")) {
 			try {
+				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
 				dao.follow(user, toUserID);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -65,6 +65,7 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("defollow")) {
 			try {
+				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
 				dao.defollow(user, toUserID);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -72,6 +73,7 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("checkFollow")) {
 			try {
+				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
 				PrintWriter out = response.getWriter();
 				out.print(dao.checkFollow(user, toUserID));
 				out.close();
@@ -81,9 +83,21 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("getFollowers")) {
 			try {
+				int toUserID = Integer.parseInt(request.getParameter("toUserID"));
 				List<JSONObject> followerList = dao.getFollowers(toUserID);
 				PrintWriter out = response.getWriter();
 				out.println(followerList);
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (action.equals("getFollowing")) {
+			try {
+				int fromUserID = Integer.parseInt(request.getParameter("fromUserID"));
+				List<JSONObject> followingList = dao.getFollowing(fromUserID);
+				PrintWriter out = response.getWriter();
+				out.println(followingList);
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

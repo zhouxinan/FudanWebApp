@@ -106,10 +106,6 @@
 						最近关注了
 					</div>
 					<div class="avatarList" id="followingListDiv">
-						<a href="#"><img src="img/avatar/1.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/2.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/3.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/4.jpg" class="userAvatar" /></a>
 					</div>
 					<div class="clear"></div>
 				</div>

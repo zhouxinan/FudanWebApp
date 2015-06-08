@@ -301,8 +301,7 @@ public class Dao {
 		return false;
 	}
 
-	public List<JSONObject> getFollowers(int toUserID)
-			throws SQLException {
+	public List<JSONObject> getFollowers(int toUserID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -315,12 +314,48 @@ public class Dao {
 			while (results.next()) {
 				JSONObject obj = new JSONObject();
 				String fromUserID = results.getString("fromUserID");
-				obj.put("fromUserID", fromUserID);
+				obj.put("userID", fromUserID);
 				User fromUser = getUserByID(fromUserID);
 				obj.put("avatarPath", fromUser.getAvatarPath());
 				followerList.add(obj);
 			}
 			return followerList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> getFollowing(int fromUserID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from follows where fromUserID='"
+					+ fromUserID + "' ORDER BY followTime DESC LIMIT 5");
+			List<JSONObject> followingList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String toUserID = results.getString("toUserID");
+				obj.put("userID", toUserID);
+				User toUser = getUserByID(toUserID);
+				obj.put("avatarPath", toUser.getAvatarPath());
+				followingList.add(obj);
+			}
+			return followingList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
