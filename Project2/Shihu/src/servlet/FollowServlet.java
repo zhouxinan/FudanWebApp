@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.User;
 import dao.Dao;
+
+import org.json.*;
 
 /**
  * Servlet implementation class FollowServlet
@@ -71,6 +74,16 @@ public class FollowServlet extends HttpServlet {
 			try {
 				PrintWriter out = response.getWriter();
 				out.print(dao.checkFollow(user, toUserID));
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (action.equals("getFollowers")) {
+			try {
+				List<JSONObject> followerList = dao.getFollowers(toUserID);
+				PrintWriter out = response.getWriter();
+				out.println(followerList);
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

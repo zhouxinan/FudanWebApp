@@ -5,9 +5,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 
 import bean.User;
 import exception.LoginServletException;
+
+import org.json.*;
 
 public class Dao {
 	private static String driver = "com.mysql.jdbc.Driver";
@@ -295,5 +299,42 @@ public class Dao {
 			}
 		}
 		return false;
+	}
+
+	public List<JSONObject> getFollowers(int toUserID)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from follows where toUserID='"
+					+ toUserID + "' ORDER BY followTime DESC LIMIT 5");
+			List<JSONObject> followerList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String fromUserID = results.getString("fromUserID");
+				obj.put("fromUserID", fromUserID);
+				User fromUser = getUserByID(fromUserID);
+				obj.put("avatarPath", fromUser.getAvatarPath());
+				followerList.add(obj);
+			}
+			return followerList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
 	}
 }

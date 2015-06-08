@@ -21,6 +21,7 @@ $("#followButton").click(function() {
 		sendfollow('defollow');
 		$(this).html('关注');
 	}
+	getFollowers();
 });
 
 function sendfollow(action) {
@@ -56,4 +57,39 @@ function checkfollow() {
 	});
 }
 
+function getFollowers() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'getFollowers',
+			toUserID : $("#userIDDiv").html()
+		},
+		dataType : "json",
+		success : function(data) {
+			$("#followerListDiv").html("");
+			appendAvatar(data, 'followerListDiv');
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+function appendAvatar(data, avatarListDivID) {
+	if (data != null) {
+		for (i = 0; i < data.length; i++) {
+			addAvatar(data[i].fromUserID, data[i].avatarPath, avatarListDivID);
+		}
+	}
+}
+
+function addAvatar(fromUserID, avatarPath, avatarListDivID) {
+	var content = document.createElement('a');
+	content.href = 'profile.jsp?id=' + fromUserID;
+	content.innerHTML = '<img src="img/avatar/' + avatarPath + '" class="userAvatar">';
+	$("#" + avatarListDivID).append(content);
+}
+
 checkfollow();
+getFollowers();

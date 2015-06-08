@@ -105,11 +105,11 @@
 					<div class="rightColumnTitle">
 						最近关注了
 					</div>
-					<div class="avatarList">
-						<a href="#"><img src="img/avatar/user_1.jpg" class="userAvatar" /></a>
+					<div class="avatarList" id="followingListDiv">
+						<a href="#"><img src="img/avatar/1.jpg" class="userAvatar" /></a>
 						<a href="#"><img src="img/avatar/2.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/user_3.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/user_4.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/avatar/3.jpg" class="userAvatar" /></a>
+						<a href="#"><img src="img/avatar/4.jpg" class="userAvatar" /></a>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -117,11 +117,7 @@
 					<div class="rightColumnTitle">
 						最近被他们关注
 					</div>
-					<div class="avatarList">
-						<a href="#"><img src="img/avatar/user_1.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/2.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/user_3.jpg" class="userAvatar" /></a>
-						<a href="#"><img src="img/avatar/user_4.jpg" class="userAvatar" /></a>
+					<div class="avatarList" id="followerListDiv">
 					</div>
 					<div class="clear"></div>
 				</div>
