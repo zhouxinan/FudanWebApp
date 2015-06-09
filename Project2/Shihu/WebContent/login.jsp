@@ -54,12 +54,10 @@
 		<div id="contentWrapper">
 			<div id="popularUserDiv">
 				<div class="contentTitle">热门用户</div>
-				<div>
-					<div id="popularUserListDiv1" class="popularUserList"></div>
-					<div class="clear"></div>
-					<div id="popularUserListDiv2" class="popularUserList"></div>
-					<div class="clear"></div>
-				</div>
+				<div id="popularUserListDiv1" class="popularUserList"></div>
+				<div class="clear"></div>
+				<div id="popularUserListDiv2" class="popularUserList"></div>
+				<div class="clear"></div>
 			</div>
 			<div id="popularQuestionDiv">
 				<div class="contentTitle">热门问题</div>

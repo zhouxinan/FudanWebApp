@@ -50,7 +50,6 @@ public class FollowServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
-		User user = (User) request.getSession().getAttribute("user");
 		if (action.equals("getPopularUserList")) {
 			try {
 				PrintWriter out = response.getWriter();
@@ -62,6 +61,7 @@ public class FollowServlet extends HttpServlet {
 			}
 			return;
 		}
+		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			response.sendRedirect("login.jsp");
 			return;
