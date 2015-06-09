@@ -4,21 +4,24 @@
 <%@ page import="dao.*" %>
     <%
    		User user = (User)request.getSession().getAttribute("user");
-   		if (user == null) {
-   			response.sendRedirect("login.jsp");
-   			return;
-   		}
    		String id = request.getParameter("id");
-   		User currentUser;
-   		if (id != null && !id.equals("" + user.getUserID())) {
+   		User currentUser = null;
+   		if (user == null) { // The visitor has not logged in.
+   			if (id == null){
+   				response.sendRedirect("login.jsp");
+   				return;
+   			} else {
+   				currentUser = Dao.getInstance().getUserByID(id);
+   			}
+   		} else if (id != null) {
    			currentUser = Dao.getInstance().getUserByID(id);
    		} else {
    			currentUser = user;
    		}
    		if (currentUser == null) { // It will only happen if id is invalid.
-   			response.sendRedirect("404.jsp");
-   			return;
-   		}
+	   		response.sendRedirect("404.jsp");
+	   		return;
+	   	}
    %>
 <html>
 <head>
@@ -73,7 +76,7 @@
 				<div class="columnDiv" id="myBigAvatarDiv">
 					<img id="myBigAvatar" src="img/avatar/<%=currentUser.getAvatarPath() %>" />
 				</div>
-				<% if (id != null && !id.equals("" + user.getUserID())) {
+				<% if (user != null && id != null && !id.equals("" + user.getUserID())) {
 				%>
 				<div class="columnDiv">
 					<button id="followButton">关注</button>

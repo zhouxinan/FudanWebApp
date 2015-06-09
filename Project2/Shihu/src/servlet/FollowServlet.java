@@ -50,6 +50,7 @@ public class FollowServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
+		User user = (User) request.getSession().getAttribute("user");
 		if (action.equals("getPopularUserList")) {
 			try {
 				PrintWriter out = response.getWriter();
@@ -60,8 +61,18 @@ public class FollowServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			return;
+		} else if (action.equals("getFollowInfo")) {
+			try {
+				int userID = Integer.parseInt(request.getParameter("userID"));
+				PrintWriter out = response.getWriter();
+				out.println(dao.getFollowInfo(user, userID));
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
 		}
-		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			response.sendRedirect("login.jsp");
 			return;
@@ -140,16 +151,6 @@ public class FollowServlet extends HttpServlet {
 						.getParameter("toUserID"));
 				PrintWriter out = response.getWriter();
 				out.println(dao.getFollowerCount(toUserID));
-				out.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (action.equals("getFollowInfo")) {
-			try {
-				int userID = Integer.parseInt(request.getParameter("userID"));
-				PrintWriter out = response.getWriter();
-				out.println(dao.getFollowInfo(user, userID));
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

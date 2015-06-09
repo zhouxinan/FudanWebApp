@@ -224,8 +224,10 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("insert into follows(fromUserID, toUserID) values('"
 					+ fromUserID + "', '" + toUserID + "')");
-			sm.executeUpdate("UPDATE user SET followerCount=followerCount+1 WHERE userID=" + toUserID);
-			sm.executeUpdate("UPDATE user SET followingCount=followingCount+1 WHERE userID=" + fromUserID);
+			sm.executeUpdate("UPDATE user SET followerCount=followerCount+1 WHERE userID="
+					+ toUserID);
+			sm.executeUpdate("UPDATE user SET followingCount=followingCount+1 WHERE userID="
+					+ fromUserID);
 			return getFollowInfo(user, toUserID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -254,8 +256,10 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("delete from follows where fromUserID='"
 					+ fromUserID + "' and toUserID='" + toUserID + "'");
-			sm.executeUpdate("UPDATE user SET followerCount=followerCount-1 WHERE userID=" + toUserID);
-			sm.executeUpdate("UPDATE user SET followingCount=followingCount-1 WHERE userID=" + fromUserID);
+			sm.executeUpdate("UPDATE user SET followerCount=followerCount-1 WHERE userID="
+					+ toUserID);
+			sm.executeUpdate("UPDATE user SET followingCount=followingCount-1 WHERE userID="
+					+ fromUserID);
 			return getFollowInfo(user, toUserID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -446,22 +450,27 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm
-					.executeQuery("select * from follows where fromUserID='"
-							+ user.getUserID() + "' and toUserID='" + userID
-							+ "'");
-			if (results.next()) {
-				returnObj.put("isFollowed", true);
-			} else {
-				returnObj.put("isFollowed", false);
+			if (user != null) {
+				results = sm
+						.executeQuery("select * from follows where fromUserID='"
+								+ user.getUserID()
+								+ "' and toUserID='"
+								+ userID + "'");
+				if (results.next()) {
+					returnObj.put("isFollowed", true);
+				} else {
+					returnObj.put("isFollowed", false);
+				}
+				results.close();
 			}
-			results.close();
 			results = sm
 					.executeQuery("select followerCount,followingCount from user where userID='"
 							+ userID + "'");
 			if (results.next()) {
-				returnObj.put("followerCount", results.getString("followerCount"));
-				returnObj.put("followingCount", results.getString("followingCount"));
+				returnObj.put("followerCount",
+						results.getString("followerCount"));
+				returnObj.put("followingCount",
+						results.getString("followingCount"));
 			}
 			results.close();
 			results = sm
@@ -507,7 +516,7 @@ public class Dao {
 		}
 		return null;
 	}
-	
+
 	public List<JSONObject> getPopularUserList() throws SQLException {
 		Connection con = null;
 		Statement sm = null;
@@ -515,7 +524,8 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select userID,avatarPath from user ORDER BY followerCount DESC LIMIT 8");
+			results = sm
+					.executeQuery("select userID,avatarPath from user ORDER BY followerCount DESC LIMIT 8");
 			List<JSONObject> popularUserList = new LinkedList<JSONObject>();
 			while (results.next()) {
 				JSONObject obj = new JSONObject();
