@@ -39,64 +39,6 @@ function sendfollow(action) {
 	});
 }
 
-function checkfollow() {
-	$.ajax({
-		type : 'POST',
-		url : "FollowServlet",
-		data : {
-			action : 'checkFollow',
-			toUserID : $("#userIDDiv").html()
-		},
-		success : function(data) {
-			if (data == 'true') {
-				$("#followButton").html('取消关注');
-			} else {
-				$("#followButton").html('关注');
-			}
-		},
-		error : function() {
-			alert("Connection error!");
-		}
-	});
-}
-
-function getFollowers() {
-	$.ajax({
-		type : 'POST',
-		url : "FollowServlet",
-		data : {
-			action : 'getFollowers',
-			toUserID : $("#userIDDiv").html()
-		},
-		dataType : "json",
-		success : function(data) {
-			$("#followerListDiv").html("");
-			appendAvatar(data, 'followerListDiv');
-		},
-		error : function() {
-			alert("Connection error!");
-		}
-	});
-}
-
-function getFollowing() {
-	$.ajax({
-		type : 'POST',
-		url : "FollowServlet",
-		data : {
-			action : 'getFollowing',
-			fromUserID : $("#userIDDiv").html()
-		},
-		dataType : "json",
-		success : function(data) {
-			appendAvatar(data, 'followingListDiv');
-		},
-		error : function() {
-			alert("Connection error!");
-		}
-	});
-}
-
 function appendAvatar(data, avatarListDivID) {
 	if (data != null) {
 		for (i = 0; i < data.length; i++) {
@@ -111,40 +53,6 @@ function addAvatar(fromUserID, avatarPath, avatarListDivID) {
 	content.innerHTML = '<img src="img/avatar/' + avatarPath
 			+ '" class="userAvatar">';
 	$("#" + avatarListDivID).append(content);
-}
-
-function getFollowingCount() {
-	$.ajax({
-		type : 'POST',
-		url : "FollowServlet",
-		data : {
-			action : 'getFollowingCount',
-			fromUserID : $("#userIDDiv").html()
-		},
-		success : function(data) {
-			$("#followingCount").html(data);
-		},
-		error : function() {
-			alert("Connection error!");
-		}
-	});
-}
-
-function getFollowerCount() {
-	$.ajax({
-		type : 'POST',
-		url : "FollowServlet",
-		data : {
-			action : 'getFollowerCount',
-			toUserID : $("#userIDDiv").html()
-		},
-		success : function(data) {
-			$("#followerCount").html(data);
-		},
-		error : function() {
-			alert("Connection error!");
-		}
-	});
 }
 
 function getFollowInfo() {
