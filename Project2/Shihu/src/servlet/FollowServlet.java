@@ -59,7 +59,9 @@ public class FollowServlet extends HttpServlet {
 			try {
 				int toUserID = Integer.parseInt(request
 						.getParameter("toUserID"));
-				dao.follow(user, toUserID);
+				PrintWriter out = response.getWriter();
+				out.println(dao.follow(user, toUserID));
+				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,7 +70,9 @@ public class FollowServlet extends HttpServlet {
 			try {
 				int toUserID = Integer.parseInt(request
 						.getParameter("toUserID"));
-				dao.defollow(user, toUserID);
+				PrintWriter out = response.getWriter();
+				out.println(dao.defollow(user, toUserID));
+				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -125,6 +129,17 @@ public class FollowServlet extends HttpServlet {
 						.getParameter("toUserID"));
 				PrintWriter out = response.getWriter();
 				out.println(dao.getFollowerCount(toUserID));
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (action.equals("getFollowInfo")) {
+			try {
+				int userID = Integer.parseInt(request
+						.getParameter("userID"));
+				PrintWriter out = response.getWriter();
+				out.println(dao.getFollowInfo(user, userID));
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

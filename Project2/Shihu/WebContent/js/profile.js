@@ -16,13 +16,9 @@ $(function setTabAction() {
 $("#followButton").click(function() {
 	if ($(this).html() == '关注') {
 		sendfollow('follow');
-		$(this).html('取消关注');
 	} else {
 		sendfollow('defollow');
-		$(this).html('关注');
 	}
-	getFollowers();
-	getFollowerCount();
 });
 
 function sendfollow(action) {
@@ -33,7 +29,13 @@ function sendfollow(action) {
 			action : action,
 			toUserID : $("#userIDDiv").html()
 		},
-		dataType : "json"
+		dataType : "json",
+		success : function(data) {
+			processData(data);
+		},
+		error : function() {
+			alert("Connection error!");
+		}
 	});
 }
 
@@ -145,8 +147,37 @@ function getFollowerCount() {
 	});
 }
 
-checkfollow();
-getFollowers();
-getFollowing();
-getFollowerCount();
-getFollowingCount();
+function getFollowInfo() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'getFollowInfo',
+			userID : $("#userIDDiv").html()
+		},
+		dataType : "json",
+		success : function(data) {
+			processData(data);
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+
+function processData(data) {
+	if (data.isFollowed == true) {
+		$("#followButton").html('取消关注');
+	} else {
+		$("#followButton").html('关注');
+	}
+	$("#followerCount").html(data.followerCount);
+	$("#followingCount").html(data.followingCount);
+	$("#followerListDiv").html("");
+	$("#followingListDiv").html("");
+	appendAvatar(data.followingList, 'followingListDiv');
+	appendAvatar(data.followerList, 'followerListDiv');
+}
+
+getFollowInfo();

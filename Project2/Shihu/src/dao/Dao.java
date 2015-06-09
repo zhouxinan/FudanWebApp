@@ -214,7 +214,7 @@ public class Dao {
 		return null;
 	}
 
-	public boolean follow(User user, int toUserID) throws SQLException {
+	public JSONObject follow(User user, int toUserID) throws SQLException {
 		int fromUserID = user.getUserID();
 		Connection con = null;
 		Statement sm = null;
@@ -224,7 +224,7 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("insert into follows(fromUserID, toUserID) values('"
 					+ fromUserID + "', '" + toUserID + "')");
-			return true;
+			return getFollowInfo(user, toUserID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,10 +239,10 @@ public class Dao {
 				results.close();
 			}
 		}
-		return false;
+		return null;
 	}
 
-	public boolean defollow(User user, int toUserID) throws SQLException {
+	public JSONObject defollow(User user, int toUserID) throws SQLException {
 		int fromUserID = user.getUserID();
 		Connection con = null;
 		Statement sm = null;
@@ -252,7 +252,7 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("delete from follows where fromUserID='"
 					+ fromUserID + "' and toUserID='" + toUserID + "'");
-			return true;
+			return getFollowInfo(user, toUserID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -267,7 +267,7 @@ public class Dao {
 				results.close();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public boolean checkFollow(User user, int toUserID) throws SQLException {
@@ -344,8 +344,9 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select * from follows where fromUserID='"
-					+ fromUserID + "' ORDER BY followTime DESC LIMIT 5");
+			results = sm
+					.executeQuery("select * from follows where fromUserID='"
+							+ fromUserID + "' ORDER BY followTime DESC LIMIT 5");
 			List<JSONObject> followingList = new LinkedList<JSONObject>();
 			while (results.next()) {
 				JSONObject obj = new JSONObject();
@@ -372,7 +373,7 @@ public class Dao {
 		}
 		return null;
 	}
-	
+
 	public int getFollowingCount(int fromUserID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
@@ -380,8 +381,9 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select count(*) from follows where fromUserID='"
-					+ fromUserID + "'");
+			results = sm
+					.executeQuery("select count(*) from follows where fromUserID='"
+							+ fromUserID + "'");
 			if (results.next()) {
 				return Integer.parseInt(results.getString("count(*)"));
 			}
@@ -401,7 +403,7 @@ public class Dao {
 		}
 		return -1; // default error return value
 	}
-	
+
 	public int getFollowerCount(int toUserID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
@@ -409,8 +411,9 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			results = sm.executeQuery("select count(*) from follows where toUserID='"
-					+ toUserID + "'");
+			results = sm
+					.executeQuery("select count(*) from follows where toUserID='"
+							+ toUserID + "'");
 			if (results.next()) {
 				return Integer.parseInt(results.getString("count(*)"));
 			}
@@ -429,5 +432,81 @@ public class Dao {
 			}
 		}
 		return -1; // default error return value
+	}
+
+	public JSONObject getFollowInfo(User user, int userID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		JSONObject returnObj = new JSONObject();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from follows where fromUserID='"
+							+ user.getUserID() + "' and toUserID='" + userID
+							+ "'");
+			if (results.next()) {
+				returnObj.put("isFollowed", true);
+			} else {
+				returnObj.put("isFollowed", false);
+			}
+			results.close();
+			results = sm
+					.executeQuery("select count(*) from follows where toUserID='"
+							+ userID + "'");
+			if (results.next()) {
+				returnObj.put("followerCount", results.getString("count(*)"));
+			}
+			results.close();
+			results = sm
+					.executeQuery("select count(*) from follows where fromUserID='"
+							+ userID + "'");
+			if (results.next()) {
+				returnObj.put("followingCount", results.getString("count(*)"));
+			}
+			results.close();
+			results = sm
+					.executeQuery("select * from follows where fromUserID='"
+							+ userID + "' ORDER BY followTime DESC LIMIT 5");
+			List<JSONObject> followingList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String toUserID = results.getString("toUserID");
+				obj.put("userID", toUserID);
+				User toUser = getUserByID(toUserID);
+				obj.put("avatarPath", toUser.getAvatarPath());
+				followingList.add(obj);
+			}
+			results.close();
+			returnObj.put("followingList", followingList);
+			results = sm.executeQuery("select * from follows where toUserID='"
+					+ userID + "' ORDER BY followTime DESC LIMIT 5");
+			List<JSONObject> followerList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String fromUserID = results.getString("fromUserID");
+				obj.put("userID", fromUserID);
+				User fromUser = getUserByID(fromUserID);
+				obj.put("avatarPath", fromUser.getAvatarPath());
+				followerList.add(obj);
+			}
+			returnObj.put("followerList", followerList);
+			return returnObj;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
 	}
 }
