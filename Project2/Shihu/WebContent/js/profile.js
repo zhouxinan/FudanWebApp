@@ -16,12 +16,8 @@ $(function setTabAction() {
 $("#followButton").click(function() {
 	if ($(this).html() == '关注') {
 		sendfollow('follow');
-		$(this).css("color","white");
-		$(this).css("background-color","#1abc9c");
 	} else {
 		sendfollow('defollow');
-		$(this).css("color","#1abc9c");
-		$(this).css("background-color","white");
 	}
 });
 
@@ -173,8 +169,12 @@ function getFollowInfo() {
 function processData(data) {
 	if (data.isFollowed == true) {
 		$("#followButton").html('取消关注');
+		$("#followButton").css("color","white");
+		$("#followButton").css("background-color","#1abc9c");
 	} else {
 		$("#followButton").html('关注');
+		$("#followButton").css("color","#1abc9c");
+		$("#followButton").css("background-color","white");
 	}
 	$("#followerCount").html(data.followerCount);
 	$("#followingCount").html(data.followingCount);
