@@ -51,6 +51,17 @@ public class FollowServlet extends HttpServlet {
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
 		User user = (User) request.getSession().getAttribute("user");
+		if (action.equals("getPopularUserList")) {
+			try {
+				PrintWriter out = response.getWriter();
+				out.println(dao.getPopularUserList());
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
 		if (user == null) {
 			response.sendRedirect("login.jsp");
 			return;
@@ -136,8 +147,7 @@ public class FollowServlet extends HttpServlet {
 			}
 		} else if (action.equals("getFollowInfo")) {
 			try {
-				int userID = Integer.parseInt(request
-						.getParameter("userID"));
+				int userID = Integer.parseInt(request.getParameter("userID"));
 				PrintWriter out = response.getWriter();
 				out.println(dao.getFollowInfo(user, userID));
 				out.close();

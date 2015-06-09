@@ -4,7 +4,7 @@
 <head>
 	<link type="text/css" rel="stylesheet" href="css/base.css" />
 	<link type="text/css" rel="stylesheet" href="css/login.css" />
-	<script type="text/javascript" src="js/login.js"></script>
+	<script src="lib/jquery-2.1.3.min.js"></script>
 	<meta charset="utf-8" />
 	<!-- For iPhone to display normally -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,17 +54,12 @@
 		<div id="contentWrapper">
 			<div id="popularUserDiv">
 				<div class="contentTitle">热门用户</div>
-				<div id="popularUserList">
-						<div><a href="#"><img src="img/avatar/user_1.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_2.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_3.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_4.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_5.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_6.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_7.jpg" /></a></div>
-						<div><a href="#"><img src="img/avatar/user_8.jpg" /></a></div>
+				<div>
+					<div id="popularUserListDiv1" class="popularUserList"></div>
+					<div class="clear"></div>
+					<div id="popularUserListDiv2" class="popularUserList"></div>
+					<div class="clear"></div>
 				</div>
-				<div class="clear"></div>
 			</div>
 			<div id="popularQuestionDiv">
 				<div class="contentTitle">热门问题</div>
@@ -78,5 +73,6 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

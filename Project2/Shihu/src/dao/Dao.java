@@ -507,4 +507,37 @@ public class Dao {
 		}
 		return null;
 	}
+	
+	public List<JSONObject> getPopularUserList() throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select userID,avatarPath from user ORDER BY followerCount DESC LIMIT 8");
+			List<JSONObject> popularUserList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("userID", results.getString("userID"));
+				obj.put("avatarPath", results.getString("avatarPath"));
+				popularUserList.add(obj);
+			}
+			return popularUserList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
 }

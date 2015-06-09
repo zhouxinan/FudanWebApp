@@ -94,3 +94,34 @@ function switchForm() {
 function showErrorMessage(errorMessage) {
 	document.getElementById("errorMessage").textContent = errorMessage;
 }
+
+function getPopularUserList() {
+	$.ajax({
+		type : 'POST',
+		url : "FollowServlet",
+		data : {
+			action : 'getPopularUserList',
+		},
+		dataType : "json",
+		success : function(data) {
+			for (i = 0; i < 4; i++) {
+				addPopularUser(data[i].userID, data[i].avatarPath, 'popularUserListDiv1');
+			}
+			for (i = 4; i < 8; i++) {
+				addPopularUser(data[i].userID, data[i].avatarPath, 'popularUserListDiv2');
+			}
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+function addPopularUser(userID, avatarPath, divName) {
+	var content = document.createElement('div');
+	content.innerHTML = '<a href="profile.jsp?id=' + userID
+			+ '"><img src="img/avatar/' + avatarPath + '" /></a>';
+	$("#" + divName).append(content);
+}
+
+getPopularUserList();
