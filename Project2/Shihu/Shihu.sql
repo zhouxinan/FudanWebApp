@@ -6,6 +6,8 @@ create table user(
     email text,
     avatarPath text,
     motto text,
+    followerCount integer DEFAULT 0,
+    followingCount integer DEFAULT 0,
 	primary key(userID)
 )default charset utf8;
 

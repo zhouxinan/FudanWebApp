@@ -224,6 +224,8 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("insert into follows(fromUserID, toUserID) values('"
 					+ fromUserID + "', '" + toUserID + "')");
+			sm.executeUpdate("UPDATE user SET followerCount=followerCount+1 WHERE userID=" + toUserID);
+			sm.executeUpdate("UPDATE user SET followingCount=followingCount+1 WHERE userID=" + fromUserID);
 			return getFollowInfo(user, toUserID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -252,6 +254,8 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("delete from follows where fromUserID='"
 					+ fromUserID + "' and toUserID='" + toUserID + "'");
+			sm.executeUpdate("UPDATE user SET followerCount=followerCount-1 WHERE userID=" + toUserID);
+			sm.executeUpdate("UPDATE user SET followingCount=followingCount-1 WHERE userID=" + fromUserID);
 			return getFollowInfo(user, toUserID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -453,17 +457,11 @@ public class Dao {
 			}
 			results.close();
 			results = sm
-					.executeQuery("select count(*) from follows where toUserID='"
+					.executeQuery("select followerCount,followingCount from user where userID='"
 							+ userID + "'");
 			if (results.next()) {
-				returnObj.put("followerCount", results.getString("count(*)"));
-			}
-			results.close();
-			results = sm
-					.executeQuery("select count(*) from follows where fromUserID='"
-							+ userID + "'");
-			if (results.next()) {
-				returnObj.put("followingCount", results.getString("count(*)"));
+				returnObj.put("followerCount", results.getString("followerCount"));
+				returnObj.put("followingCount", results.getString("followingCount"));
 			}
 			results.close();
 			results = sm
