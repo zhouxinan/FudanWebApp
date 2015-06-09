@@ -16,8 +16,12 @@ $(function setTabAction() {
 $("#followButton").click(function() {
 	if ($(this).html() == '关注') {
 		sendfollow('follow');
+		$(this).css("color","white");
+		$(this).css("background-color","#1abc9c");
 	} else {
 		sendfollow('defollow');
+		$(this).css("color","#1abc9c");
+		$(this).css("background-color","white");
 	}
 });
 
