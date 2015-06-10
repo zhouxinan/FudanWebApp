@@ -550,4 +550,44 @@ public class Dao {
 		}
 		return null;
 	}
+
+	public boolean modifyPassword(User user, String oldPassword,
+			String newPassword) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int userID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select password from user where userID='"
+							+ userID + "'");
+			if (results.next()) {
+				String password = results.getString("password");
+				if (password.equals(oldPassword)) {
+					results.close();
+					sm.executeUpdate("UPDATE user SET password='" + newPassword
+							+ "' WHERE userID=" + userID);
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
 }

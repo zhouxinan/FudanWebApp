@@ -12,3 +12,27 @@ $(function setTabAction() {
 		}
 	});
 });
+
+$("#savePasswordButton").click(function() {
+	$.ajax({
+		type : 'POST',
+		url : "SettingsServlet",
+		data : {
+			action : 'modifyPassword',
+			oldPassword : $("#oldPassword").val(),
+			newPassword : $("#newPassword").val(),
+			newPasswordRepeat : $("#newPasswordRepeat").val()
+		},
+		success : function(data) {
+			$("#serverResponseMessageDiv").html(data);
+			if (data == '修改密码成功！') {
+				$("#oldPassword").val("");
+				$("#newPassword").val("");
+				$("#newPasswordRepeat").val("");
+			}
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+});

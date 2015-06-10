@@ -16,7 +16,6 @@
 <link type="text/css" rel="stylesheet" href="css/profile.css" />
 <link type="text/css" rel="stylesheet" href="css/settings.css" />
 <script src="lib/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/settings.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>识乎 - 设置</title>
 </head>
@@ -55,6 +54,7 @@
 							<label for="newPasswordRepeat">重复新密码</label>
 							<input type="password" id="newPasswordRepeat" />
 						</div>
+						<div id="serverResponseMessageDiv"></div>
 						<div>
 							<button class="saveButton" id="savePasswordButton">保存</button>
 						</div>
@@ -67,5 +67,6 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/settings.js"></script>
 </body>
 </html>
