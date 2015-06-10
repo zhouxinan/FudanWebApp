@@ -33,25 +33,29 @@
 					<div class="columnDiv">
 						<div>
 							<label for="motto">个人简介</label>
-							<input type="text" id="motto" />
+							<input type="text" id="motto" placeholder="<%=user.getMotto() %>"/>
 						</div>
+						<div id="saveMottoResponseMessageDiv"></div>
 						<div>
-							<button class="saveButton">保存</button>
+							<button class="saveButton" id="saveMottoButton">保存</button>
 						</div>
 					</div>
 				</div>
 				<div id="setPasswordDiv" class="tabPane">
 					<div class="columnDiv">
 						<div>
+							<label for="oldPassword">当前密码</label>
 							<input type="password" id="oldPassword" />
 						</div>
 						<div>
+							<label for="newPassword">新的密码</label>
 							<input type="password" id="newPassword" />
 						</div>
 						<div>
+							<label for="newPasswordRepeat">确认密码</label>
 							<input type="password" id="newPasswordRepeat" />
 						</div>
-						<div id="serverResponseMessageDiv"></div>
+						<div id="savePasswordResponseMessageDiv"></div>
 						<div>
 							<button class="saveButton" id="savePasswordButton">保存</button>
 						</div>
