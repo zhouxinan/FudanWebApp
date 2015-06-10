@@ -43,15 +43,12 @@
 				<div id="setPasswordDiv" class="tabPane">
 					<div class="columnDiv">
 						<div>
-							<label for="oldPassword">旧密码</label>
 							<input type="password" id="oldPassword" />
 						</div>
 						<div>
-							<label for="newPassword">新密码</label>
 							<input type="password" id="newPassword" />
 						</div>
 						<div>
-							<label for="newPasswordRepeat">重复新密码</label>
 							<input type="password" id="newPasswordRepeat" />
 						</div>
 						<div id="serverResponseMessageDiv"></div>

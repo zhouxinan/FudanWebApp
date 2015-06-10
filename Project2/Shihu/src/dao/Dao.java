@@ -590,4 +590,32 @@ public class Dao {
 		}
 		return false;
 	}
+
+	public boolean modifyMotto(User user, String motto) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int userID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("UPDATE user SET motto='" + motto
+					+ "' WHERE userID=" + userID);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
 }

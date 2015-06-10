@@ -85,6 +85,19 @@ public class SettingsServlet extends HttpServlet {
 			} finally {
 				out.close();
 			}
+		} else if (action.equals("modifyMotto")) {
+			PrintWriter out = response.getWriter();
+			String motto = request.getParameter("motto");
+			try {
+				out.print(dao.modifyMotto(user, motto));
+				request.getSession().setAttribute("user",
+						dao.getUserByID("" + user.getUserID())); // renew
+																	// session.
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			out.close();
 		}
 	}
 

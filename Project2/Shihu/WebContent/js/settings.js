@@ -24,11 +24,39 @@ $("#savePasswordButton").click(function() {
 			newPasswordRepeat : $("#newPasswordRepeat").val()
 		},
 		success : function(data) {
-			$("#serverResponseMessageDiv").html(data);
+			$("#savePasswordResponseMessageDiv").html(data);
 			if (data == '修改密码成功！') {
 				$("#oldPassword").val("");
 				$("#newPassword").val("");
 				$("#newPasswordRepeat").val("");
+			}
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+});
+
+$("#saveMottoButton").click(function() {
+	var motto = $("#motto").val();
+	if (motto == "") {
+		$("#saveMottoResponseMessageDiv").html("请输入个人简介！");
+		return;
+	}
+	$.ajax({
+		type : 'POST',
+		url : "SettingsServlet",
+		data : {
+			action : 'modifyMotto',
+			motto : motto
+		},
+		success : function(data) {
+			if (data == "true") {
+				$("#saveMottoResponseMessageDiv").html("修改成功！");
+				$("#motto").attr('placeholder', motto);
+				$("#motto").val("");
+			} else {
+				$("#saveMottoResponseMessageDiv").html("服务器错误");
 			}
 		},
 		error : function() {
