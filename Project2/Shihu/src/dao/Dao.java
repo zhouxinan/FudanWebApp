@@ -591,7 +591,7 @@ public class Dao {
 		return false;
 	}
 
-	public boolean modifyMotto(User user, String motto) throws SQLException {
+	public boolean modifyMotto(User user, String newMotto) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -599,7 +599,36 @@ public class Dao {
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
-			sm.executeUpdate("UPDATE user SET motto='" + motto
+			sm.executeUpdate("UPDATE user SET motto='" + newMotto
+					+ "' WHERE userID=" + userID);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
+
+	public boolean modifyAvatarPath(User user, String newAvatarPath)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int userID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("UPDATE user SET avatarPath='" + newAvatarPath
 					+ "' WHERE userID=" + userID);
 			return true;
 		} catch (SQLException e) {

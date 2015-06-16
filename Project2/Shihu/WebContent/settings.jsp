@@ -7,6 +7,8 @@
 		response.sendRedirect("login.jsp");
 		return;
 	}
+	String saveAvatarResponseMessage = (String)request.getSession().getAttribute("saveAvatarResponseMessage");
+	request.getSession().removeAttribute("saveAvatarResponseMessage");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,12 +26,22 @@
 	<div id="content">
 		<div id="contentWrapper">
 			<div id="tabBar" class="columnDiv">
-				<div class="tab active">个人简介</div>
+				<div class="tab active">头像</div>
+				<div class="tab">个人简介</div>
 				<div class="tab">密码</div>
-				<div class="tab">头像</div>
 			</div>
 			<div id="settingsDiv">
-				<div id="setMottoDiv" class="tabPane active">
+				<div id="setAvatarDiv" class="tabPane active">
+					<div class="columnDiv">
+						<img src="img/avatar/<%=user.getAvatarPath() %>" />
+						<form id="uploadAvatarForm" method="POST" action="FileUploadServlet?action=uploadUserAvatar" enctype="multipart/form-data">
+							<input type="file" id="file" name="file">
+						</form>
+						<div id="saveAvatarResponseMessageDiv"><%= (saveAvatarResponseMessage != null)? saveAvatarResponseMessage : "" %></div>
+						<button class="saveButton" id="saveAvatarButton">保存</button>
+					</div>
+				</div>
+				<div id="setMottoDiv" class="tabPane">
 					<div class="columnDiv">
 						<div>
 							<label for="motto">个人简介</label>
@@ -59,10 +71,6 @@
 						<div>
 							<button class="saveButton" id="savePasswordButton">保存</button>
 						</div>
-					</div>
-				</div>
-				<div id="setAvatarDiv" class="tabPane">
-					<div class="columnDiv">
 					</div>
 				</div>
 			</div>

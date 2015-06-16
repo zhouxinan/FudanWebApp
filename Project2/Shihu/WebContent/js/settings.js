@@ -16,7 +16,7 @@ $(function setTabAction() {
 $("#savePasswordButton").click(function() {
 	$.ajax({
 		type : 'POST',
-		url : "SettingsServlet",
+		url : 'SettingsServlet',
 		data : {
 			action : 'modifyPassword',
 			oldPassword : $("#oldPassword").val(),
@@ -45,7 +45,7 @@ $("#saveMottoButton").click(function() {
 	}
 	$.ajax({
 		type : 'POST',
-		url : "SettingsServlet",
+		url : 'SettingsServlet',
 		data : {
 			action : 'modifyMotto',
 			motto : motto
@@ -64,3 +64,29 @@ $("#saveMottoButton").click(function() {
 		}
 	});
 });
+
+$("#saveAvatarButton").click(function() {
+	var file = document.getElementById("file").files[0];
+	if (file == undefined) {
+		alert("You have to choose an image file!");
+	} else {
+		document.getElementById("uploadAvatarForm").submit();
+	}
+});
+
+function setFileTypeValidator() {
+	$("#file").on('change', function() {
+		var file = document.getElementById("file").files[0];
+		if (!file.type.match('image.*')) {
+			alert("You can only choose an image file! Please try again.");
+			resetFileInput();
+		}
+	});
+}
+
+function resetFileInput() {
+	document.getElementById("uploadAvatarForm").innerHTML = '<input type="file" id="file">';
+	setFileTypeValidator();
+}
+
+setFileTypeValidator();
