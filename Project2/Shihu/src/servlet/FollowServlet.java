@@ -52,9 +52,10 @@ public class FollowServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		User user = (User) request.getSession().getAttribute("user");
 		if (action.equals("getPopularUserList")) {
+			int popularUserNumber = Integer.parseInt(request.getParameter("popularUserNumber"));
 			try {
 				PrintWriter out = response.getWriter();
-				out.println(dao.getPopularUserList());
+				out.println(dao.getPopularUserList(popularUserNumber));
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

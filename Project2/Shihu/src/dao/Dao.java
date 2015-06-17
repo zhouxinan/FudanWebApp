@@ -517,7 +517,7 @@ public class Dao {
 		return null;
 	}
 
-	public List<JSONObject> getPopularUserList() throws SQLException {
+	public List<JSONObject> getPopularUserList(int popularUserNumber) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -525,12 +525,14 @@ public class Dao {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
 			results = sm
-					.executeQuery("select userID,avatarPath from user ORDER BY followerCount DESC LIMIT 8");
+					.executeQuery("select * from user ORDER BY followerCount DESC LIMIT " + popularUserNumber);
 			List<JSONObject> popularUserList = new LinkedList<JSONObject>();
 			while (results.next()) {
 				JSONObject obj = new JSONObject();
 				obj.put("userID", results.getString("userID"));
 				obj.put("avatarPath", results.getString("avatarPath"));
+				obj.put("username", results.getString("username"));
+				obj.put("motto", results.getString("motto"));
 				popularUserList.add(obj);
 			}
 			return popularUserList;

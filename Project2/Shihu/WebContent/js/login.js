@@ -101,6 +101,7 @@ function getPopularUserList() {
 		url : "FollowServlet",
 		data : {
 			action : 'getPopularUserList',
+			popularUserNumber: '8',
 		},
 		dataType : "json",
 		success : function(data) {
