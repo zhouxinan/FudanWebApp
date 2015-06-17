@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+    pageEncoding="UTF-8"%>
+<%@ page import="bean.*"%>
+<%
+	User user = (User) request.getSession().getAttribute("user");
+	if (user != null) {
+		response.sendRedirect("index.jsp");
+		return;
+	}
+%>
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="css/base.css" />

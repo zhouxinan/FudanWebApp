@@ -647,4 +647,239 @@ public class Dao {
 		}
 		return false;
 	}
+
+	public boolean addMessage(User user, String receiverUsername, String content)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int fromUserID = user.getUserID();
+		content = content.replace("'", "''");
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select userID from user where username='"
+							+ receiverUsername + "'");
+			if (results.next()) {
+				String toUserID = results.getString("userID");
+				sm.executeUpdate("insert into messages(fromUserID, toUserID, content) values('"
+						+ fromUserID
+						+ "', '"
+						+ toUserID
+						+ "', '"
+						+ content
+						+ "')");
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
+
+	public boolean setMessageRead(User user, String messageID)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int toUserID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("UPDATE messages SET isRead=1 WHERE toUserID='"
+					+ toUserID + "' and messageID='" + messageID + "'");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
+
+	public List<JSONObject> getAllMessagesToUser(User user, boolean isRead)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int toUserID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from messages where toUserID='"
+					+ toUserID + "' and isRead='" + (isRead ? 1 : 0)
+					+ "' ORDER BY sendTime DESC");
+			List<JSONObject> messageList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String fromUserID = results.getString("fromUserID");
+				User fromUser = getUserByID(fromUserID);
+				obj.put("userID", fromUserID);
+				obj.put("username", fromUser.getUsername());
+				obj.put("avatarPath", fromUser.getAvatarPath());
+				obj.put("messageID", results.getString("messageID"));
+				obj.put("content", results.getString("content"));
+				messageList.add(obj);
+			}
+			return messageList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> getAllMessagesFromUser(User user)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int fromUserID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from messages where fromUserID='"
+							+ fromUserID + "' ORDER BY sendTime DESC");
+			List<JSONObject> messageList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String toUserID = results.getString("toUserID");
+				User toUser = getUserByID(toUserID);
+				obj.put("userID", toUserID);
+				obj.put("username", toUser.getUsername());
+				obj.put("avatarPath", toUser.getAvatarPath());
+				obj.put("messageID", results.getString("messageID"));
+				obj.put("content", results.getString("content"));
+				messageList.add(obj);
+			}
+			return messageList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public JSONObject getMessageByID(User user, String messageID)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int userID = user.getUserID();
+		JSONObject messageObj = new JSONObject();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("UPDATE messages SET isRead=1 WHERE toUserID='"
+					+ userID + "' and messageID='" + messageID + "'");
+			results = sm
+					.executeQuery("select * from messages where messageID='"
+							+ messageID + "' and (fromUserID='" + userID
+							+ "' or toUserID='" + userID + "')");
+			if (results.next()) {
+				String fromUserID = results.getString("fromUserID");
+				String toUserID = results.getString("toUserID");
+				User fromUser = getUserByID(fromUserID);
+				User toUser = getUserByID(toUserID);
+				messageObj.put("fromUsername", fromUser.getUsername());
+				messageObj.put("toUsername", toUser.getUsername());
+				messageObj.put("fromUserAvatarPath", fromUser.getAvatarPath());
+				messageObj.put("toUserAvatarPath", toUser.getAvatarPath());
+				messageObj.put("content", results.getString("content"));
+			}
+			return messageObj;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public String getUnreadMessageCount(User user) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int userID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select count(*) from messages where toUserID='"
+							+ userID + "' and isRead='0'");
+			if (results.next()) {
+				String count = results.getString("count(*)");
+				return count;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
 }

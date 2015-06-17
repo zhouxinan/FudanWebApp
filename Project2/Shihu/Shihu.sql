@@ -28,6 +28,7 @@ create table messages(
     toUserID integer,
     content text,
     sendTime datetime DEFAULT CURRENT_TIMESTAMP,
+    isRead integer DEFAULT 0,
 	primary key(messageID)
 )default charset utf8;
 

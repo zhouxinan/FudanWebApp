@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+#newMessage {
+	float: right;
+}
+
+#contentWrapper > div {
+	float: left;
+	width: 100%;
+}

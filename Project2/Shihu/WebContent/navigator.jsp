@@ -29,12 +29,13 @@
 		<div id="userMenuDiv" class="changeHoverBackground  clickbox">
 			<div id="myAvatarAndNameDiv">
 				<img id="myAvatar" src="img/avatar/<%=avatarPath %>" />
+				<div class="notificationBubble"></div>
 				<div id="myName"><a href="profile.jsp"><%=username %></a></div>
 			</div>
 			<% if (user != null) { %>
 			<div id="userMenu">
 				<div class="clickbox"><img src="img/icon/user.png" class="icon" /><a href="profile.jsp">我的主页</a></div>
-				<div class="clickbox"><img src="img/icon/envelop.png" class="icon" /><a href="messages.jsp">私信</a></div>
+				<div class="clickbox"><img src="img/icon/envelop.png" class="icon" /><a href="messages.jsp">私信</a><div class="notificationBubble" id="userMenuNotificationBubble"></div></div>
 				<div class="clickbox"><img src="img/icon/cog.png" class="icon" /><a href="settings.jsp">设置</a></div>
 				<div class="clickbox"><img src="img/icon/exit.png" class="icon" /><a href="LoginServlet?action=logout">退出</a></div>
 			</div>
