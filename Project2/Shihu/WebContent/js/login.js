@@ -106,11 +106,14 @@ function getPopularUserList() {
 		dataType : "json",
 		success : function(data) {
 			for (i = 0; i < 4; i++) {
-				addPopularUser(data[i].userID, data[i].avatarPath, 'popularUserListDiv1');
+				addPopularUser(data[i].userID, data[i].avatarPath, 'popularUserAvatarRow1');
 			}
 			for (i = 4; i < 8; i++) {
-				addPopularUser(data[i].userID, data[i].avatarPath, 'popularUserListDiv2');
+				addPopularUser(data[i].userID, data[i].avatarPath, 'popularUserAvatarRow1');
 			}
+			var popularUserAvatarSize = $("#popularUserDiv").width() * 0.8 * 0.25 * 0.3;
+			$(".popularUserAvatar").height(popularUserAvatarSize);
+			$(".popularUserAvatar").width(popularUserAvatarSize);
 		},
 		error : function() {
 			alert("Connection error!");
@@ -121,8 +124,12 @@ function getPopularUserList() {
 function addPopularUser(userID, avatarPath, divName) {
 	var content = document.createElement('div');
 	content.innerHTML = '<a href="profile.jsp?id=' + userID
-			+ '"><img src="img/avatar/' + avatarPath + '" /></a>';
+			+ '"><img class="popularUserAvatar" src="img/avatar/' + avatarPath + '" /></a>';
 	$("#" + divName).append(content);
 }
+
+$("#switchFormController").click(function() {
+	switchForm();
+});
 
 getPopularUserList();

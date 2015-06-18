@@ -2,7 +2,7 @@ body {
 	background-color: #ecf0f1;
 }
 
-#top, #content {
+body>div {
 	width: 100%;
 }
 
@@ -12,6 +12,10 @@ body {
 
 #content {
 	float: left;
+}
+
+#contentWrapper>div+div {
+	margin-top: 5%;
 }
 
 #topWrapper, #contentWrapper {
@@ -51,11 +55,6 @@ body {
 
 #switchFormController:active {
 	opacity: 1;
-}
-
-#switchFormController img {
-	width: 18px;
-	height: 18px;
 }
 
 #switchFormController div {
@@ -99,15 +98,12 @@ input:focus {
 }
 
 #submitButton {
-	height: 30px;
-	border: 0px;
 	background-color: white;
 	width: 100%;
 	color: #1abc9c;
 }
 
 #submitButton:hover {
-	cursor: pointer;
 	color: #2ecc71;
 }
 
@@ -119,25 +115,19 @@ input:focus {
 	display: none;
 }
 
-#contentWrapper > div+div {
-	margin-top: 5%;
-}
-
-.popularUserList {
+.popularUserAvatarRow {
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.popularUserList div {
+.popularUserAvatarRow div {
 	float: left;
 	width: 25%;
 	text-align: center;
 }
 
-.popularUserList img {
-	width: 30%;
-	height: auto;
+.popularUserAvatar {
 	margin: 5%;
 	border-radius: 50px;
 }
@@ -155,28 +145,23 @@ input:focus {
 }
 
 @media screen and (max-width: 600px) {
-    #logoDiv {
-    	width: 100%;
-    }
-    
-    #logoDiv div {
-    	text-align: center;
-    }
-    
-    #loginAndRegDiv {
-    	width: 100%;
-    	margin-top: 5%;
-    }
-    
-    #popularUserList div {
-    	width: 50%;
-    }
-    
-    #popularUserList img {
-    	width: 50%;
-    }
-    
-    #title {
-    	margin-bottom: 0px;
-    }
+	#logoDiv {
+		width: 100%;
+	}
+	#logoDiv div {
+		text-align: center;
+	}
+	#loginAndRegDiv {
+		width: 100%;
+		margin-top: 5%;
+	}
+	#popularUserList div {
+		width: 50%;
+	}
+	#popularUserList img {
+		width: 50%;
+	}
+	#title {
+		margin-bottom: 0px;
+	}
 }

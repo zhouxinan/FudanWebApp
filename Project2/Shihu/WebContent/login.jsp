@@ -26,8 +26,8 @@
 				<div>提高自己的知识水平</div>
 			</div>
 			<div id="loginAndRegDiv" class="noSelect">
-				<div id="switchFormController" onclick="switchForm()">
-					<div><img src="img/icon/arrow-right.png" /></div>
+				<div id="switchFormController">
+					<div><img class="icon" src="img/icon/arrow-right.png" /></div>
 					<div id="switchFormControllerText">登陆</div>
 				</div>
 				<div id="regDiv" class="formDiv">
@@ -62,9 +62,9 @@
 		<div id="contentWrapper">
 			<div id="popularUserDiv">
 				<div class="contentTitle">热门用户</div>
-				<div id="popularUserListDiv1" class="popularUserList"></div>
+				<div id="popularUserAvatarRow1" class="popularUserAvatarRow"></div>
 				<div class="clear"></div>
-				<div id="popularUserListDiv2" class="popularUserList"></div>
+				<div id="popularUserAvatarRow1" class="popularUserAvatarRow"></div>
 				<div class="clear"></div>
 			</div>
 			<div id="popularQuestionDiv">
