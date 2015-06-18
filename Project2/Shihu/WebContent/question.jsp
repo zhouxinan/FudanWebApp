@@ -3,9 +3,25 @@
 <%@ page import="dao.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="org.json.*"%>
+<%@ page import="bean.*"%>
 <%
-	String a = request.getParameter("id"); // test parameter
+	String id = request.getParameter("id");
+	if (id == null) {
+		response.sendRedirect("index.jsp");
+		return;
+	}
 	Dao dao = Dao.getInstance();
+	Question currentQuestion = null;
+	try {
+		currentQuestion = dao.getQuestionByID(Integer.parseInt(id));
+	} catch (Exception e) {
+		response.sendRedirect("404.jsp");
+		return;
+	}
+	if (currentQuestion == null) {
+		response.sendRedirect("404.jsp");
+		return;
+	}
 	List<JSONObject> popularUserList = dao.getPopularUserList(3);
 %>
 <html>
@@ -26,9 +42,10 @@
 		<div id="contentWrapper">
 			<div id="leftColumn">
 				<div class="columnDiv">
-					<div id="questionTitle">美国的华莱士到底有多高？</div>
+					<div id="questionTitle"><%=currentQuestion.getTitle()%></div>
 					<div id="questionMetadata">
-						<span class="userName"><a href="#">张宝华</a></span><span>提问于</span><span>2015年1月1日</span>
+						<span class="userName"><a
+							href="profile.jsp?id=<%=currentQuestion.getUserID()%>"><%=currentQuestion.getUsername()%></a></span><span>提问于</span><span><%=currentQuestion.getTime()%></span>
 					</div>
 				</div>
 				<div class="columnDiv">
@@ -173,7 +190,6 @@
 				</div>
 				<div class="columnDiv">
 					<div class="rightColumnTitle">热门用户</div>
-
 					<div id="popularUserList">
 						<%
 							for (JSONObject obj : popularUserList) {

@@ -40,3 +40,23 @@ create table follows(
     followTime datetime DEFAULT CURRENT_TIMESTAMP,
 	primary key(followID)
 )default charset utf8;
+
+drop table if exists answers;
+create table answers(
+	answerID integer not null auto_increment,
+    questionID integer,
+    userID integer,
+    content text,
+    answerTime datetime DEFAULT CURRENT_TIMESTAMP,
+	primary key(answerID)
+)default charset utf8;
+
+drop table if exists replies;
+create table replies(
+	replyID integer not null auto_increment,
+    answerID integer,
+    userID integer,
+    content text,
+    replyTime datetime DEFAULT CURRENT_TIMESTAMP,
+	primary key(replyID)
+)default charset utf8;

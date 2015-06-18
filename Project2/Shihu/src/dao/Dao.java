@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import bean.Question;
 import bean.User;
 import exception.LoginServletException;
 
@@ -517,7 +518,8 @@ public class Dao {
 		return null;
 	}
 
-	public List<JSONObject> getPopularUserList(int popularUserNumber) throws SQLException {
+	public List<JSONObject> getPopularUserList(int popularUserNumber)
+			throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -525,7 +527,8 @@ public class Dao {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
 			results = sm
-					.executeQuery("select * from user ORDER BY followerCount DESC LIMIT " + popularUserNumber);
+					.executeQuery("select * from user ORDER BY followerCount DESC LIMIT "
+							+ popularUserNumber);
 			List<JSONObject> popularUserList = new LinkedList<JSONObject>();
 			while (results.next()) {
 				JSONObject obj = new JSONObject();
@@ -884,4 +887,296 @@ public class Dao {
 		}
 		return null;
 	}
+
+	public Question getQuestionByID(int questionID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from question where questionID='"
+							+ questionID + "'");
+			if (results.next()) {
+				Question question = new Question();
+				question.setQuestionID(Integer.parseInt(results
+						.getString("questionID")));
+				question.setUserID(Integer.parseInt(results.getString("userID")));
+				question.setUsername(getUserByID(results.getString("userID"))
+						.getUsername());
+				question.setTitle(results.getString("title"));
+				question.setContent(results.getString("content"));
+				question.setTime(results.getString("questionTime"));
+				return question;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> getAnswer(int questionID, int startingIndex,
+			int numberOfAnswers) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from answers where questionID='"
+							+ questionID + "' ORDER BY answerID DESC LIMIT "
+							+ startingIndex + "," + numberOfAnswers);
+			List<JSONObject> answerList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String userID = results.getString("userID");
+				User user = getUserByID(userID);
+				obj.put("answerID", results.getString("answerID"));
+				obj.put("userID", userID);
+				obj.put("username", user.getUsername());
+				obj.put("avatarPath", user.getAvatarPath());
+				obj.put("motto", user.getMotto());
+				obj.put("content", results.getString("content"));
+				obj.put("answerTime", results.getString("answerTime"));
+				answerList.add(obj);
+			}
+			return answerList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public boolean addAnswer(User user, int questionID, String content)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		content = content.replace("'", "''");
+		int userID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("insert into answers(questionID, userID, content) values('"
+					+ questionID + "', '" + userID + "', '" + content + "')");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
+
+	public String getReplyCount(int answerID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select count(*) from replies where answerID='"
+							+ answerID + "'");
+			if (results.next()) {
+				String count = results.getString("count(*)");
+				return count;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> getReply(int answerID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from replies where answerID='"
+					+ answerID + "' ORDER BY replyID DESC");
+			List<JSONObject> replyList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String userID = results.getString("userID");
+				User user = getUserByID(userID);
+				obj.put("userID", userID);
+				obj.put("username", user.getUsername());
+				obj.put("avatarPath", user.getAvatarPath());
+				obj.put("content", results.getString("content"));
+				obj.put("replyTime", results.getString("replyTime"));
+				replyList.add(obj);
+			}
+			return replyList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> addReply(User user, int answerID, String content)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		content = content.replace("'", "''");
+		int userID = user.getUserID();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			sm.executeUpdate("insert into replies(answerID, userID, content) values('"
+					+ answerID + "', '" + userID + "', '" + content + "')");
+			return getReply(answerID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> getAnswerListByUserID(int userID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from answers where userID='"
+					+ userID + "' ORDER BY answerID DESC");
+			List<JSONObject> answerList = new LinkedList<JSONObject>();
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String questionID = results.getString("questionID");
+				Question question = getQuestionByID(Integer
+						.parseInt(questionID));
+				obj.put("questionID", questionID);
+				obj.put("questionTitle", question.getTitle());
+				obj.put("content", results.getString("content"));
+				obj.put("answerTime", results.getString("answerTime"));
+				answerList.add(obj);
+			}
+			return answerList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<Question> getQuestionListByUserID(int userID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm.executeQuery("select * from question where userID='"
+					+ userID + "' ORDER BY questionID DESC");
+			List<Question> questionList = new LinkedList<Question>();
+			while (results.next()) {
+				Question question = new Question();
+				question.setQuestionID(Integer.parseInt(results
+						.getString("questionID")));
+				question.setTitle(results.getString("title"));
+				questionList.add(question);
+			}
+			return questionList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
 }
