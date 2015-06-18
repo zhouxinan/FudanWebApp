@@ -29,7 +29,9 @@
 		<div id="userMenuDiv" class="changeHoverBackground  clickbox">
 			<div id="myAvatarAndNameDiv">
 				<img id="myAvatar" src="img/avatar/<%=avatarPath %>" />
+				<% if (user != null) { %>
 				<div class="notificationBubble"></div>
+				<%} %>
 				<div id="myName"><a href="profile.jsp"><%=username %></a></div>
 			</div>
 			<% if (user != null) { %>
