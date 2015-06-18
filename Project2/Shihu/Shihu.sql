@@ -17,6 +17,7 @@ create table question(
     userID integer,
     title text,
     content text,
+    answerCount integer DEFAULT 0,
     questionTime datetime DEFAULT CURRENT_TIMESTAMP,
 	primary key(questionID)
 )default charset utf8;

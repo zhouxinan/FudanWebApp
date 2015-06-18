@@ -23,6 +23,7 @@
 		return;
 	}
 	List<JSONObject> popularUserList = dao.getPopularUserList(3);
+	List<Question> popularQuestionList = dao.getPopularQuestionList(5);
 %>
 <html>
 <head>
@@ -171,21 +172,15 @@
 				<div class="columnDiv">
 					<div class="rightColumnTitle">热门问题</div>
 					<div id="popularQuestionList">
+						<%
+							for (Question question : popularQuestionList) {
+						%>
 						<div>
-							<a href="#">美国的华莱士到底有多高？</a>
+							<a href="question.jsp?id=<%=question.getQuestionID()%>"><%=question.getTitle()%></a>
 						</div>
-						<div>
-							<a href="#">香港记者到底跑得有多快？</a>
-						</div>
-						<div>
-							<a href="#">江主席究竟掌握了几门语言？</a>
-						</div>
-						<div>
-							<a href="#">李光耀眼里的长者是什么样的？</a>
-						</div>
-						<div>
-							<a href="#">为什么有那么多人膜蛤？</a>
-						</div>
+						<%
+							}
+						%>
 					</div>
 				</div>
 				<div class="columnDiv">

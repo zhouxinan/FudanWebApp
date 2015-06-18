@@ -985,6 +985,8 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("insert into answers(questionID, userID, content) values('"
 					+ questionID + "', '" + userID + "', '" + content + "')");
+			sm.executeUpdate("UPDATE question SET answerCount=answerCount+1 WHERE questionID='"
+					+ questionID + "'");
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1105,7 +1107,8 @@ public class Dao {
 		return null;
 	}
 
-	public List<JSONObject> getAnswerListByUserID(int userID) throws SQLException {
+	public List<JSONObject> getAnswerListByUserID(int userID)
+			throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -1144,7 +1147,8 @@ public class Dao {
 		return null;
 	}
 
-	public List<Question> getQuestionListByUserID(int userID) throws SQLException {
+	public List<Question> getQuestionListByUserID(int userID)
+			throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -1179,4 +1183,40 @@ public class Dao {
 		return null;
 	}
 
+	public List<Question> getPopularQuestionList(int numberOfPopularQuestions)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from question ORDER BY answerCount DESC LIMIT "
+							+ numberOfPopularQuestions);
+			List<Question> questionList = new LinkedList<Question>();
+			while (results.next()) {
+				Question question = new Question();
+				question.setQuestionID(Integer.parseInt(results
+						.getString("questionID")));
+				question.setTitle(results.getString("title"));
+				questionList.add(question);
+			}
+			return questionList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
 }
