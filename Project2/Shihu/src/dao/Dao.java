@@ -145,41 +145,6 @@ public class Dao {
 		return null;
 	}
 
-	public int addNewQuestion(User user, String title, String content)
-			throws SQLException {
-		int userID = user.getUserID();
-		title = title.replace("'", "''");
-		content = content.replace("'", "''");
-		Connection con = null;
-		Statement sm = null;
-		ResultSet results = null;
-		try {
-			con = DriverManager.getConnection(url, dbUsername, dbPassword);
-			sm = con.createStatement();
-			sm.executeUpdate("insert into question(userID, title, content) values('"
-					+ userID + "', '" + title + "', '" + content + "')");
-			results = sm.executeQuery("select * from question where userID='"
-					+ userID + "' ORDER BY questionTime DESC LIMIT 1");
-			if (results.next()) {
-				return results.getInt("questionID");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (sm != null) {
-				sm.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-			if (results != null) {
-				results.close();
-			}
-		}
-		return -1; // default error return value
-	}
-
 	public User getUserByID(String userID) throws SQLException {
 		Connection con = null;
 		Statement sm = null;
@@ -929,6 +894,41 @@ public class Dao {
 		return null;
 	}
 
+	public int addQuestion(User user, String title, String content)
+			throws SQLException {
+		int userID = user.getUserID();
+		title = title.replace("'", "''");
+		content = content.replace("'", "''");
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			int newQuestionID = sm
+					.executeUpdate(
+							"insert into question(userID, title, content) values('"
+									+ userID + "', '" + title + "', '"
+									+ content + "')",
+							Statement.RETURN_GENERATED_KEYS);
+			return newQuestionID;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return -1; // default error return value
+	}
+
 	public List<JSONObject> getAnswer(int questionID, int startingIndex,
 			int numberOfAnswers) throws SQLException {
 		Connection con = null;
@@ -939,7 +939,7 @@ public class Dao {
 			sm = con.createStatement();
 			results = sm
 					.executeQuery("select * from answers where questionID='"
-							+ questionID + "' ORDER BY answerID DESC LIMIT "
+							+ questionID + "' ORDER BY answerID ASC LIMIT "
 							+ startingIndex + "," + numberOfAnswers);
 			List<JSONObject> answerList = new LinkedList<JSONObject>();
 			while (results.next()) {
@@ -953,6 +953,7 @@ public class Dao {
 				obj.put("motto", user.getMotto());
 				obj.put("content", results.getString("content"));
 				obj.put("answerTime", results.getString("answerTime"));
+				obj.put("replyCount", results.getString("replyCount"));
 				answerList.add(obj);
 			}
 			return answerList;
@@ -1003,39 +1004,6 @@ public class Dao {
 			}
 		}
 		return false;
-	}
-
-	public String getReplyCount(int answerID) throws SQLException {
-		Connection con = null;
-		Statement sm = null;
-		ResultSet results = null;
-		try {
-			con = DriverManager.getConnection(url, dbUsername, dbPassword);
-			sm = con.createStatement();
-			results = sm
-					.executeQuery("select count(*) from replies where answerID='"
-							+ answerID + "'");
-			if (results.next()) {
-				String count = results.getString("count(*)");
-				return count;
-			} else {
-				return null;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (sm != null) {
-				sm.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-			if (results != null) {
-				results.close();
-			}
-		}
-		return null;
 	}
 
 	public List<JSONObject> getReply(int answerID) throws SQLException {
@@ -1089,6 +1057,8 @@ public class Dao {
 			sm = con.createStatement();
 			sm.executeUpdate("insert into replies(answerID, userID, content) values('"
 					+ answerID + "', '" + userID + "', '" + content + "')");
+			sm.executeUpdate("UPDATE answers SET replyCount=replyCount+1 WHERE answerID='"
+					+ answerID + "'");
 			return getReply(answerID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

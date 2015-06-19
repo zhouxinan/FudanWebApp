@@ -1,3 +1,7 @@
+#questionID {
+	display: none;
+}
+
 #questionTitle {
 	font-size: 1.5em;
 }
@@ -8,7 +12,7 @@
 	font-size: 15px;
 }
 
-#questionMetadata > span {
+#questionMetadata>span {
 	margin-right: 5px;
 }
 
@@ -154,10 +158,23 @@ textarea {
 	font-size: 12px;
 }
 
+#getMoreAnswersButton {
+	width: 100%;
+	background-color: white;
+	color: #1abc9c;
+	border: 1px solid #1abc9c;
+	border-radius: 3px;
+}
+
+#getMoreAnswersButton:hover {
+	color: #2ecc71;
+	border: 1px solid #2ecc71;
+}
+
 @media screen and (max-width: 600px) {
-    #rightColumn, #leftColumn {
-    	position: relative;
-    	float: left;
-    	width: 100%;
-    }
+	#rightColumn, #leftColumn {
+		position: relative;
+		float: left;
+		width: 100%;
+	}
 }

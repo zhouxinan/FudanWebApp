@@ -48,6 +48,7 @@ create table answers(
     questionID integer,
     userID integer,
     content text,
+    replyCount integer DEFAULT 0,
     answerTime datetime DEFAULT CURRENT_TIMESTAMP,
 	primary key(answerID)
 )default charset utf8;

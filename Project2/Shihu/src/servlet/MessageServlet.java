@@ -50,6 +50,7 @@ public class MessageServlet extends HttpServlet {
 			return;
 		}
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
 

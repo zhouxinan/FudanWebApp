@@ -14,7 +14,7 @@
 	Question currentQuestion = null;
 	try {
 		currentQuestion = dao.getQuestionByID(Integer.parseInt(id));
-	} catch (Exception e) {
+	} catch (NumberFormatException e) {
 		response.sendRedirect("404.jsp");
 		return;
 	}
@@ -31,7 +31,6 @@
 <link type="text/css" rel="stylesheet" href="css/layout.css" />
 <link type="text/css" rel="stylesheet" href="css/question.css" />
 <script src="lib/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/question.js"></script>
 <meta charset="utf-8" />
 <!-- For iPhone to display normally -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +42,7 @@
 		<div id="contentWrapper">
 			<div id="leftColumn">
 				<div class="columnDiv">
+					<div id="questionID"><%=currentQuestion.getQuestionID()%></div>
 					<div id="questionTitle"><%=currentQuestion.getTitle()%></div>
 					<div id="questionMetadata">
 						<span class="userName"><a
@@ -121,41 +121,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="columnDiv">
-					<div class="userInfoDiv">
-						<a href="#"> <img class="userAvatar"
-							src="img/avatar/user_1.jpg" /> <span class="userName">华莱士</span>
-						</a> <span class="userSignature">比你们不知道高到哪里去</span>
-					</div>
-					<div class="answer">
-						<p>185cm，我就明确告诉你。</p>
-					</div>
-					<div class="answerMetadata">
-						<span>2015-01-01 12:12</span> <span class="replyCount noSelect">评论
-							(1)</span>
-					</div>
-					<div class="replyListDiv">
-						<div class="replyDiv">
-							<div>
-								<a href="#"><img class="userAvatar"
-									src="img/avatar/user_2.jpg" /></a>
-							</div>
-							<div class="replyData">
-								<div class="userName">
-									<a href="#">张宝华</a>
-								</div>
-								<div class="replyContent">豪迈！</div>
-								<div class="replyTime">2015-01-01 13:02</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="replyDiv new">
-							<form method="post" action="">
-								<input type="text" name="newReply" placeholder="说你什么好呢……" />
-								<button class="submitButton">发表评论</button>
-							</form>
-						</div>
-					</div>
+				<div class="columnDiv" id="getMoreAnswersDiv">
+					<button id="getMoreAnswersButton">显示更多</button>
 				</div>
 				<div class="columnDiv">
 					<form method="post" action="">
@@ -211,5 +178,6 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/question.js"></script>
 </body>
 </html>
