@@ -115,6 +115,22 @@ public class QuestionServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (action.equals("addAnswer")) {
+			String questionID = request.getParameter("questionID");
+			String content = request.getParameter("content");
+			try {
+				PrintWriter out = response.getWriter();
+				out.println(dao.addAnswer(user, Integer.parseInt(questionID),
+						content));
+				out.close();
+				return;
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

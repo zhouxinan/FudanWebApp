@@ -125,13 +125,12 @@
 					<button id="getMoreAnswersButton">显示更多</button>
 				</div>
 				<div class="columnDiv">
-					<form method="post" action="">
-						<textarea placeholder="我来告诉你们人生的经验……"></textarea>
-						<button id="uploadImgButton">
-							<img src="img/icon/attachment.png" class="icon" />
-						</button>
-						<button class="submitButton">发布回答</button>
-					</form>
+					<textarea id="newAnswerContent" placeholder="我来告诉你们人生的经验……"></textarea>
+					<div id="sendAnswerResponseMessageDiv"></div>
+					<button id="uploadImgButton">
+						<img src="img/icon/attachment.png" class="icon" />
+					</button>
+					<button class="submitButton" id="sendAnswerButton">发布回答</button>	
 					<div class="clear"></div>
 				</div>
 			</div>

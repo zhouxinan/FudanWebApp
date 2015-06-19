@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -974,21 +975,42 @@ public class Dao {
 		return null;
 	}
 
-	public boolean addAnswer(User user, int questionID, String content)
+	public JSONObject addAnswer(User user, int questionID, String content)
 			throws SQLException {
 		Connection con = null;
-		Statement sm = null;
+		PreparedStatement sm = null;
 		ResultSet results = null;
 		content = content.replace("'", "''");
 		int userID = user.getUserID();
+		int newAnswerID = 0;
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
-			sm = con.createStatement();
-			sm.executeUpdate("insert into answers(questionID, userID, content) values('"
-					+ questionID + "', '" + userID + "', '" + content + "')");
+			sm = con.prepareStatement(
+					"insert into answers(questionID, userID, content) values('"
+							+ questionID + "', '" + userID + "', '" + content
+							+ "')", Statement.RETURN_GENERATED_KEYS);
+			sm.executeUpdate();
+			results = sm.getGeneratedKeys();
+			if (results.next()) {
+				newAnswerID = results.getInt(1);
+			}
+			results.close();
 			sm.executeUpdate("UPDATE question SET answerCount=answerCount+1 WHERE questionID='"
 					+ questionID + "'");
-			return true;
+			results = sm.executeQuery("select * from answers where answerID='"
+					+ newAnswerID + "'");
+			if (results.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("answerID", newAnswerID);
+				obj.put("userID", userID);
+				obj.put("username", user.getUsername());
+				obj.put("avatarPath", user.getAvatarPath());
+				obj.put("motto", user.getMotto());
+				obj.put("content", results.getString("content"));
+				obj.put("answerTime", results.getString("answerTime"));
+				obj.put("replyCount", results.getString("replyCount"));
+				return obj;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1003,7 +1025,7 @@ public class Dao {
 				results.close();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public List<JSONObject> getReply(int answerID) throws SQLException {

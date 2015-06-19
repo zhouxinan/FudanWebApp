@@ -55,6 +55,34 @@ function addReply(userID, avatarPath, username, content, replyTime) {
 	$("#leftColumn").append(newDiv);
 }
 
+function sendAnswer() {
+	var content = $("#newAnswerContent").val();
+	if (content == "") {
+		$("#sendAnswerResponseMessageDiv").html("请输入回答！");
+		return;
+	}
+	$.ajax({
+		type : 'POST',
+		url : 'QuestionServlet',
+		data : {
+			action : 'addAnswer',
+			questionID : $("#questionID").html(),
+			content : content
+		},
+		dataType : "json",
+		success : function(data) {
+			addAnswerToPage(data.userID, data.avatarPath, data.username,
+					data.motto, data.content, data.answerTime, data.answerID,
+					data.replyCount);
+			$("#newAnswerContent").val("");
+			$("#sendAnswerResponseMessageDiv").html("回答成功！");
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
 function getAnswer(startingIndex, numberOfAnswers) {
 	$.ajax({
 		type : 'POST',
@@ -110,6 +138,10 @@ function addAnswerToPage(userID, avatarPath, username, motto, content,
 
 $("#getMoreAnswersButton").bind('click', function() {
 	getAnswer(startingIndex, 5);
+});
+
+$("#sendAnswerButton").bind('click', function() {
+	sendAnswer();
 });
 
 startingIndex = 0;
