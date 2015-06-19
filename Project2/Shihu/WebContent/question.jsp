@@ -22,8 +22,6 @@
 		response.sendRedirect("404.jsp");
 		return;
 	}
-	List<JSONObject> popularUserList = dao.getPopularUserList(3);
-	List<Question> popularQuestionList = dao.getPopularQuestionList(5);
 %>
 <html>
 <head>
@@ -48,6 +46,16 @@
 						<span class="userName"><a
 							href="profile.jsp?id=<%=currentQuestion.getUserID()%>"><%=currentQuestion.getUsername()%></a></span><span>提问于</span><span><%=currentQuestion.getTime()%></span>
 					</div>
+					<%
+						String questionContent = currentQuestion.getContent();
+						if (questionContent != null) {
+					%>
+					<div>
+						<%=questionContent%>
+					</div>
+					<%
+						}
+					%>
 				</div>
 				<div class="columnDiv">
 					<div class="userInfoDiv">
@@ -130,50 +138,11 @@
 					<button id="uploadImgButton">
 						<img src="img/icon/attachment.png" class="icon" />
 					</button>
-					<button class="submitButton" id="sendAnswerButton">发布回答</button>	
+					<button class="submitButton" id="sendAnswerButton">发布回答</button>
 					<div class="clear"></div>
 				</div>
 			</div>
-			<div id="rightColumn">
-				<div class="columnDiv">
-					<div class="rightColumnTitle">热门问题</div>
-					<div id="popularQuestionList">
-						<%
-							for (Question question : popularQuestionList) {
-						%>
-						<div>
-							<a href="question.jsp?id=<%=question.getQuestionID()%>"><%=question.getTitle()%></a>
-						</div>
-						<%
-							}
-						%>
-					</div>
-				</div>
-				<div class="columnDiv">
-					<div class="rightColumnTitle">热门用户</div>
-					<div id="popularUserList">
-						<%
-							for (JSONObject obj : popularUserList) {
-						%>
-						<div class="popularUser">
-							<a href="profile.jsp?id=<%=obj.get("userID")%>"> <img
-								class="userAvatar" src="img/avatar/<%=obj.get("avatarPath")%>" />
-							</a>
-							<div class="userName">
-								<a href="profile.jsp?id=<%=obj.get("userID")%>"><%=obj.get("username")%></a>
-							</div>
-							<div class="userSignature"><%=obj.get("motto")%></div>
-						</div>
-						<%
-							}
-						%>
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="columnDiv">
-					<div id="author">© 2015 Zhou Xinan</div>
-				</div>
-			</div>
+			<jsp:include page="popularQuestionAndUser.jsp" />
 			<div class="clear"></div>
 		</div>
 	</div>

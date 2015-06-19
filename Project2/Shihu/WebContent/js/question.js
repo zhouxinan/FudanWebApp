@@ -128,10 +128,10 @@ function addAnswerToPage(userID, avatarPath, username, motto, content,
 	newDiv.innerHTML = '<div class="userInfoDiv"><a href="profile.jsp?id='
 			+ userID + '"><img class="userAvatar" src="img/avatar/'
 			+ avatarPath + '" /><span class="userName">' + username
-			+ '</span></a><span class="userSignature">' + motto
+			+ ' </span></a><span class="userSignature">' + motto
 			+ '</span></div><div class="answer"><p>' + content
 			+ '</p></div><div class="answerMetadata"><span>' + answerTime
-			+ '</span> <span class="replyCount noSelect">评论(' + replyCount
+			+ '</span> <span class="replyCount noSelect">评论 (' + replyCount
 			+ ')</span></div><div class="replyListDiv">';
 	$("#getMoreAnswersDiv").before(newDiv);
 }

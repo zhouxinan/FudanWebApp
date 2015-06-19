@@ -1,47 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="bean.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="bean.*"%>
 <%
-		String username = "登陆";
-		String avatarPath = "default.jpg";
-   		User user = (User)request.getSession().getAttribute("user");
-   		if (user != null) {
-   			username = user.getUsername();
-   			avatarPath = user.getAvatarPath();
-   		}
-   %>
+	String username = "登陆";
+	String avatarPath = "default.jpg";
+	User user = (User) request.getSession().getAttribute("user");
+	if (user != null) {
+		username = user.getUsername();
+		avatarPath = user.getAvatarPath();
+	}
+%>
 <link type="text/css" rel="stylesheet" href="css/navigator.css" />
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <div id="navigator">
 	<div id="navigatorWrapper">
-		<div id="logo"><a href="index.jsp">识乎</a></div>
+		<div id="logo">
+			<a href="index.jsp">识乎</a>
+		</div>
 		<div id="searchDiv">
 			<form method="post" action="SearchServlet">
-				<input type="text" id="searchInput" name="keyword" placeholder="搜索问题或用户" />
+				<input type="text" id="searchInput" name="keyword"
+					placeholder="搜索问题或用户" />
 				<button type="submit" id="searchButton">搜索</button>
 			</form>
 		</div>
-		<div id="newQuestionButton"><button>提问题</button></div>
+		<div id="newQuestionButton">
+			<button>提问题</button>
+		</div>
 		<div id="menuDiv">
-			<div class="changeHoverBackground clickbox"><a href="index.jsp">首页</a></div>
+			<div class="changeHoverBackground clickbox">
+				<a href="index.jsp">首页</a>
+			</div>
 			<div class="changeHoverBackground clickbox">话题</div>
-			<div class="changeHoverBackground clickbox"><a href="discovery.jsp">发现</a></div>
+			<div class="changeHoverBackground clickbox">
+				<a href="discovery.jsp">发现</a>
+			</div>
 		</div>
 		<div id="userMenuDiv" class="changeHoverBackground  clickbox">
 			<div id="myAvatarAndNameDiv">
-				<img id="myAvatar" src="img/avatar/<%=avatarPath %>" />
-				<% if (user != null) { %>
+				<img id="myAvatar" src="img/avatar/<%=avatarPath%>" />
+				<%
+					if (user != null) {
+				%>
 				<div class="notificationBubble"></div>
-				<%} %>
-				<div id="myName"><a href="profile.jsp"><%=username %></a></div>
+				<%
+					}
+				%>
+				<div id="myName">
+					<a href="profile.jsp"><%=username%></a>
+				</div>
 			</div>
-			<% if (user != null) { %>
+			<%
+				if (user != null) {
+			%>
 			<div id="userMenu">
-				<div class="clickbox"><img src="img/icon/user.png" class="icon" /><a href="profile.jsp">我的主页</a></div>
-				<div class="clickbox"><img src="img/icon/envelop.png" class="icon" /><a href="messages.jsp">私信</a><div class="notificationBubble" id="userMenuNotificationBubble"></div></div>
-				<div class="clickbox"><img src="img/icon/cog.png" class="icon" /><a href="settings.jsp">设置</a></div>
-				<div class="clickbox"><img src="img/icon/exit.png" class="icon" /><a href="LoginServlet?action=logout">退出</a></div>
+				<div class="clickbox">
+					<img src="img/icon/user.png" class="icon" /><a href="profile.jsp">我的主页</a>
+				</div>
+				<div class="clickbox">
+					<img src="img/icon/envelop.png" class="icon" /><a
+						href="messages.jsp">私信</a>
+					<div class="notificationBubble" id="userMenuNotificationBubble"></div>
+				</div>
+				<div class="clickbox">
+					<img src="img/icon/cog.png" class="icon" /><a href="settings.jsp">设置</a>
+				</div>
+				<div class="clickbox">
+					<img src="img/icon/exit.png" class="icon" /><a
+						href="LoginServlet?action=logout">退出</a>
+				</div>
 			</div>
-			<% }%>
+			<%
+				}
+			%>
 		</div>
 	</div>
 </div>
