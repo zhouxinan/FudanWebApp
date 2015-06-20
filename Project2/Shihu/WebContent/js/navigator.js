@@ -3,6 +3,16 @@ $(".clickbox").click(function() {
 	return false;
 });
 
+$("#searchButton").click(function() {
+	var keyword = $("#searchInput").val();
+	if (keyword == "") {
+		$("#searchInput").attr("placeholder", "请输入关键词");
+		$("#searchInput").focus();
+		return;
+	}
+	window.location = "search.jsp?keyword=" + encodeURIComponent(keyword);
+});
+
 $.ajax({
 	type : 'POST',
 	url : "MessageServlet",

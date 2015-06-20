@@ -18,11 +18,8 @@
 			<a href="index.jsp">识乎</a>
 		</div>
 		<div id="searchDiv">
-			<form method="post" action="SearchServlet">
-				<input type="text" id="searchInput" name="keyword"
-					placeholder="搜索问题或用户" />
-				<button type="submit" id="searchButton">搜索</button>
-			</form>
+			<input type="text" id="searchInput" placeholder="搜索问题或用户" />
+			<button type="submit" id="searchButton">搜索</button>
 		</div>
 		<div id="newQuestionButton">
 			<button>提问题</button>

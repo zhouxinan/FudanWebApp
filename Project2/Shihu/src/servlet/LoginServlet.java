@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 				user = dao.login(email, password);
 				request.getSession().setAttribute("user", user);
 				response.sendRedirect("index.jsp"); // Jump to index.jsp if
-														// login succeeds.
+													// login succeeds.
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

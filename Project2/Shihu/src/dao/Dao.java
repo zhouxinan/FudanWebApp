@@ -1151,4 +1151,79 @@ public class Dao {
 		}
 		return null;
 	}
+
+	public List<Question> searchQuestionByKeyword(String keyword)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from question where title like '%"
+							+ keyword + "%' ORDER BY answerCount DESC");
+			List<Question> questionList = new LinkedList<Question>();
+			while (results.next()) {
+				Question question = new Question();
+				question.setQuestionID(Integer.parseInt(results
+						.getString("questionID")));
+				question.setTitle(results.getString("title"));
+				questionList.add(question);
+			}
+			return questionList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<User> searchUsernameByKeyword(String keyword)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from user where username like '%"
+							+ keyword + "%' ORDER BY followerCount DESC");
+			List<User> userList = new LinkedList<User>();
+			while (results.next()) {
+				User user = new User();
+				user.setUserID(results.getInt("userID"));
+				user.setUsername(results.getString("username"));
+				user.setAvatarPath(results.getString("avatarPath"));
+				user.setMotto(results.getString("motto"));
+				userList.add(user);
+			}
+			return userList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
 }
