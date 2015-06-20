@@ -135,28 +135,6 @@ public class FollowServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (action.equals("getFollowingCount")) {
-			try {
-				int fromUserID = Integer.parseInt(request
-						.getParameter("fromUserID"));
-				PrintWriter out = response.getWriter();
-				out.println(dao.getFollowingCount(fromUserID));
-				out.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (action.equals("getFollowerCount")) {
-			try {
-				int toUserID = Integer.parseInt(request
-						.getParameter("toUserID"));
-				PrintWriter out = response.getWriter();
-				out.println(dao.getFollowerCount(toUserID));
-				out.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 }

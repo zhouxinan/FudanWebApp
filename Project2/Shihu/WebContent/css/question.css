@@ -2,6 +2,10 @@
 	display: none;
 }
 
+.answerID {
+	display: none;
+}
+
 #questionTitle {
 	font-size: 1.5em;
 }
@@ -36,7 +40,12 @@
 	font-size: 15px;
 }
 
-.replyCount:hover {
+.answerMetadata>div {
+	float: left;
+	margin-left: 5px;
+}
+
+.replyCountDiv:hover {
 	cursor: pointer;
 }
 
