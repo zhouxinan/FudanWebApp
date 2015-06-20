@@ -1,24 +1,21 @@
 function setReplyCountDivAction() {
 	var $replyCountDiv = $(".replyCountDiv");
-	var $replyListDiv = $(".replyListDiv");
 	$replyCountDiv.click(function() {
-		var answerID = $(this).next().html();
-		getReply(answerID, $(this).parent().next());
-		for (var i = 0; i < $replyCountDiv.length; i++) {
-			if (this == $replyCountDiv[i]) {
-				if ($replyListDiv.eq(i).attr("class") == "replyListDiv") {
-					$replyListDiv.eq(i).attr("class", "replyListDiv active");
-				} else {
-					$replyListDiv.eq(i).attr("class", "replyListDiv");
-				}
-			}
+		var currentReplyListDiv = $(this).parent().next();
+		if (currentReplyListDiv.attr("class") == "replyListDiv") {
+			var answerID = $(this).next().html();
+			getReply(answerID, currentReplyListDiv);
+			currentReplyListDiv.attr("class", "replyListDiv active");
+		} else {
+			currentReplyListDiv.attr("class", "replyListDiv");
 		}
 	});
 };
 
-function sendReply(answerID, content) {
+function sendReply(answerID, content, sendReplyButton) {
 	if (content == "") {
-		$("#sendAnswerResponseMessageDiv").html("请输入回答！");
+		sendReplyButton.prev().attr("placeholder", "请输入回复！");
+		sendReplyButton.prev().focus();
 		return;
 	}
 	$.ajax({
@@ -26,11 +23,13 @@ function sendReply(answerID, content) {
 		url : 'QuestionServlet',
 		data : {
 			action : 'addReply',
-			answerID : $("#questionID").html(),
+			answerID : answerID,
 			content : content
 		},
 		dataType : "json",
 		success : function(data) {
+			processReplyData(data, sendReplyButton.parent().parent());
+			setSendReplyButtonAction();
 		},
 		error : function() {
 			alert("Connection error!");
@@ -49,6 +48,7 @@ function getReply(answerID, replyListDiv) {
 		dataType : "json",
 		success : function(data) {
 			processReplyData(data, replyListDiv);
+			setSendReplyButtonAction();
 		},
 		error : function() {
 			alert("Connection error!");
@@ -58,7 +58,7 @@ function getReply(answerID, replyListDiv) {
 
 function processReplyData(data, replyListDiv) {
 	replyListDiv
-			.html('<div class="replyDiv new"><input type="text" id="newReplyContent" placeholder="说你什么好呢……" /><button class="submitButton" id="sendReplyButton">发表评论</button></div>');
+			.html('<div class="replyDiv new"><input type="text" placeholder="说你什么好呢……" /><button class="submitButton sendReplyButton">发表评论</button></div>');
 	if (data != null) {
 		for (i = 0; i < data.length; i++) {
 			addReplyToPage(data[i].userID, data[i].avatarPath,
@@ -86,7 +86,8 @@ function addReplyToPage(userID, avatarPath, username, content, replyTime,
 function sendAnswer() {
 	var content = $("#newAnswerContent").val();
 	if (content == "") {
-		$("#sendAnswerResponseMessageDiv").html("请输入回答！");
+		$("#newAnswerContent").attr("placeholder", "请输入回答！");
+		$("#newAnswerContent").focus();
 		return;
 	}
 	$.ajax({
@@ -103,7 +104,6 @@ function sendAnswer() {
 					data.motto, data.content, data.answerTime, data.answerID,
 					data.replyCount);
 			$("#newAnswerContent").val("");
-			$("#sendAnswerResponseMessageDiv").html("回答成功！");
 		},
 		error : function() {
 			alert("Connection error!");
@@ -155,28 +155,30 @@ function addAnswerToPage(userID, avatarPath, username, motto, content,
 	var columnDiv = document.createElement('div');
 	columnDiv.setAttribute('class', 'columnDiv');
 	columnDiv.innerHTML = '<div class="userInfoDiv"><a href="profile.jsp?id='
-			+ userID
-			+ '"><img class="userAvatar" src="img/avatar/'
-			+ avatarPath
-			+ '" /><span class="userName">'
-			+ username
-			+ ' </span></a><span class="userSignature">'
-			+ motto
-			+ '</span></div><div class="answer"><p>'
-			+ content
-			+ '</p></div><div class="answerMetadata"><div>'
-			+ answerTime
-			+ '</div> <div class="replyCountDiv noSelect">评论 ('
-			+ replyCount
-			+ ')</div><div class="answerID">'
-			+ answerID
-			+ '</div></div><div class="replyListDiv"><div class="replyDiv new"><input type="text" id="newReplyContent" placeholder="说你什么好呢……" /><button class="submitButton" id="sendReplyButton">发表评论</button></div></div>';
+			+ userID + '"><img class="userAvatar" src="img/avatar/'
+			+ avatarPath + '" /><span class="userName">' + username
+			+ ' </span></a><span class="userSignature">' + motto
+			+ '</span></div><div class="answer"><p>' + content
+			+ '</p></div><div class="answerMetadata"><div>' + answerTime
+			+ '</div> <div class="replyCountDiv noSelect">评论 (' + replyCount
+			+ ')</div><div class="answerID">' + answerID
+			+ '</div></div><div class="replyListDiv"></div>';
 	$("#getMoreAnswersDiv").before(columnDiv);
 }
 
-$(".sendReplyButton").click(function() {
-	alert($(this).prev().val());
-});
+function setSendReplyButtonAction() {
+	var $sendReplyButton = $(".sendReplyButton");
+	var $answerID = $(".answerID");
+	$sendReplyButton
+			.click(function() {
+				for (var i = 0; i < $sendReplyButton.length; i++) {
+					if (this == $sendReplyButton[i]) {
+						sendReply($answerID.eq(i).html(), $(this).prev().val(),
+								$(this));
+					}
+				}
+			});
+}
 
 $("#getMoreAnswersButton").bind('click', function() {
 	getAnswer(startingIndex, 5);
