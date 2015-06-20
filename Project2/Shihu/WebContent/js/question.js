@@ -57,6 +57,10 @@ function getReply(answerID, replyListDiv) {
 }
 
 function processReplyData(data, replyListDiv) {
+	if (data == "-1") {
+		replyListDiv.html('<div class="replyDiv new"><div class="errorMessageDiv">登录后才可以查看和发表评论</div></div>');
+		return;
+	}
 	replyListDiv
 			.html('<div class="replyDiv new"><input type="text" placeholder="说你什么好呢……" /><button class="submitButton sendReplyButton">发表评论</button></div>');
 	if (data != null) {

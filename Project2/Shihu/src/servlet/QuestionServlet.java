@@ -48,6 +48,7 @@ public class QuestionServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
+		User user = (User) request.getSession().getAttribute("user");
 		if (action.equals("getAnswer")) {
 			String questionID = request.getParameter("questionID");
 			String startingIndex = request.getParameter("startingIndex");
@@ -66,8 +67,25 @@ public class QuestionServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (action.equals("getReply")) {
+			String answerID = request.getParameter("answerID");
+			try {
+				PrintWriter out = response.getWriter();
+				if (user != null) {
+					out.println(dao.getReply(Integer.parseInt(answerID)));
+				} else {
+					out.println("-1");
+				}
+				out.close();
+				return;
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			response.sendRedirect("login.jsp");
 			return;
@@ -81,20 +99,6 @@ public class QuestionServlet extends HttpServlet {
 			try {
 				int newQuestionID = dao.addQuestion(user, title, content);
 				response.sendRedirect("question.jsp?id=" + newQuestionID);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (action.equals("getReply")) {
-			String answerID = request.getParameter("answerID");
-			try {
-				PrintWriter out = response.getWriter();
-				out.println(dao.getReply(Integer.parseInt(answerID)));
-				out.close();
-				return;
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

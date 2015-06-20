@@ -5,6 +5,7 @@
 <%@ page import="org.json.*"%>
 <%@ page import="bean.*"%>
 <%
+	User user = (User) request.getSession().getAttribute("user");
 	String id = request.getParameter("id");
 	if (id == null) {
 		response.sendRedirect("index.jsp");
@@ -60,14 +61,23 @@
 				<div class="columnDiv" id="getMoreAnswersDiv">
 					<button id="getMoreAnswersButton">显示更多</button>
 				</div>
-				<div class="columnDiv">
+				<div class="columnDiv" id="newAnswerDiv">
+					<%
+						if (user != null) {
+					%>
 					<textarea id="newAnswerContent" placeholder="我来告诉你们人生的经验……"></textarea>
-					<div id="sendAnswerResponseMessageDiv"></div>
 					<button id="uploadImgButton">
 						<img src="img/icon/attachment.png" class="icon" />
 					</button>
 					<button class="submitButton" id="sendAnswerButton">发布回答</button>
 					<div class="clear"></div>
+					<%
+						} else {
+					%>
+					<div class="errorMessageDiv">登录后才可以发表回答</div>
+					<%
+						}
+					%>
 				</div>
 			</div>
 			<jsp:include page="popularQuestionAndUser.jsp" />

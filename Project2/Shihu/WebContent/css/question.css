@@ -62,6 +62,10 @@ textarea {
 	font-size: 15px;
 }
 
+textarea:focus{
+	border-color: #2ecc71;
+}
+
 .submitButton, #uploadImgButton {
 	margin: 5px;
 	background-color: #16a085;
@@ -129,6 +133,10 @@ textarea {
 	padding: 5px;
 }
 
+.replyDiv.new input:focus {
+	border-color: #2ecc71;
+}
+
 .replyDiv.new {
 	border-bottom: 0px;
 }
@@ -178,6 +186,13 @@ textarea {
 #getMoreAnswersButton:hover {
 	color: #2ecc71;
 	border: 1px solid #2ecc71;
+}
+
+.errorMessageDiv {
+	font-size: 12px;
+	text-align: center;
+	width: 100%;
+	color: #bdc3c7;
 }
 
 @media screen and (max-width: 600px) {
