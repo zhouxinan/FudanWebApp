@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 				Validator.validatePassword(password);
 				user = dao.login(email, password);
 				request.getSession().setAttribute("user", user);
-				response.sendRedirect("profile.jsp"); // Jump to index.jsp if
+				response.sendRedirect("index.jsp"); // Jump to index.jsp if
 														// login succeeds.
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

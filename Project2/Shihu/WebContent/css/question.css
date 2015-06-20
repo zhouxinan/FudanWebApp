@@ -151,30 +151,6 @@ textarea:focus{
 	margin-bottom: 5px;
 }
 
-#popularQuestionList div {
-	font-size: 15px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-#popularUserList {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.popularUser {
-	width: 100%;
-	float: left;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.popularUser div {
-	width: 100%;
-	margin-left: 30px;
-	font-size: 12px;
-}
-
 #getMoreAnswersButton {
 	width: 100%;
 	background-color: white;

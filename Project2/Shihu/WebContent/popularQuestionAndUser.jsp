@@ -11,6 +11,7 @@
 %>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/layout.css" />
+<link type="text/css" rel="stylesheet" href="css/popularQuestionAndUser.css" />
 <div id="rightColumn">
 	<div class="columnDiv">
 		<div class="rightColumnTitle">热门问题</div>
