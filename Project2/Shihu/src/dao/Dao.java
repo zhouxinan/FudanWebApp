@@ -873,6 +873,38 @@ public class Dao {
 		return -1; // default error return value
 	}
 
+	public String getQuestionTitleByID(int questionID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from question where questionID='"
+							+ questionID + "'");
+			if (results.next()) {
+				return results.getString("title");
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
 	public List<JSONObject> getAnswer(int questionID, int startingIndex,
 			int numberOfAnswers) throws SQLException {
 		Connection con = null;
@@ -1303,7 +1335,57 @@ public class Dao {
 		return null;
 	}
 
-	public String getQuestionTitleByID(int questionID) throws SQLException {
+	public List<JSONObject> getDiscoveryEntryListForUser() throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		List<JSONObject> discoveryEntryList = new LinkedList<JSONObject>();
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from question ORDER BY questionTime");
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("time", results.getString("questionTime"));
+				obj.put("questionTitle", results.getString("title"));
+				String questionID = results.getString("questionID");
+				obj.put("questionID", questionID);
+				JSONObject latestAnswer = getLatestAnswerforQuestion(Integer
+						.parseInt(questionID));
+				if (latestAnswer == null) {
+					obj.put("hasAnswer", "0");
+				} else {
+					obj.put("hasAnswer", "1");
+					obj.put("userID", latestAnswer.get("userID"));
+					obj.put("avatarPath", latestAnswer.get("avatarPath"));
+					obj.put("username", latestAnswer.get("username"));
+					obj.put("time", latestAnswer.get("time"));
+					obj.put("content", latestAnswer.get("content"));
+				}
+				discoveryEntryList.add(obj);
+			}
+			Collections.sort(discoveryEntryList, new MyComparator());
+			return discoveryEntryList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public JSONObject getLatestAnswerforQuestion(int questionID)
+			throws SQLException {
 		Connection con = null;
 		Statement sm = null;
 		ResultSet results = null;
@@ -1311,10 +1393,18 @@ public class Dao {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
 			results = sm
-					.executeQuery("select * from question where questionID='"
-							+ questionID + "'");
+					.executeQuery("select * from answers where questionID='"
+							+ questionID + "' ORDER BY answerTime DESC LIMIT 1");
 			if (results.next()) {
-				return results.getString("title");
+				JSONObject obj = new JSONObject();
+				String userID = results.getString("userID");
+				obj.put("userID", userID);
+				User user = getUserByID(userID);
+				obj.put("avatarPath", user.getAvatarPath());
+				obj.put("username", user.getUsername());
+				obj.put("time", results.getString("answerTime"));
+				obj.put("content", results.getString("content"));
+				return obj;
 			} else {
 				return null;
 			}
