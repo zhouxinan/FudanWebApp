@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import bean.User;
 import exception.LoginServletException;
 
 import org.json.*;
+
+import utility.MyComparator;
 
 public class Dao {
 	private static String driver = "com.mysql.jdbc.Driver";
@@ -1210,6 +1213,111 @@ public class Dao {
 				userList.add(user);
 			}
 			return userList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public List<JSONObject> getTrendEntryListForUser(User user)
+			throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		int userID = user.getUserID();
+		List<JSONObject> trendEntryList = new LinkedList<JSONObject>();
+		String toUserIDString = "(";
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from follows where fromUserID='"
+							+ userID + "'");
+			while (results.next()) {
+				toUserIDString += results.getString("toUserID") + ",";
+			}
+			results.close();
+			toUserIDString += "0)";
+			results = sm.executeQuery("select * from question where userID in "
+					+ toUserIDString);
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String toUserID = results.getString("userID");
+				obj.put("isQuestion", "1");
+				obj.put("userID", toUserID);
+				User toUser = getUserByID(toUserID);
+				obj.put("avatarPath", toUser.getAvatarPath());
+				obj.put("username", toUser.getUsername());
+				obj.put("questionID", results.getString("questionID"));
+				obj.put("questionTitle", results.getString("title"));
+				obj.put("time", results.getString("questionTime"));
+				trendEntryList.add(obj);
+			}
+			results.close();
+			results = sm.executeQuery("select * from answers where userID in "
+					+ toUserIDString);
+			while (results.next()) {
+				JSONObject obj = new JSONObject();
+				String toUserID = results.getString("userID");
+				obj.put("isQuestion", "0");
+				obj.put("userID", toUserID);
+				User toUser = getUserByID(toUserID);
+				obj.put("avatarPath", toUser.getAvatarPath());
+				obj.put("username", toUser.getUsername());
+				String questionID = results.getString("questionID");
+				obj.put("questionID", questionID);
+				obj.put("questionTitle",
+						getQuestionTitleByID(Integer.parseInt(questionID)));
+				obj.put("time", results.getString("answerTime"));
+				obj.put("content", results.getString("content"));
+				trendEntryList.add(obj);
+			}
+			results.close();
+			Collections.sort(trendEntryList, new MyComparator());
+			return trendEntryList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sm != null) {
+				sm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	public String getQuestionTitleByID(int questionID) throws SQLException {
+		Connection con = null;
+		Statement sm = null;
+		ResultSet results = null;
+		try {
+			con = DriverManager.getConnection(url, dbUsername, dbPassword);
+			sm = con.createStatement();
+			results = sm
+					.executeQuery("select * from question where questionID='"
+							+ questionID + "'");
+			if (results.next()) {
+				return results.getString("title");
+			} else {
+				return null;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

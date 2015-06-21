@@ -25,8 +25,8 @@
 		return;
 	}
 	Dao dao = Dao.getInstance();
-	List<Question> questionList = dao.getQuestionListByUserID(currentUser
-			.getUserID());
+	List<Question> questionList = dao
+			.getQuestionListByUserID(currentUser.getUserID());
 	List<JSONObject> answerList = dao.getAnswerListByUserID(currentUser
 			.getUserID());
 %>
