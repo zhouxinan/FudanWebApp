@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.User;
 import dao.Dao;
-
-import org.json.*;
 
 /**
  * Servlet implementation class FollowServlet
@@ -52,7 +49,8 @@ public class FollowServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		User user = (User) request.getSession().getAttribute("user");
 		if (action.equals("getPopularUserList")) {
-			int popularUserNumber = Integer.parseInt(request.getParameter("popularUserNumber"));
+			int popularUserNumber = Integer.parseInt(request
+					.getParameter("popularUserNumber"));
 			try {
 				PrintWriter out = response.getWriter();
 				out.println(dao.getPopularUserList(popularUserNumber));
@@ -106,30 +104,6 @@ public class FollowServlet extends HttpServlet {
 						.getParameter("toUserID"));
 				PrintWriter out = response.getWriter();
 				out.print(dao.checkFollow(user, toUserID));
-				out.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (action.equals("getFollowers")) {
-			try {
-				int toUserID = Integer.parseInt(request
-						.getParameter("toUserID"));
-				List<JSONObject> followerList = dao.getFollowers(toUserID);
-				PrintWriter out = response.getWriter();
-				out.println(followerList);
-				out.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (action.equals("getFollowing")) {
-			try {
-				int fromUserID = Integer.parseInt(request
-						.getParameter("fromUserID"));
-				List<JSONObject> followingList = dao.getFollowing(fromUserID);
-				PrintWriter out = response.getWriter();
-				out.println(followingList);
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
