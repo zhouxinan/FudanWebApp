@@ -22,8 +22,7 @@ import utility.MyComparator;
 public class Dao {
 	private static String driver = "com.mysql.jdbc.Driver";
 	String url = "jdbc:mysql://127.0.0.1:3306/Shihu?useUnicode=true&amp;characterEncoding=UTF-8&amp;";
-	SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"yyyy年MM月dd日 HH:mm:ss E");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss E");
 
 	// your username and password
 	String dbUsername = "root";
@@ -1026,7 +1025,8 @@ public class Dao {
 				obj.put("questionID", questionID);
 				obj.put("questionTitle", question.getTitle());
 				obj.put("content", results.getString("content"));
-				obj.put("answerTime", dateFormat.format(results.getTimestamp("answerTime")));
+				obj.put("answerTime",
+						dateFormat.format(results.getTimestamp("answerTime")));
 				answerList.add(obj);
 			}
 			return answerList;
@@ -1226,7 +1226,8 @@ public class Dao {
 				obj.put("username", toUser.getUsername());
 				obj.put("questionID", results.getString("questionID"));
 				obj.put("questionTitle", results.getString("title"));
-				obj.put("time", dateFormat.format(results.getTimestamp("questionTime")));
+				obj.put("time",
+						dateFormat.format(results.getTimestamp("questionTime")));
 				trendEntryList.add(obj);
 			}
 			results.close();
@@ -1244,7 +1245,8 @@ public class Dao {
 				obj.put("questionID", questionID);
 				obj.put("questionTitle",
 						getQuestionTitleByID(Integer.parseInt(questionID)));
-				obj.put("time", dateFormat.format(results.getTimestamp("answerTime")));
+				obj.put("time",
+						dateFormat.format(results.getTimestamp("answerTime")));
 				obj.put("content", results.getString("content"));
 				trendEntryList.add(obj);
 			}
@@ -1280,7 +1282,8 @@ public class Dao {
 					.executeQuery("select * from question ORDER BY questionTime");
 			while (results.next()) {
 				JSONObject obj = new JSONObject();
-				obj.put("time", dateFormat.format(results.getTimestamp("questionTime")));
+				obj.put("time",
+						dateFormat.format(results.getTimestamp("questionTime")));
 				obj.put("questionTitle", results.getString("title"));
 				String questionID = results.getString("questionID");
 				obj.put("questionID", questionID);
@@ -1288,6 +1291,11 @@ public class Dao {
 						.parseInt(questionID));
 				if (latestAnswer == null) {
 					obj.put("hasAnswer", "0");
+					String userID = results.getString("userID");
+					obj.put("userID", userID);
+					User user = getUserByID(userID);
+					obj.put("avatarPath", user.getAvatarPath());
+					obj.put("username", user.getUsername());
 				} else {
 					obj.put("hasAnswer", "1");
 					obj.put("userID", latestAnswer.get("userID"));
@@ -1335,7 +1343,8 @@ public class Dao {
 				User user = getUserByID(userID);
 				obj.put("avatarPath", user.getAvatarPath());
 				obj.put("username", user.getUsername());
-				obj.put("time", dateFormat.format(results.getTimestamp("answerTime")));
+				obj.put("time",
+						dateFormat.format(results.getTimestamp("answerTime")));
 				obj.put("content", results.getString("content"));
 				return obj;
 			} else {

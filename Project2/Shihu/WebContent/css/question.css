@@ -13,7 +13,7 @@
 #questionMetadata {
 	color: #7f8c8d;
 	line-height: 30px;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 #questionMetadata>span {
@@ -27,6 +27,7 @@
 
 .userInfoDiv {
 	height: 40px;
+	font-size: 15px;
 }
 
 .userInfoDiv span {
@@ -37,7 +38,7 @@
 	float: right;
 	color: #7f8c8d;
 	height: 20px;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .answerMetadata>div {

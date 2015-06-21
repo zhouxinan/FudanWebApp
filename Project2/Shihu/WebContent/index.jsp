@@ -20,6 +20,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/layout.css" />
+<link type="text/css" rel="stylesheet" href="css/index.css" />
 <title>识乎 - 主页</title>
 </head>
 <body>
@@ -31,20 +32,39 @@
 					for (JSONObject obj : trendEntryList) {
 				%>
 				<div class="columnDiv">
-					<div>
-						<a href="question.jsp?id=<%=obj.get("questionID")%>"><%=obj.get("questionTitle")%></a>
-					</div>
 					<%
-						if (obj.get("isQuestion").equals("0")) {
+						if (obj.get("isQuestion").equals("1")) {
 					%>
-					<div class="replyContent"><%=obj.get("content")%></div>
+					<div>
+						<a href="profile.jsp?id=<%=obj.get("userID")%>"><img
+							src="img/avatar/<%=obj.get("avatarPath")%>" class="userAvatar" /></a>
+					</div>
+					<div class="trendEntry">
+						<div class="questionDiv">
+							<a href="profile.jsp?id=<%=obj.get("userID")%>" class="userName"><%=obj.get("username")%></a>
+							提问了 <a href="question.jsp?id=<%=obj.get("questionID")%>"><%=obj.get("questionTitle")%></a>
+						</div>
+						<div class="replyTime"><%=obj.get("time")%></div>
+					</div>
 					<%
 						} else {
 					%>
+					<div>
+						<a href="profile.jsp?id=<%=obj.get("userID")%>"><img
+							src="img/avatar/<%=obj.get("avatarPath")%>" class="userAvatar" /></a>
+					</div>
+					<div class="trendEntry">
+						<div class="questionDiv">
+							<a href="profile.jsp?id=<%=obj.get("userID")%>" class="userName"><%=obj.get("username")%></a>
+							回答了 <a href="question.jsp?id=<%=obj.get("questionID")%>"><%=obj.get("questionTitle")%></a>
+						</div>
+						<div class="answerContent"><%=obj.get("content")%></div>
+						<div class="replyTime"><%=obj.get("time")%></div>
+					</div>
 					<%
 						}
 					%>
-					<div class="replyTime"><%=obj.get("time")%></div>
+
 				</div>
 				<%
 					}
