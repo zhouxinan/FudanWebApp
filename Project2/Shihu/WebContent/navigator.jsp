@@ -28,7 +28,9 @@
 			<div class="changeHoverBackground clickbox">
 				<a href="index.jsp">首页</a>
 			</div>
-			<div class="changeHoverBackground clickbox">话题</div>
+			<div class="changeHoverBackground clickbox">
+				<a href="#">话题</a>
+			</div>
 			<div class="changeHoverBackground clickbox">
 				<a href="discovery.jsp">发现</a>
 			</div>

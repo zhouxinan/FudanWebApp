@@ -1,5 +1,8 @@
 package bean;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public class Question {
 	private int questionID;
 	private int userID;
@@ -52,8 +55,9 @@ public class Question {
 		return time;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setTime(Timestamp timestamp) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"yyyy年MM月dd日 HH:mm:ss E");
+		this.time = dateFormat.format(timestamp);
 	}
-
 }
