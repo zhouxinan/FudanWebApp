@@ -55,3 +55,7 @@ textarea {
 	border-radius: 3px;
 	border: 1px solid #bdc3c7;
 }
+
+.hidden {
+	display: none;
+}

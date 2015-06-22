@@ -21,8 +21,8 @@
 			<input type="text" id="searchInput" placeholder="搜索问题或用户" />
 			<button type="submit" id="searchButton">搜索</button>
 		</div>
-		<div id="newQuestionButton">
-			<button>提问题</button>
+		<div>
+			<button id="newQuestionButton">提问题</button>
 		</div>
 		<div id="menuDiv">
 			<div class="changeHoverBackground clickbox">
@@ -75,5 +75,6 @@
 		</div>
 	</div>
 </div>
+
 <script src="lib/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="js/navigator.js"></script>

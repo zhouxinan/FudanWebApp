@@ -61,7 +61,7 @@
 	right: 0px;
 }
 
-#newQuestionButton button {
+#newQuestionButton {
 	float: left;
 	margin: 10px;
 }
@@ -127,13 +127,13 @@
 	background-color: #27ae60;
 }
 
-#userMenu > div {
+#userMenu>div {
 	text-align: left;
 	width: 100%;
 	float: left;
 }
 
-#userMenu > div:hover {
+#userMenu>div:hover {
 	background-color: #2ecc71;
 }
 

@@ -13,6 +13,16 @@ $("#searchButton").click(function() {
 	window.location = "search.jsp?keyword=" + encodeURIComponent(keyword);
 });
 
+$("#newQuestionButton").click(function() {
+	$(".modal-dialog-bg").removeClass("hidden");
+	$(".modal-wrapper").removeClass("hidden");
+});
+
+$(".modal-dialog-title-close").click(function() {
+	$(".modal-dialog-bg").addClass("hidden");
+	$(".modal-wrapper").addClass("hidden");
+});
+
 $.ajax({
 	type : 'POST',
 	url : "MessageServlet",
