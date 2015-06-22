@@ -58,7 +58,8 @@ function getReply(answerID, replyListDiv) {
 
 function processReplyData(data, replyListDiv) {
 	if (data == "-1") {
-		replyListDiv.html('<div class="replyDiv new"><div class="errorMessageDiv">登录后才可以查看和发表评论</div></div>');
+		replyListDiv
+				.html('<div class="replyDiv new"><div class="errorMessageDiv">登录后才可以查看和发表评论</div></div>');
 		return;
 	}
 	replyListDiv
@@ -94,25 +95,31 @@ function sendAnswer() {
 		$("#newAnswerContent").focus();
 		return;
 	}
-	$.ajax({
-		type : 'POST',
-		url : 'QuestionServlet',
-		data : {
-			action : 'addAnswer',
-			questionID : $("#questionID").html(),
-			content : content
-		},
-		dataType : "json",
-		success : function(data) {
-			addAnswerToPage(data.userID, data.avatarPath, data.username,
-					data.motto, data.content, data.answerTime, data.answerID,
-					data.replyCount);
-			$("#newAnswerContent").val("");
-		},
-		error : function() {
-			alert("Connection error!");
-		}
-	});
+	var file = document.getElementById("file").files[0];
+	if (file != undefined) {
+		$("#questionID").val($("#questionIDDiv").html());
+		$("#newAnswerForm").submit();
+	} else {
+		$.ajax({
+			type : 'POST',
+			url : 'QuestionServlet',
+			data : {
+				action : 'addAnswer',
+				questionID : $("#questionIDDiv").html(),
+				content : content
+			},
+			dataType : "json",
+			success : function(data) {
+				addAnswerToPage(data.userID, data.avatarPath, data.username,
+						data.motto, data.content, data.answerTime,
+						data.answerID, data.replyCount);
+				$("#newAnswerContent").val("");
+			},
+			error : function() {
+				alert("Connection error!");
+			}
+		});
+	}
 }
 
 function getAnswer(startingIndex, numberOfAnswers) {
@@ -121,7 +128,7 @@ function getAnswer(startingIndex, numberOfAnswers) {
 		url : 'QuestionServlet',
 		data : {
 			action : 'getAnswer',
-			questionID : $("#questionID").html(),
+			questionID : $("#questionIDDiv").html(),
 			startingIndex : startingIndex,
 			numberOfAnswers : numberOfAnswers
 		},
@@ -165,7 +172,7 @@ function addAnswerToPage(userID, avatarPath, username, motto, content,
 			+ '</span></div><div class="answer"><p>' + content
 			+ '</p></div><div class="answerMetadata"><div>' + answerTime
 			+ '</div> <div class="replyCountDiv noSelect">评论 (' + replyCount
-			+ ')</div><div class="answerID">' + answerID
+			+ ')</div><div class="answerID hidden">' + answerID
 			+ '</div></div><div class="replyListDiv"></div>';
 	$("#getMoreAnswersDiv").before(columnDiv);
 }
@@ -184,6 +191,21 @@ function setSendReplyButtonAction() {
 			});
 }
 
+function setFileTypeValidator() {
+	$("#file").on('change', function() {
+		var file = document.getElementById("file").files[0];
+		if (!file.type.match('image.*')) {
+			alert("你只能选择图片文件，请重新选择！");
+			resetFileInput();
+		}
+	});
+}
+
+function resetFileInput() {
+	document.getElementById("newAnswerForm").innerHTML = '<textarea id="newAnswerContent" name="newAnswerContent" placeholder="我来告诉你们人生的经验……"></textarea><input type="file" id="file" class="hidden" name="file" /> <input type="text" id="questionID" class="hidden" name="questionID" />';
+	setFileTypeValidator();
+}
+
 $("#getMoreAnswersButton").bind('click', function() {
 	getAnswer(startingIndex, 5);
 });
@@ -195,3 +217,9 @@ $("#sendAnswerButton").bind('click', function() {
 startingIndex = 0;
 
 $("#getMoreAnswersButton").click();
+
+$("#uploadImgButton").bind('click', function() {
+	$("#file").trigger('click');
+});
+
+setFileTypeValidator();

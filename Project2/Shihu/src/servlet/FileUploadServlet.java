@@ -57,6 +57,7 @@ public class FileUploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// checks if the user has logged in
+		request.setCharacterEncoding("utf-8");
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			response.sendRedirect("login.jsp");
@@ -86,12 +87,14 @@ public class FileUploadServlet extends HttpServlet {
 
 		Dao dao = Dao.getInstance();
 		String action = request.getParameter("action");
+		String newAnswerContent = "";
+		int questionID = 0;
 		// constructs the directory path to store upload file
 		// this path is relative to application's directory
 		if (action.equals("uploadUserAvatar")) {
 			uploadPath = getServletContext().getRealPath("") + File.separator
 					+ "img/avatar";
-		} else if (action.equals("uploadReplyImage")) {
+		} else if (action.equals("addAnswerWithImage")) {
 			uploadPath = getServletContext().getRealPath("") + File.separator
 					+ "img/upload";
 		}
@@ -104,11 +107,19 @@ public class FileUploadServlet extends HttpServlet {
 		try {
 			// parses the request's content to extract file data
 			List<FileItem> formItems = upload.parseRequest(request);
-
 			if (formItems != null && formItems.size() > 0) {
 				// iterates over form's fields
 				for (FileItem item : formItems) {
-					// processes only fields that are not form fields
+					if (item.isFormField()) {
+						String fieldName = item.getFieldName();
+						if (fieldName.equals("newAnswerContent")) {
+							newAnswerContent = item.getString("UTF-8");
+						} else if (fieldName.equals("questionID")) {
+							questionID = Integer.parseInt(item.getString());
+						}
+					}
+				}
+				for (FileItem item : formItems) {
 					if (!item.isFormField()) {
 						String fileName = UUID.randomUUID().toString();
 						String filePath = uploadPath + File.separator
@@ -121,21 +132,22 @@ public class FileUploadServlet extends HttpServlet {
 							request.getSession().setAttribute("user",
 									dao.getUserByID("" + user.getUserID())); // renew
 																				// session.
-							request.getSession().setAttribute("saveAvatarResponseMessage",
-									"头像修改成功!");
+							request.getSession().setAttribute(
+									"saveAvatarResponseMessage", "头像修改成功!");
 							response.sendRedirect("settings.jsp");
+						} else if (action.equals("addAnswerWithImage")) {
+							newAnswerContent += "<img src=\"img/upload/"
+									+ fileName + "\" />";
+							dao.addAnswer(user, questionID, newAnswerContent);
+							response.sendRedirect("question.jsp?id="
+									+ questionID);
 						}
-
 					}
 				}
 			}
-		} catch (Exception ex) {
-			// request.setAttribute("message",
-			// "There was an error: " + ex.getMessage());
-			System.out.println("bad!");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		// redirects client to message page
-		// getServletContext().getRequestDispatcher("/message.jsp").forward(
-		// request, response);
 	}
 }

@@ -41,7 +41,7 @@
 		<div id="contentWrapper">
 			<div id="leftColumn">
 				<div class="columnDiv">
-					<div id="questionID"><%=currentQuestion.getQuestionID()%></div>
+					<div id="questionIDDiv" class="hidden"><%=currentQuestion.getQuestionID()%></div>
 					<div id="questionTitle"><%=currentQuestion.getTitle()%></div>
 					<div id="questionMetadata">
 						<span class="userName"><a
@@ -65,7 +65,14 @@
 					<%
 						if (user != null) {
 					%>
-					<textarea id="newAnswerContent" placeholder="我来告诉你们人生的经验……"></textarea>
+					<form id="newAnswerForm" method="POST"
+						action="FileUploadServlet?action=addAnswerWithImage"
+						enctype="multipart/form-data">
+						<textarea id="newAnswerContent" name="newAnswerContent"
+							placeholder="我来告诉你们人生的经验……"></textarea>
+						<input type="file" id="file" class="hidden" name="file" /> <input
+							type="text" id="questionID" class="hidden" name="questionID" />
+					</form>
 					<button id="uploadImgButton">
 						<img src="img/icon/attachment.png" class="icon" />
 					</button>
