@@ -70,8 +70,11 @@
 						enctype="multipart/form-data">
 						<textarea id="newAnswerContent" name="newAnswerContent"
 							placeholder="我来告诉你们人生的经验……"></textarea>
-						<input type="file" id="file" class="hidden" name="file" /> <input
-							type="text" id="questionID" class="hidden" name="questionID" />
+						<div id="resetFileDiv" class="hidden">
+							<input type="file" id="file" name="file" />
+						</div>
+						<input type="text" id="questionID" class="hidden"
+							name="questionID" />
 					</form>
 					<button id="uploadImgButton">
 						<img src="img/icon/attachment.png" class="icon" />

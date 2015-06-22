@@ -202,7 +202,7 @@ function setFileTypeValidator() {
 }
 
 function resetFileInput() {
-	document.getElementById("newAnswerForm").innerHTML = '<textarea id="newAnswerContent" name="newAnswerContent" placeholder="我来告诉你们人生的经验……"></textarea><input type="file" id="file" class="hidden" name="file" /> <input type="text" id="questionID" class="hidden" name="questionID" />';
+	$("#resetFileDiv").html('<input type="file" id="file" name="file" />');
 	setFileTypeValidator();
 }
 
