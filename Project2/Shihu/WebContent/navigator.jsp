@@ -26,7 +26,7 @@
 			if (user != null) {
 		%>
 		<div>
-			<button id="newQuestionButton">提问题</button>
+			<button id="newQuestionButton" class="standardButton">提问题</button>
 		</div>
 		<%
 			}
@@ -82,8 +82,8 @@
 		</div>
 	</div>
 </div>
-<div class="modalDialogBackground"></div>
-<div class="modalWrapper">
+<div class="modalDialogBackground hidden"></div>
+<div class="modalWrapper hidden">
 	<div class="modalDialog">
 		<div class="modalDialogTitle">
 			<span class="modalDialogTitleText">提问</span><span
@@ -105,7 +105,7 @@
 					placeholder="请输入你的问题">
 			</div>
 			<div>
-				<button id="submitNewQuestionButton" class="submitButton">提交</button>
+				<button id="submitNewQuestionButton" class="standardButton">提交</button>
 				<div class="clear"></div>
 			</div>
 			<form id="newQuestionForm" method="POST"

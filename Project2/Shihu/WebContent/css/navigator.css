@@ -4,6 +4,13 @@
 	top: 0px;
 	width: 100%;
 	background-color: #2ecc71;
+	background-image: -moz-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -ms-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2ecc71),
+		to(#1abc9c));
+	background-image: -webkit-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -o-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: linear-gradient(top, #2ecc71, #1abc9c);
 	z-index: 1;
 }
 
@@ -110,6 +117,7 @@
 	height: 30px;
 	margin: 10px;
 	margin-left: 20px;
+	border-radius: 5px;
 }
 
 #myName {
@@ -124,7 +132,7 @@
 #userMenu {
 	display: none;
 	float: right;
-	background-color: #27ae60;
+	background-color: #1abc9c;
 }
 
 #userMenu>div {
@@ -156,7 +164,7 @@
 }
 
 .changeHoverBackground:hover {
-	background-color: #27ae60;
+	background-color: #2ecc71;
 }
 
 .notificationBubble {
@@ -265,7 +273,7 @@
 }
 
 .modalDialogInput:focus {
-	border-color: #2ecc71;
+	border-color: #1abc9c;
 }
 
 #submitNewQuestionButton {

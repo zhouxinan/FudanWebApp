@@ -76,10 +76,10 @@
 						<input type="text" id="questionID" class="hidden"
 							name="questionID" />
 					</form>
-					<button id="uploadImgButton">
+					<button id="uploadImgButton" class="standardButton">
 						<img src="img/icon/attachment.png" class="icon" />
 					</button>
-					<button class="submitButton" id="sendAnswerButton">发布回答</button>
+					<button class="standardButton" id="sendAnswerButton">发布回答</button>
 					<div class="clear"></div>
 					<%
 						} else {

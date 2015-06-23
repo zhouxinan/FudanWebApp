@@ -63,7 +63,7 @@ function processReplyData(data, replyListDiv) {
 		return;
 	}
 	replyListDiv
-			.html('<div class="replyDiv new"><input type="text" placeholder="说你什么好呢……" /><button class="submitButton sendReplyButton">发表评论</button></div>');
+			.html('<div class="replyDiv new"><input type="text" placeholder="说你什么好呢……" /><button class="standardButton sendReplyButton">发表评论</button></div>');
 	if (data != null) {
 		for (i = 0; i < data.length; i++) {
 			addReplyToPage(data[i].userID, data[i].avatarPath,

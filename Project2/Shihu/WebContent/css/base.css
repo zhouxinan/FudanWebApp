@@ -9,12 +9,12 @@ body {
 
 /* Don't allow mis-selections caused by clicking too fast on elements in the login/register area, or the UI will look silly.  */
 .noSelect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 input, textarea {
@@ -51,4 +51,34 @@ button {
 
 .hidden {
 	display: none;
+}
+
+.standardButton {
+	background: #2ecc71;
+	background-color: #2ecc71;
+	background-image: -moz-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -ms-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2ecc71),
+		to(#1abc9c));
+	background-image: -webkit-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -o-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: linear-gradient(top, #2ecc71, #1abc9c);
+	border: 1px solid #24aa6c;
+	color: #fff !important;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0
+		rgba(0, 0, 0, .2);
+	font-size: 14px;
+	line-height: 1.7;
+	text-align: center;
+	padding: 4px 10px;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+.standardButton:active {
+	opacity: 0.7;
+}
+
+.standardInput {
+	
 }
