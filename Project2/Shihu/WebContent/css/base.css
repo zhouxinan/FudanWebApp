@@ -80,5 +80,36 @@ button {
 }
 
 .standardInput {
-	
+	padding: 8px 10px;
+	font-size: 13px;
+	line-height: 15px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	color: #222;
+	width: 100%;
+}
+
+.standardInput:focus {
+	border-color: #2ecc71;
+}
+
+textarea {
+	padding: 8px 10px;
+	font-size: 13px;
+	line-height: 15px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	color: #222;
+	width: 100%;
+	height: 20%;
+	margin-bottom: 5px;
+	overflow-y: auto;
+}
+
+textarea:focus {
+	border-color: #2ecc71;
 }

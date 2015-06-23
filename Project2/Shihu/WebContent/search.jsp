@@ -29,35 +29,49 @@
 				</div>
 				<div>
 					<div class="tabPane active">
-						<div class="columnDiv">
-							<%
+						<%
+							if (questionList.size() == 0) {
+						%>
+						<div class="columnDiv">没有找到符合条件的问题。</div>
+						<%
+							} else {
 								for (Question question : questionList) {
-							%>
+						%>
+						<div class="columnDiv">
 							<div class="questionTitleDiv">
 								<a href="question.jsp?id=<%=question.getQuestionID()%>"><%=question.getTitle()%></a>
 							</div>
-							<%
-								}
-							%>
 						</div>
+						<%
+							}
+							}
+						%>
+
 					</div>
 					<div class="tabPane">
 						<%
-							for (User user : userList) {
+							if (userList.size() == 0) {
+						%>
+						<div class="columnDiv">没有找到符合条件的用户。</div>
+						<%
+							} else {
+								for (User user : userList) {
 						%>
 						<div class="columnDiv">
-							<div class="bigUserAvatarDiv">
+							<div>
 								<a href="profile.jsp?id=<%=user.getUserID()%>"> <img
-									class="bigUserAvatar"
-									src="img/avatar/<%=user.getAvatarPath()%>" />
+									src="img/avatar/<%=user.getAvatarPath()%>" class="userAvatar" />
 								</a>
 							</div>
-							<div class="userName">
-								<a href="profile.jsp?id=<%=user.getUserID()%>"><%=user.getUsername()%></a>
+							<div>
+								<div class="userName">
+									<a href="profile.jsp?id=<%=user.getUserID()%>" class="userName"><%=user.getUsername()%></a>
+								</div>
+								<div class="userSignature"><%=user.getMotto()%></div>
 							</div>
-							<div class="userSignature"><%=user.getMotto()%></div>
 						</div>
 						<%
+							}
 							}
 						%>
 					</div>

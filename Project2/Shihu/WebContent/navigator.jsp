@@ -94,14 +94,14 @@
 				<b>问题标题（必填）</b>
 			</div>
 			<div>
-				<input type="text" class="modalDialogInput" id="newQuestionTitle"
+				<input type="text" class="standardInput" id="newQuestionTitle"
 					placeholder="请输入你的问题">
 			</div>
 			<div>
 				<b>问题描述</b>
 			</div>
 			<div>
-				<input type="text" class="modalDialogInput" id="newQuestionContent"
+				<input type="text" class="standardInput" id="newQuestionContent"
 					placeholder="请输入你的问题">
 			</div>
 			<div>

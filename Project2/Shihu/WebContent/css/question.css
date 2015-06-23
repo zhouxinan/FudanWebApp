@@ -48,25 +48,6 @@
 	padding-top: 10px;
 }
 
-textarea {
-	padding: 8px 10px;
-	font-size: 13px;
-	line-height: 15px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
-	background: #fff;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-	color: #222;
-	width: 100%;
-	height: 20%;
-	margin-bottom: 5px;
-	overflow-y: auto;
-}
-
-textarea:focus {
-	border-color: #2ecc71;
-}
-
 .standardButton {
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -113,22 +94,6 @@ textarea:focus {
 
 .replyData {
 	float: left;
-}
-
-.replyDiv.new input {
-	padding: 8px 10px;
-	font-size: 13px;
-	line-height: 15px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
-	background: #fff;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-	color: #222;
-	width: 100%;
-}
-
-.replyDiv.new input:focus {
-	border-color: #2ecc71;
 }
 
 .replyDiv.new {

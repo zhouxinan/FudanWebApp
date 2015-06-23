@@ -52,17 +52,17 @@
 				</div>
 				<div id="myQuestionAndAnswerDiv">
 					<div id="myQuestionDiv" class="tabPane active">
+						<%
+							for (Question question : questionList) {
+						%>
 						<div class="columnDiv">
-							<%
-								for (Question question : questionList) {
-							%>
 							<div>
 								<a href="question.jsp?id=<%=question.getQuestionID()%>"><%=question.getTitle()%></a>
 							</div>
-							<%
-								}
-							%>
 						</div>
+						<%
+							}
+						%>
 					</div>
 					<div id="myAnswerDiv" class="tabPane">
 						<%

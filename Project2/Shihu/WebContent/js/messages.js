@@ -37,6 +37,10 @@ $("#messagesUnread").click(function() {
 	sendRequest('getAllUnreadMessages');
 });
 
+$("#sendMessageButton").click(function() {
+	sendMessage();
+});
+
 function appendMessage(data) {
 	$("#messagesDiv").html("");
 	if (data != null) {
@@ -58,4 +62,34 @@ function addMessage(userID, avatarPath, messageID, content, username) {
 	$("#messagesDiv").append(newDiv);
 }
 
-//$("#messagesUnread").trigger("click");
+function sendMessage() {
+	var receiverUsername = $("#receiverUsername").val();
+	if (receiverUsername == "") {
+		$("#sendMessageErrorMessageDiv").html("请输入收信人的用户名！");
+		return;
+	}
+	var content = $("#messageContent").val();
+	if (content == "") {
+		$("#sendMessageErrorMessageDiv").html("请输入私信内容！");
+		return;
+	}
+	$("#sendMessageErrorMessageDiv").html("");
+	$.ajax({
+		type : 'POST',
+		url : 'MessageServlet',
+		data : {
+			action : 'addMessage',
+			receiverUsername : receiverUsername,
+			content : content
+		},
+		dataType : "json",
+		success : function(data) {
+			
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+// $("#messagesUnread").trigger("click");
