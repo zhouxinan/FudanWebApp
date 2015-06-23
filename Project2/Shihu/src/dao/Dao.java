@@ -773,17 +773,20 @@ public class Dao {
 		title = title.replace("'", "''");
 		content = content.replace("'", "''");
 		Connection con = null;
-		Statement sm = null;
+		PreparedStatement sm = null;
 		ResultSet results = null;
+		int newQuestionID = 0;
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
-			sm = con.createStatement();
-			int newQuestionID = sm
-					.executeUpdate(
-							"insert into question(userID, title, content) values('"
-									+ userID + "', '" + title + "', '"
-									+ content + "')",
-							Statement.RETURN_GENERATED_KEYS);
+			sm = con.prepareStatement(
+					"insert into question(userID, title, content) values('"
+							+ userID + "', '" + title + "', '" + content + "')",
+					Statement.RETURN_GENERATED_KEYS);
+			sm.executeUpdate();
+			results = sm.getGeneratedKeys();
+			if (results.next()) {
+				newQuestionID = results.getInt(1);
+			}
 			return newQuestionID;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

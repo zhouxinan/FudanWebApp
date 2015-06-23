@@ -14,13 +14,26 @@ $("#searchButton").click(function() {
 });
 
 $("#newQuestionButton").click(function() {
-	$(".modal-dialog-bg").removeClass("hidden");
-	$(".modal-wrapper").removeClass("hidden");
+	$(".modalDialogBackground").removeClass("hidden");
+	$(".modalWrapper").removeClass("hidden");
 });
 
-$(".modal-dialog-title-close").click(function() {
-	$(".modal-dialog-bg").addClass("hidden");
-	$(".modal-wrapper").addClass("hidden");
+$(".modalDialogTitleClose").click(function() {
+	$(".modalDialogBackground").addClass("hidden");
+	$(".modalWrapper").addClass("hidden");
+});
+
+$("#submitNewQuestionButton").click(function() {
+	var newQuestionTitle = $("#newQuestionTitle").val();
+	var newQuestionContent = $("#newQuestionContent").val();
+	if (newQuestionTitle == "") {
+		$("#newQuestionTitle").attr("placeholder","问题标题是必填的");
+		$("#newQuestionTitle").focus();
+		return;
+	}
+	$("#newQuestionTitleChecked").val(newQuestionTitle);
+	$("#newQuestionContentChecked").val(newQuestionContent); 
+	$("#newQuestionForm").submit();
 });
 
 $.ajax({

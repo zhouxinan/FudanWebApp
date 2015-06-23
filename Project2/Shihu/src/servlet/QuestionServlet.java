@@ -93,9 +93,6 @@ public class QuestionServlet extends HttpServlet {
 		if (action.equals("addQuestion")) {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			if (title.equals("")) {
-				// void title, should return error.
-			}
 			try {
 				int newQuestionID = dao.addQuestion(user, title, content);
 				response.sendRedirect("question.jsp?id=" + newQuestionID);

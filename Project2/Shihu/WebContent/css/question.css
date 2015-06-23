@@ -43,16 +43,24 @@
 }
 
 .replyDiv {
-	border-bottom: 1px solid #bdc3c7;
+	border-bottom: 1px solid #ccc;
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
 
 textarea {
+	padding: 8px 10px;
+	font-size: 13px;
+	line-height: 15px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	color: #222;
 	width: 100%;
 	height: 20%;
 	margin-bottom: 5px;
-	font-size: 15px;
+	overflow-y: auto;
 }
 
 textarea:focus{
@@ -81,7 +89,7 @@ textarea:focus{
 
 .replyListDiv {
 	position: relative;
-	border: 1px solid #bdc3c7;
+	border: 1px solid #ccc;
 	border-radius: 3px;
 	width: 90%;
 	float: right;
@@ -102,7 +110,7 @@ textarea:focus{
 
 .replyListDiv::before {
 	top: -10px;
-	border-color: transparent transparent #bdc3c7 transparent;
+	border-color: transparent transparent #ccc transparent;
 }
 
 .replyListDiv::after {
@@ -119,11 +127,15 @@ textarea:focus{
 }
 
 .replyDiv.new input {
-	height: 30px;
-	width: 100%;
-	border: 1px solid #bdc3c7;
+	padding: 8px 10px;
+	font-size: 13px;
+	line-height: 15px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1) inset;
+	background: #fff;
+	border: 1px solid #ccc;
 	border-radius: 2px;
-	padding: 5px;
+	color: #222;
+	width: 100%;
 }
 
 .replyDiv.new input:focus {
@@ -161,7 +173,7 @@ textarea:focus{
 	font-size: 12px;
 	text-align: center;
 	width: 100%;
-	color: #bdc3c7;
+	color: #ccc;
 }
 
 @media screen and (max-width: 600px) {

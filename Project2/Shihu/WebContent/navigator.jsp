@@ -10,8 +10,9 @@
 		avatarPath = user.getAvatarPath();
 	}
 %>
-<link type="text/css" rel="stylesheet" href="css/navigator.css" />
+
 <link type="text/css" rel="stylesheet" href="css/base.css" />
+<link type="text/css" rel="stylesheet" href="css/navigator.css" />
 <div id="navigator">
 	<div id="navigatorWrapper">
 		<div id="logo">
@@ -21,9 +22,15 @@
 			<input type="text" id="searchInput" placeholder="搜索问题或用户" />
 			<button type="submit" id="searchButton">搜索</button>
 		</div>
+		<%
+			if (user != null) {
+		%>
 		<div>
 			<button id="newQuestionButton">提问题</button>
 		</div>
+		<%
+			}
+		%>
 		<div id="menuDiv">
 			<div class="changeHoverBackground clickbox">
 				<a href="index.jsp">首页</a>
@@ -75,6 +82,39 @@
 		</div>
 	</div>
 </div>
-
+<div class="modalDialogBackground"></div>
+<div class="modalWrapper">
+	<div class="modalDialog">
+		<div class="modalDialogTitle">
+			<span class="modalDialogTitleText">提问</span><span
+				class="modalDialogTitleClose"></span>
+		</div>
+		<div class="modalDialogContent">
+			<div>
+				<b>问题标题（必填）</b>
+			</div>
+			<div>
+				<input type="text" class="modalDialogInput" id="newQuestionTitle"
+					placeholder="请输入你的问题">
+			</div>
+			<div>
+				<b>问题描述</b>
+			</div>
+			<div>
+				<input type="text" class="modalDialogInput" id="newQuestionContent"
+					placeholder="请输入你的问题">
+			</div>
+			<div>
+				<button id="submitNewQuestionButton" class="submitButton">提交</button>
+				<div class="clear"></div>
+			</div>
+			<form id="newQuestionForm" method="POST"
+				action="QuestionServlet?action=addQuestion" class="hidden">
+				<input type="text" name="title" id="newQuestionTitleChecked">
+				<input type="text" name="content" id="newQuestionContentChecked">
+			</form>
+		</div>
+	</div>
+</div>
 <script src="lib/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="js/navigator.js"></script>

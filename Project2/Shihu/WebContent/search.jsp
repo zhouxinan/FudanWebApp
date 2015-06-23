@@ -9,7 +9,6 @@
 	List<Question> questionList = dao.searchQuestionByKeyword(keyword);
 	List<User> userList = dao.searchUsernameByKeyword(keyword);
 %>
-<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
