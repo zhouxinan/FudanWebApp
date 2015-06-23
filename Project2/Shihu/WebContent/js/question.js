@@ -1,6 +1,7 @@
 function setReplyCountDivAction() {
 	var $replyCountDiv = $(".replyCountDiv");
-	$replyCountDiv.click(function() {
+	$replyCountDiv.unbind('click');
+	$replyCountDiv.bind('click', function() {
 		var currentReplyListDiv = $(this).parent().next();
 		if (currentReplyListDiv.attr("class") == "replyListDiv") {
 			var answerID = $(this).next().html();
@@ -114,6 +115,7 @@ function sendAnswer() {
 						data.motto, data.content, data.answerTime,
 						data.answerID, data.replyCount);
 				$("#newAnswerContent").val("");
+				setReplyCountDivAction();
 			},
 			error : function() {
 				alert("Connection error!");
