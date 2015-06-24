@@ -2,7 +2,7 @@
 .tab {
 	color: #16a085;
 	float: left;
-	width: 50px;
+	padding: 0 10px;
 	text-align: center;
 	margin-right: 2px;
 	line-height: 30px;

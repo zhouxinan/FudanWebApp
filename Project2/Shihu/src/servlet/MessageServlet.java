@@ -58,7 +58,9 @@ public class MessageServlet extends HttpServlet {
 			String receiverUsername = request.getParameter("receiverUsername");
 			String content = request.getParameter("content");
 			try {
-				dao.addMessage(user, receiverUsername, content);
+				PrintWriter out = response.getWriter();
+				out.print(dao.addMessage(user, receiverUsername, content));
+				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

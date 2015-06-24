@@ -12,7 +12,7 @@
 <head>
 <link type="text/css" rel="stylesheet" href="css/base.css" />
 <link type="text/css" rel="stylesheet" href="css/layout.css" />
-<link type="text/css" rel="stylesheet" href="css/profile.css" />
+<link type="text/css" rel="stylesheet" href="css/tabBar.css" />
 <link type="text/css" rel="stylesheet" href="css/messages.css" />
 <script src="lib/jquery-2.1.3.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,13 +29,15 @@
 				<div class="tab" id="newMessage">新私信</div>
 			</div>
 			<div id="messagesDiv" class="columnDiv">
-				<div>
-					收信人：
-					<input type="text" id="receiverUsername" class="standardInput" placeholder="想发给谁呢？">
+				<div id="viewMessageDiv">
 				</div>
-				<textarea id="messageContent" placeholder="我来告诉你一点人生的经验……"></textarea>
-				<div id="sendMessageErrorMessageDiv"></div>
-				<button id="sendMessageButton" class="standardButton">发送</button>
+				<div id="newMessageDiv" class="hidden">
+					<input type="text" id="receiverUsername" class="standardInput"
+						placeholder="想发给谁呢？">
+					<textarea id="messageContent" placeholder="我来告诉你一点人生的经验……"></textarea>
+					<div id="sendMessageErrorMessageDiv"></div>
+					<button id="sendMessageButton" class="standardButton">发送</button>
+				</div>
 			</div>
 		</div>
 	</div>

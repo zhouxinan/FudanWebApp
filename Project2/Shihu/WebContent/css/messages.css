@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-#newMessage {
+#newMessage, #sendMessageButton {
 	float: right;
 }
 
@@ -8,12 +8,10 @@
 	width: 100%;
 }
 
-#receiverUsername {
-	/* width: 100%;
-	padding: 5px;
-	border-radius: 3px;
-	border: 1px solid #bdc3c7;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px; */
+#receiverUsername, #messageContent {
+	margin-bottom: 10px;
+}
+
+#sendMessageErrorMessageDiv {
+	float: left;
 }

@@ -28,13 +28,26 @@ function sendRequest(actionName) {
 }
 
 $("#messagesSent").click(function() {
+	$("#viewMessageDiv").removeClass("hidden");
 	sendRequest('getAllSentMessages');
+	$("#newMessageDiv").addClass("hidden");
 });
+
 $("#messagesRead").click(function() {
+	$("#viewMessageDiv").removeClass("hidden");
 	sendRequest('getAllReadMessages');
+	$("#newMessageDiv").addClass("hidden");
 });
+
 $("#messagesUnread").click(function() {
+	$("#viewMessageDiv").removeClass("hidden");
 	sendRequest('getAllUnreadMessages');
+	$("#newMessageDiv").addClass("hidden");
+});
+
+$("#newMessage").click(function() {
+	$("#viewMessageDiv").addClass("hidden");
+	$("#newMessageDiv").removeClass("hidden");
 });
 
 $("#sendMessageButton").click(function() {
@@ -42,7 +55,7 @@ $("#sendMessageButton").click(function() {
 });
 
 function appendMessage(data) {
-	$("#messagesDiv").html("");
+	$("#viewMessageDiv").html("");
 	if (data != null) {
 		for (i = 0; i < data.length; i++) {
 			addMessage(data[i].userID, data[i].avatarPath, data[i].messageID,
@@ -59,21 +72,22 @@ function addMessage(userID, avatarPath, messageID, content, username) {
 			+ '" /><span class="userName">' + username
 			+ '</span></a><a href="readMessage.jsp?id=' + messageID + '">'
 			+ content + '</a></div>';
-	$("#messagesDiv").append(newDiv);
+	$("#viewMessageDiv").append(newDiv);
 }
 
 function sendMessage() {
 	var receiverUsername = $("#receiverUsername").val();
 	if (receiverUsername == "") {
-		$("#sendMessageErrorMessageDiv").html("请输入收信人的用户名！");
+		$("#receiverUsername").attr("placeholder", "请输入收信人的用户名！");
+		$("#receiverUsername").focus();
 		return;
 	}
 	var content = $("#messageContent").val();
 	if (content == "") {
-		$("#sendMessageErrorMessageDiv").html("请输入私信内容！");
+		$("#messageContent").attr("placeholder", "请输入私信内容！");
+		$("#messageContent").focus();
 		return;
 	}
-	$("#sendMessageErrorMessageDiv").html("");
 	$.ajax({
 		type : 'POST',
 		url : 'MessageServlet',
@@ -82,9 +96,12 @@ function sendMessage() {
 			receiverUsername : receiverUsername,
 			content : content
 		},
-		dataType : "json",
 		success : function(data) {
-			
+			if (data == "true") {
+				$("#messagesSent").click();
+			} else {
+				$("#sendMessageErrorMessageDiv").html("你输入的用户名不存在！");
+			}
 		},
 		error : function() {
 			alert("Connection error!");

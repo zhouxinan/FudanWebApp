@@ -20,6 +20,7 @@
 
 .popularUser div {
 	width: 100%;
+	max-width: 220px;
 	margin-left: 30px;
 	font-size: 12px;
 }

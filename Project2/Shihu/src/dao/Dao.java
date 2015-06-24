@@ -491,13 +491,15 @@ public class Dao {
 		return false;
 	}
 
-	public boolean addMessage(User user, String receiverUsername, String content)
+	public int addMessage(User user, String receiverUsername, String content)
 			throws SQLException {
 		Connection con = null;
 		Statement sm = null;
+		PreparedStatement psm = null;
 		ResultSet results = null;
 		int fromUserID = user.getUserID();
 		content = content.replace("'", "''");
+		int newMessageID = 0;
 		try {
 			con = DriverManager.getConnection(url, dbUsername, dbPassword);
 			sm = con.createStatement();
@@ -506,16 +508,20 @@ public class Dao {
 							+ receiverUsername + "'");
 			if (results.next()) {
 				String toUserID = results.getString("userID");
-				sm.executeUpdate("insert into messages(fromUserID, toUserID, content) values('"
-						+ fromUserID
-						+ "', '"
-						+ toUserID
-						+ "', '"
-						+ content
-						+ "')");
-				return true;
+				results.close();
+				psm = con.prepareStatement(
+						"insert into messages(fromUserID, toUserID, content) values('"
+								+ fromUserID + "', '" + toUserID + "', '"
+								+ content + "')",
+						Statement.RETURN_GENERATED_KEYS);
+				psm.executeUpdate();
+				results = psm.getGeneratedKeys();
+				if (results.next()) {
+					newMessageID = results.getInt(1);
+					return newMessageID;
+				}
 			} else {
-				return false;
+				return 0;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -531,7 +537,7 @@ public class Dao {
 				results.close();
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	public boolean setMessageRead(User user, String messageID)

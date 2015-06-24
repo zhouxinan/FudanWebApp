@@ -229,7 +229,13 @@
 .modalDialogTitle {
 	position: relative;
 	background-color: #2ecc71;
+	background-image: -moz-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -ms-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2ecc71),
+		to(#1abc9c));
 	background-image: -webkit-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: -o-linear-gradient(top, #2ecc71, #1abc9c);
+	background-image: linear-gradient(top, #2ecc71, #1abc9c);
 	padding: 10px 15px;
 	border-radius: 6px 6px 0 0;
 	border: 1px solid #16a085;
