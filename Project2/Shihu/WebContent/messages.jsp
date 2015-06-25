@@ -37,8 +37,19 @@
 					<div id="sendMessageErrorMessageDiv"></div>
 					<button id="sendMessageButton" class="standardButton">发送</button>
 				</div>
-				<div id="showSingleMessageDiv">
-				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modalDialogBackground hidden"
+		id="singleMessageDialogBackground"></div>
+	<div class="modalWrapper hidden" id="singleMessageWrapper">
+		<div class="modalDialog">
+			<div class="modalDialogTitle">
+				<span class="modalDialogTitleText">查看私信</span><span
+					class="modalDialogTitleClose" id="singleMessageDialogClose"></span>
+			</div>
+			<div class="modalDialogContent">
+				<div id="showSingleMessageDiv"></div>
 			</div>
 		</div>
 	</div>

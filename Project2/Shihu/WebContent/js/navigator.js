@@ -14,13 +14,13 @@ $("#searchButton").click(function() {
 });
 
 $("#newQuestionButton").click(function() {
-	$(".modalDialogBackground").removeClass("hidden");
-	$(".modalWrapper").removeClass("hidden");
+	$("#newQuestionDialogBackground").removeClass("hidden");
+	$("#newQuestionWrapper").removeClass("hidden");
 });
 
 $(".modalDialogTitleClose").click(function() {
-	$(".modalDialogBackground").addClass("hidden");
-	$(".modalWrapper").addClass("hidden");
+	$("#newQuestionDialogBackground").addClass("hidden");
+	$("#newQuestionWrapper").addClass("hidden");
 });
 
 $("#submitNewQuestionButton").click(function() {

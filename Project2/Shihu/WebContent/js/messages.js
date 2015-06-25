@@ -20,6 +20,7 @@ function sendRequest(actionName) {
 		dataType : "json",
 		success : function(data) {
 			appendMessage(data);
+			setSingleMessagePreviewAction();
 		},
 		error : function() {
 			alert("Connection error!");
@@ -67,11 +68,20 @@ function appendMessage(data) {
 function addMessage(userID, avatarPath, messageID, content, username) {
 	var newDiv = document.createElement('div');
 	newDiv.setAttribute('class', 'columnDiv');
-	newDiv.innerHTML = '<div><a href="profile.jsp?id=' + userID
+	newDiv.innerHTML = '<div class="userWrapper"><a href="profile.jsp?id=' + userID
 			+ '"><img class="userAvatar" src="img/avatar/' + avatarPath
-			+ '" /><span class="userName">' + username + '</span></a><a>'
-			+ content + '</a><div class="hidden">' + messageID + '</div></div>';
+			+ '" /><span class="userName">' + username
+			+ '</span></a></div><div class="singleMessagePreviewDiv"><a class="singleMessagePreview">' + content
+			+ '</a><div class="hidden">' + messageID + '</div></div><div class="clear"></div>';
 	$("#viewMessagesDiv").append(newDiv);
+}
+
+function setSingleMessagePreviewAction() {
+	$(".singleMessagePreview").unbind('click');
+	$(".singleMessagePreview").bind('click', function() {
+		var messageID = $(this).next().html();
+		getMessageByID(messageID);
+	});
 }
 
 function sendMessage() {
@@ -87,6 +97,8 @@ function sendMessage() {
 		$("#messageContent").focus();
 		return;
 	}
+	$("#messageContent").val("");
+	$("#receiverUsername").val("");
 	$.ajax({
 		type : 'POST',
 		url : 'MessageServlet',
@@ -96,10 +108,10 @@ function sendMessage() {
 			content : content
 		},
 		success : function(data) {
-			if (data == "true") {
-				$("#messagesSent").click();
-			} else {
+			if (data == "0") {
 				$("#sendMessageErrorMessageDiv").html("你输入的用户名不存在！");
+			} else {
+				$("#messagesSent").click();
 			}
 		},
 		error : function() {
@@ -131,7 +143,16 @@ function processMessageData(data) {
 			'<div class="columnDiv"><a href="profile.jsp?id=' + data.fromUserID
 					+ '"><img class="userAvatar" src="img/avatar/'
 					+ data.fromUserAvatarPath + '"><span class="userName">'
-					+ data.fromUsername + '</span></a><a>' + data.content
-					+ '</a></div>');
+					+ data.fromUsername + '</span></a></div><div class="columnDiv">' + data.content
+					+ '</div>');
+	$("#singleMessageDialogBackground").removeClass("hidden");
+	$("#singleMessageWrapper").removeClass("hidden");
 }
-// $("#messagesUnread").trigger("click");
+
+$("#singleMessageDialogClose").click(function() {
+	$("#singleMessageDialogBackground").addClass("hidden");
+	$("#singleMessageWrapper").addClass("hidden");
+	$(".tab.active").click();
+});
+
+$("#messagesUnread").trigger("click");

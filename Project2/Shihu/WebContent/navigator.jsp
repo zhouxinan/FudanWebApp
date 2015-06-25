@@ -82,8 +82,8 @@
 		</div>
 	</div>
 </div>
-<div class="modalDialogBackground hidden"></div>
-<div class="modalWrapper hidden">
+<div class="modalDialogBackground hidden" id="newQuestionDialogBackground"></div>
+<div class="modalWrapper hidden" id="newQuestionWrapper">
 	<div class="modalDialog">
 		<div class="modalDialogTitle">
 			<span class="modalDialogTitleText">提问</span><span
