@@ -91,12 +91,12 @@ function addReplyToPage(userID, avatarPath, username, content, replyTime,
 
 function sendAnswer() {
 	var content = $("#newAnswerContent").val();
-	if (content == "") {
-		$("#newAnswerContent").attr("placeholder", "请输入回答！");
+	var file = document.getElementById("file").files[0];
+	if (content == "" && file == undefined) {
+		$("#newAnswerContent").attr("placeholder", "请输入回答内容，或选择上传一张照片");
 		$("#newAnswerContent").focus();
 		return;
 	}
-	var file = document.getElementById("file").files[0];
 	if (file != undefined) {
 		$("#questionID").val($("#questionIDDiv").html());
 		$("#newAnswerForm").submit();

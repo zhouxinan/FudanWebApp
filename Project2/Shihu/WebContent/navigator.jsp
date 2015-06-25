@@ -95,14 +95,14 @@
 			</div>
 			<div>
 				<input type="text" class="standardInput" id="newQuestionTitle"
-					placeholder="请输入你的问题">
+					placeholder="请输入问题标题">
 			</div>
 			<div>
 				<b>问题描述</b>
 			</div>
 			<div>
 				<input type="text" class="standardInput" id="newQuestionContent"
-					placeholder="请输入你的问题">
+					placeholder="请输入问题描述">
 			</div>
 			<div>
 				<button id="submitNewQuestionButton" class="standardButton">提交</button>

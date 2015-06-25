@@ -28,6 +28,13 @@
 		<div id="contentWrapper">
 			<div id="leftColumn">
 				<%
+					if (trendEntryList.size() == 0) {
+				%>
+				<div class="columnDiv">你还没有关注任何用户哦，快点击导航栏的“发现”来关注感兴趣的用户吧！</div>
+				<%
+					}
+				%>
+				<%
 					for (JSONObject obj : trendEntryList) {
 				%>
 				<div class="columnDiv">
