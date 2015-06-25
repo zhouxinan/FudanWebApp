@@ -68,11 +68,15 @@ function appendMessage(data) {
 function addMessage(userID, avatarPath, messageID, content, username) {
 	var newDiv = document.createElement('div');
 	newDiv.setAttribute('class', 'columnDiv');
-	newDiv.innerHTML = '<div class="userWrapper"><a href="profile.jsp?id=' + userID
-			+ '"><img class="userAvatar" src="img/avatar/' + avatarPath
-			+ '" /><span class="userName">' + username
-			+ '</span></a></div><div class="singleMessagePreviewDiv"><a class="singleMessagePreview">' + content
-			+ '</a><div class="hidden">' + messageID + '</div></div><div class="clear"></div>';
+	newDiv.innerHTML = '<div class="userWrapper"><a href="profile.jsp?id='
+			+ userID
+			+ '"><img class="userAvatar" src="img/avatar/'
+			+ avatarPath
+			+ '" /><span class="userName">'
+			+ username
+			+ '</span></a></div><div class="singleMessagePreviewDiv"><a class="singleMessagePreview">'
+			+ content + '</a><div class="hidden">' + messageID
+			+ '</div></div><div class="clear"></div>';
 	$("#viewMessagesDiv").append(newDiv);
 }
 
@@ -97,6 +101,7 @@ function sendMessage() {
 		$("#messageContent").focus();
 		return;
 	}
+	content = content.replace(/(\r\n|\n|\r)/gm, '<br />');
 	$("#messageContent").val("");
 	$("#receiverUsername").val("");
 	$.ajax({
@@ -143,7 +148,8 @@ function processMessageData(data) {
 			'<div class="columnDiv"><a href="profile.jsp?id=' + data.fromUserID
 					+ '"><img class="userAvatar" src="img/avatar/'
 					+ data.fromUserAvatarPath + '"><span class="userName">'
-					+ data.fromUsername + '</span></a></div><div class="columnDiv">' + data.content
+					+ data.fromUsername
+					+ '</span></a></div><div class="columnDiv">' + data.content
 					+ '</div>');
 	$("#singleMessageDialogBackground").removeClass("hidden");
 	$("#singleMessageWrapper").removeClass("hidden");

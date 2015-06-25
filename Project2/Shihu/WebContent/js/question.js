@@ -97,6 +97,7 @@ function sendAnswer() {
 		$("#newAnswerContent").focus();
 		return;
 	}
+	content = content.replace(/(\r\n|\n|\r)/gm, '<br />');
 	if (file != undefined) {
 		$("#questionID").val($("#questionIDDiv").html());
 		$("#newAnswerForm").submit();

@@ -31,6 +31,7 @@ $("#submitNewQuestionButton").click(function() {
 		$("#newQuestionTitle").focus();
 		return;
 	}
+	newQuestionContent = newQuestionContent.replace(/(\r\n|\n|\r)/gm, '<br />');
 	$("#newQuestionTitleChecked").val(newQuestionTitle);
 	$("#newQuestionContentChecked").val(newQuestionContent); 
 	$("#newQuestionForm").submit();

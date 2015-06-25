@@ -101,8 +101,8 @@
 				<b>问题描述</b>
 			</div>
 			<div>
-				<input type="text" class="standardInput" id="newQuestionContent"
-					placeholder="请输入问题描述">
+				<textarea id="newQuestionContent"
+					placeholder="请输入问题描述"></textarea>
 			</div>
 			<div>
 				<button id="submitNewQuestionButton" class="standardButton">提交</button>
