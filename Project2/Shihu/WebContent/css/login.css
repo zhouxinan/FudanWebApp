@@ -7,7 +7,8 @@ body>div {
 }
 
 #top {
-	background-color: #2ecc71;
+	background-image: url(../img/static/background.jpg);
+	background-size: 100%;
 }
 
 #content {
@@ -100,11 +101,11 @@ input:focus {
 #submitButton {
 	background-color: white;
 	width: 100%;
-	color: #1abc9c;
+	opacity: 0.8;
 }
 
 #submitButton:hover {
-	color: #2ecc71;
+	opacity: 0.9;
 }
 
 #submitButton:active {

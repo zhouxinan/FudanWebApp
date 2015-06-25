@@ -13,7 +13,16 @@ function setReplyCountDivAction() {
 	});
 };
 
-function sendReply(answerID, content, sendReplyButton) {
+function setSendReplyButtonAction() {
+	$(".sendReplyButton").click(function() {
+		sendReply($(this));
+	});
+}
+
+function sendReply(sendReplyButton) {
+	var answerID = sendReplyButton.parent().parent().prev().children().last()
+			.html();
+	var content = sendReplyButton.prev().val();
 	if (content == "") {
 		sendReplyButton.prev().attr("placeholder", "请输入回复！");
 		sendReplyButton.prev().focus();
@@ -178,20 +187,6 @@ function addAnswerToPage(userID, avatarPath, username, motto, content,
 			+ ')</div><div class="answerID hidden">' + answerID
 			+ '</div></div><div class="replyListDiv"></div>';
 	$("#getMoreAnswersDiv").before(columnDiv);
-}
-
-function setSendReplyButtonAction() {
-	var $sendReplyButton = $(".sendReplyButton");
-	var $answerID = $(".answerID");
-	$sendReplyButton
-			.click(function() {
-				for (var i = 0; i < $sendReplyButton.length; i++) {
-					if (this == $sendReplyButton[i]) {
-						sendReply($answerID.eq(i).html(), $(this).prev().val(),
-								$(this));
-					}
-				}
-			});
 }
 
 function setFileTypeValidator() {
