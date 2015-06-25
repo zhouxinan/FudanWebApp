@@ -68,7 +68,7 @@ $("#saveMottoButton").click(function() {
 $("#saveAvatarButton").click(function() {
 	var file = document.getElementById("file").files[0];
 	if (file == undefined) {
-		alert("You have to choose an image file!");
+		alert("你还没有选择新的头像，请重新选择！");
 	} else {
 		document.getElementById("uploadAvatarForm").submit();
 	}
@@ -78,15 +78,26 @@ function setFileTypeValidator() {
 	$("#file").on('change', function() {
 		var file = document.getElementById("file").files[0];
 		if (!file.type.match('image.*')) {
-			alert("You can only choose an image file! Please try again.");
+			alert("你只能选择图片文件，请重新选择！");
 			resetFileInput();
+			return;
 		}
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$("#view").html('<img src="' + e.target.result + '"/>');
+		};
+		reader.readAsDataURL(file);
 	});
 }
 
 function resetFileInput() {
-	document.getElementById("uploadAvatarForm").innerHTML = '<input type="file" id="file">';
+	$("#uploadAvatarForm").html('<input type="file" id="file" name="file">');
+	$("#view").html("");
 	setFileTypeValidator();
 }
+
+$("#selectImgButton").bind('click', function() {
+	$("#file").trigger('click');
+});
 
 setFileTypeValidator();

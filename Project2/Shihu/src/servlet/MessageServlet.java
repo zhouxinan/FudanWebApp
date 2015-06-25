@@ -65,14 +65,6 @@ public class MessageServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (action.equals("setMessageRead")) {
-			String messageID = request.getParameter("messageID");
-			try {
-				dao.setMessageRead(user, messageID);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		} else if (action.equals("getAllSentMessages")) {
 			try {
 				PrintWriter out = response.getWriter();
@@ -104,6 +96,16 @@ public class MessageServlet extends HttpServlet {
 			try {
 				PrintWriter out = response.getWriter();
 				out.print(dao.getUnreadMessageCount(user));
+				out.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (action.equals("getMessageByID")) {
+			String messageID = request.getParameter("messageID");
+			try {
+				PrintWriter out = response.getWriter();
+				out.print(dao.getMessageByID(user, messageID));
 				out.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

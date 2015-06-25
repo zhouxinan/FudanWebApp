@@ -31,48 +31,68 @@
 				<div class="tab">密码</div>
 			</div>
 			<div id="settingsDiv">
-				<div id="setAvatarDiv" class="tabPane active">
-					<div class="columnDiv">
-						<img src="img/avatar/<%=user.getAvatarPath()%>" />
-						<form id="uploadAvatarForm" method="POST"
-							action="FileUploadServlet?action=uploadUserAvatar"
-							enctype="multipart/form-data">
-							<input type="file" id="file" name="file">
-						</form>
+				<div class="tabPane active">
+					<div id="setAvatarDiv" class="columnDiv">
 						<div id="saveAvatarResponseMessageDiv"><%=(saveAvatarResponseMessage != null) ? saveAvatarResponseMessage
 					: ""%></div>
-						<button class="saveButton" id="saveAvatarButton">保存</button>
+						<div>
+							<div id="oldAvatarDiv">
+								<div class="avatarDivWrapper">
+									<div id="oldAvatarContainer">
+										<img id="oldAvatar" src="img/avatar/<%=user.getAvatarPath()%>" />
+									</div>
+									<div>现在的头像</div>
+								</div>
+							</div>
+							<div id="newAvatarDiv">
+								<div class="avatarDivWrapper">
+									<div id="view"></div>
+									<div>新的头像</div>
+									<div>
+										<button id="selectImgButton" class="standardButton">
+											<img src="img/icon/attachment.png" class="icon" />
+										</button>
+										<button id="saveAvatarButton" class="standardButton">保存</button>
+									</div>
+									<form id="uploadAvatarForm" class="hidden" method="POST"
+										action="FileUploadServlet?action=uploadUserAvatar"
+										enctype="multipart/form-data">
+										<input type="file" id="file" name="file">
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div id="setMottoDiv" class="tabPane">
-					<div class="columnDiv">
+				<div class="tabPane">
+					<div id="setMottoDiv" class="columnDiv">
 						<div>
-							<label for="motto">个人简介</label> <input type="text" id="motto"
+							<input class="standardInput" type="text" id="motto"
 								placeholder="<%=user.getMotto()%>" />
 						</div>
 						<div id="saveMottoResponseMessageDiv"></div>
 						<div>
-							<button class="saveButton" id="saveMottoButton">保存</button>
+							<button class="standardButton" id="saveMottoButton">保存</button>
 						</div>
 					</div>
 				</div>
-				<div id="setPasswordDiv" class="tabPane">
-					<div class="columnDiv">
+				<div class="tabPane">
+					<div id="setPasswordDiv" class="columnDiv">
 						<div>
-							<label for="oldPassword">当前密码</label> <input type="password"
-								id="oldPassword" />
+							<label for="oldPassword">当前密码</label> <input
+								class="standardInput" type="password" id="oldPassword" />
 						</div>
 						<div>
-							<label for="newPassword">新的密码</label> <input type="password"
-								id="newPassword" />
+							<label for="newPassword">新的密码</label> <input
+								class="standardInput" type="password" id="newPassword" />
 						</div>
 						<div>
 							<label for="newPasswordRepeat">确认密码</label> <input
-								type="password" id="newPasswordRepeat" />
+								class="standardInput" type="password" id="newPasswordRepeat" />
 						</div>
 						<div id="savePasswordResponseMessageDiv"></div>
 						<div>
-							<button class="saveButton" id="savePasswordButton">保存</button>
+							<button class="standardButton" id="savePasswordButton">保存</button>
 						</div>
 					</div>
 				</div>

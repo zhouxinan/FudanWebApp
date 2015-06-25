@@ -28,25 +28,25 @@ function sendRequest(actionName) {
 }
 
 $("#messagesSent").click(function() {
-	$("#viewMessageDiv").removeClass("hidden");
+	$("#viewMessagesDiv").removeClass("hidden");
 	sendRequest('getAllSentMessages');
 	$("#newMessageDiv").addClass("hidden");
 });
 
 $("#messagesRead").click(function() {
-	$("#viewMessageDiv").removeClass("hidden");
+	$("#viewMessagesDiv").removeClass("hidden");
 	sendRequest('getAllReadMessages');
 	$("#newMessageDiv").addClass("hidden");
 });
 
 $("#messagesUnread").click(function() {
-	$("#viewMessageDiv").removeClass("hidden");
+	$("#viewMessagesDiv").removeClass("hidden");
 	sendRequest('getAllUnreadMessages');
 	$("#newMessageDiv").addClass("hidden");
 });
 
 $("#newMessage").click(function() {
-	$("#viewMessageDiv").addClass("hidden");
+	$("#viewMessagesDiv").addClass("hidden");
 	$("#newMessageDiv").removeClass("hidden");
 });
 
@@ -55,7 +55,7 @@ $("#sendMessageButton").click(function() {
 });
 
 function appendMessage(data) {
-	$("#viewMessageDiv").html("");
+	$("#viewMessagesDiv").html("");
 	if (data != null) {
 		for (i = 0; i < data.length; i++) {
 			addMessage(data[i].userID, data[i].avatarPath, data[i].messageID,
@@ -69,10 +69,9 @@ function addMessage(userID, avatarPath, messageID, content, username) {
 	newDiv.setAttribute('class', 'columnDiv');
 	newDiv.innerHTML = '<div><a href="profile.jsp?id=' + userID
 			+ '"><img class="userAvatar" src="img/avatar/' + avatarPath
-			+ '" /><span class="userName">' + username
-			+ '</span></a><a href="readMessage.jsp?id=' + messageID + '">'
-			+ content + '</a></div>';
-	$("#viewMessageDiv").append(newDiv);
+			+ '" /><span class="userName">' + username + '</span></a><a>'
+			+ content + '</a><div class="hidden">' + messageID + '</div></div>';
+	$("#viewMessagesDiv").append(newDiv);
 }
 
 function sendMessage() {
@@ -109,4 +108,30 @@ function sendMessage() {
 	});
 }
 
+function getMessageByID(messageID) {
+	$.ajax({
+		type : 'POST',
+		url : 'MessageServlet',
+		data : {
+			action : 'getMessageByID',
+			messageID : messageID
+		},
+		dataType : "json",
+		success : function(data) {
+			processMessageData(data);
+		},
+		error : function() {
+			alert("Connection error!");
+		}
+	});
+}
+
+function processMessageData(data) {
+	$("#showSingleMessageDiv").html(
+			'<div class="columnDiv"><a href="profile.jsp?id=' + data.fromUserID
+					+ '"><img class="userAvatar" src="img/avatar/'
+					+ data.fromUserAvatarPath + '"><span class="userName">'
+					+ data.fromUsername + '</span></a><a>' + data.content
+					+ '</a></div>');
+}
 // $("#messagesUnread").trigger("click");

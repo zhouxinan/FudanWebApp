@@ -540,35 +540,6 @@ public class Dao {
 		return -1;
 	}
 
-	public boolean setMessageRead(User user, String messageID)
-			throws SQLException {
-		Connection con = null;
-		Statement sm = null;
-		ResultSet results = null;
-		int toUserID = user.getUserID();
-		try {
-			con = DriverManager.getConnection(url, dbUsername, dbPassword);
-			sm = con.createStatement();
-			sm.executeUpdate("UPDATE messages SET isRead=1 WHERE toUserID='"
-					+ toUserID + "' and messageID='" + messageID + "'");
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (sm != null) {
-				sm.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-			if (results != null) {
-				results.close();
-			}
-		}
-		return false;
-	}
-
 	public List<JSONObject> getAllMessagesToUser(User user, boolean isRead)
 			throws SQLException {
 		Connection con = null;
@@ -671,13 +642,10 @@ public class Dao {
 							+ "' or toUserID='" + userID + "')");
 			if (results.next()) {
 				String fromUserID = results.getString("fromUserID");
-				String toUserID = results.getString("toUserID");
 				User fromUser = getUserByID(fromUserID);
-				User toUser = getUserByID(toUserID);
+				messageObj.put("fromUserID", fromUserID);
 				messageObj.put("fromUsername", fromUser.getUsername());
-				messageObj.put("toUsername", toUser.getUsername());
 				messageObj.put("fromUserAvatarPath", fromUser.getAvatarPath());
-				messageObj.put("toUserAvatarPath", toUser.getAvatarPath());
 				messageObj.put("content", results.getString("content"));
 			}
 			return messageObj;
