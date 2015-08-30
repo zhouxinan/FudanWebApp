@@ -1,0 +1,3 @@
+数据库文件在Database目录下。
+整个网站的实现在Shihu目录下，请拷贝到Eclipse中运行，而不要用Eclipse的导入，因为源代码不含classpath等配置文件。
+连接数据库的密码在Shihu/src/dao/Dao.java中修改，数据库名字必须为Shihu。
