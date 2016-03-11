@@ -21,7 +21,7 @@ import utility.MyComparator;
 
 public class Dao {
 	private static String driver = "com.mysql.jdbc.Driver";
-	String url = "jdbc:mysql://127.0.0.1:3306/Shihu?useUnicode=true&amp;characterEncoding=UTF-8&amp;";
+	String url = "jdbc:mysql://127.0.0.1:3306/Shihu?useUnicode=true&characterEncoding=UTF-8";
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss E");
 
 	// your username and password
